@@ -206,8 +206,8 @@ try:
     INSERT INTO VIOLATION_TABLE
     (SKU, Violation_date, PL, Category, Sub_category, Region, Marketplace, seller_name, 
      homologated_name, MAP_Price, LPP, Advertised_price, Season, Promotion, Promotional_price, 
-     Screenshot, Violation_Type, Price_Difference)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+     Screenshot, Violation_Type, Price_Difference, Notice_Doc_Path)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     v_records = []
     for _, r in v_df.iterrows():
@@ -229,7 +229,8 @@ try:
             float(r["Promotional_price"]) if pd.notna(r["Promotional_price"]) else None,
             str(r["Screenshot"]) if pd.notna(r["Screenshot"]) else None,
             str(r["Violation_Type"]) if pd.notna(r["Violation_Type"]) else None,
-            float(r["Price_Difference"]) if pd.notna(r["Price_Difference"]) else None
+            float(r["Price_Difference"]) if pd.notna(r["Price_Difference"]) else None,
+            str(r["Notice_Doc_Path"]) if pd.notna(r.get("Notice_Doc_Path")) else None
         ))
         if len(v_records) >= CHUNK_SIZE:
             cursor.executemany(v_insert_query, v_records)

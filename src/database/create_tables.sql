@@ -171,6 +171,7 @@ CREATE TABLE IF NOT EXISTS VIOLATION_TABLE (
     Screenshot VARCHAR(255),
     Violation_Type VARCHAR(100),
     Price_Difference DECIMAL(12,2),
+    Notice_Doc_Path VARCHAR(255),
 
     INDEX idx_vio_sku (SKU),
     INDEX idx_vio_date (Violation_date),
