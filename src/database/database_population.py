@@ -59,8 +59,10 @@ try:
         ddl_script = ddl_file.read_text(encoding="utf-8")
         statements = [s.strip() for s in ddl_script.split(";") if s.strip()]
         for stmt in statements:
-            if not stmt.upper().startswith("--"):
-                cursor.execute(stmt)
+            clean_lines = [l for l in stmt.splitlines() if not l.strip().startswith("--")]
+            clean_stmt = "\n".join(clean_lines).strip()
+            if clean_stmt:
+                cursor.execute(clean_stmt)
         connection.commit()
         print(" Schema verified and all tables initialized.")
 
@@ -93,37 +95,37 @@ try:
     sku_df = pd.read_csv(DATA_PATH / "sku_table.csv")
     sku_data = [(row["PN"], row["SKU"]) for _, row in sku_df.iterrows()]
     cursor.executemany("INSERT INTO SKU (PN, SKU) VALUES (%s, %s)", sku_data)
-    print(f"✓ SKU:                    {cursor.rowcount:,} rows inserted.")
+    print(f"[OK] SKU:                    {cursor.rowcount:,} rows inserted.")
 
     # 5.2 PL TABLE
     pl_df = pd.read_csv(DATA_PATH / "pl_table.csv")
     pl_data = [(row["PL"], row["SKU"], row["SUB_CATEGORY"]) for _, row in pl_df.iterrows()]
     cursor.executemany("INSERT INTO PL (PL, SKU, SUB_CATEGORY) VALUES (%s, %s, %s)", pl_data)
-    print(f"✓ PL:                     {cursor.rowcount:,} rows inserted.")
+    print(f"[OK] PL:                     {cursor.rowcount:,} rows inserted.")
 
     # 5.3 PRICE LIST TABLE
     price_df = pd.read_csv(DATA_PATH / "price_list_table.csv")
     price_data = [(row["PL"], row["SKU"], float(row["MAP"]), float(row["LPP"])) for _, row in price_df.iterrows()]
     cursor.executemany("INSERT INTO PRICE_LIST (PL, SKU, MAP, LPP) VALUES (%s, %s, %s, %s)", price_data)
-    print(f"✓ PRICE_LIST:             {cursor.rowcount:,} rows inserted.")
+    print(f"[OK] PRICE_LIST:             {cursor.rowcount:,} rows inserted.")
 
     # 5.4 SELLER MAPPING TABLE
     seller_map_df = pd.read_csv(DATA_PATH / "seller_mapping_table.csv")
     seller_map_data = [(row["SELLER_NAME"], row["HOMOLOGATED_NAME"]) for _, row in seller_map_df.iterrows()]
     cursor.executemany("INSERT INTO SELLER_MAPPING (SELLER_NAME, HOMOLOGATED_NAME) VALUES (%s, %s)", seller_map_data)
-    print(f"✓ SELLER_MAPPING:         {cursor.rowcount:,} rows inserted.")
+    print(f"[OK] SELLER_MAPPING:         {cursor.rowcount:,} rows inserted.")
 
     # 5.5 CATEGORY MAPPING TABLE
     cat_map_df = pd.read_csv(DATA_PATH / "category_mapping_table.csv")
     cat_map_data = [(row["CATEGORY"], row["SUB_CATEGORY"], row["PL"], row["SKU"]) for _, row in cat_map_df.iterrows()]
     cursor.executemany("INSERT INTO CATEGORY_MAPPING (CATEGORY, SUB_CATEGORY, PL, SKU) VALUES (%s, %s, %s, %s)", cat_map_data)
-    print(f"✓ CATEGORY_MAPPING:       {cursor.rowcount:,} rows inserted.")
+    print(f"[OK] CATEGORY_MAPPING:       {cursor.rowcount:,} rows inserted.")
 
     # 5.6 PROMOTION TABLE
     prom_df = pd.read_csv(DATA_PATH / "promotion_table.csv").dropna(subset=["PL", "SKU", "SEASON", "PROMOTION"])
     prom_data = [(row["PL"], row["SKU"], row["SEASON"], row["PROMOTION"]) for _, row in prom_df.iterrows()]
     cursor.executemany("INSERT INTO PROMOTION (PL, SKU, SEASON, PROMOTION) VALUES (%s, %s, %s, %s)", prom_data)
-    print(f"✓ PROMOTION:              {cursor.rowcount:,} rows inserted.")
+    print(f"[OK] PROMOTION:              {cursor.rowcount:,} rows inserted.")
 
     connection.commit()
 
@@ -159,7 +161,7 @@ try:
     if seller_records:
         cursor.executemany(seller_insert_query, seller_records)
         connection.commit()
-    print(f"✓ SELLER_TABLE:           {len(seller_df):,} rows inserted.")
+    print(f"[OK] SELLER_TABLE:           {len(seller_df):,} rows inserted.")
 
     # 6.2 PRICE MONITORING TABLE (147,900 Rows)
     print("\nIngesting PRICE_MONITORING_TABLE (147,900 rows in batches)...")
@@ -195,7 +197,7 @@ try:
     if pm_records:
         cursor.executemany(pm_insert_query, pm_records)
         connection.commit()
-    print(f"✓ PRICE_MONITORING_TABLE: {len(pm_df):,} rows inserted.")
+    print(f"[OK] PRICE_MONITORING_TABLE: {len(pm_df):,} rows inserted.")
 
     # 6.3 VIOLATION TABLE (15,936 Rows)
     print("\nIngesting VIOLATION_TABLE (15,936 rows in batches)...")
@@ -236,7 +238,7 @@ try:
     if v_records:
         cursor.executemany(v_insert_query, v_records)
         connection.commit()
-    print(f"✓ VIOLATION_TABLE:        {len(v_df):,} rows inserted.")
+    print(f"[OK] VIOLATION_TABLE:        {len(v_df):,} rows inserted.")
 
     # =========================================================
     # 7. FINAL AUDIT & SUMMARY VERIFICATION
