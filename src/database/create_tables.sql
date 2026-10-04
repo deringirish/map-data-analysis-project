@@ -1,5 +1,6 @@
 -- =========================================================
--- MAP PROJECT DATABASE SCHEMA
+-- MAP PROJECT DATABASE SCHEMA (3NF RELATIONAL MODEL)
+-- Author: Derin Girish D G
 -- =========================================================
 
 -- Create database
@@ -10,7 +11,7 @@ USE MAP_PROJECT;
 
 
 -- =========================================================
--- 1. SKU TABLE
+-- 1. SKU TABLE (Product Catalog Master)
 -- =========================================================
 
 CREATE TABLE IF NOT EXISTS SKU (
@@ -20,7 +21,7 @@ CREATE TABLE IF NOT EXISTS SKU (
 
 
 -- =========================================================
--- 2. PL TABLE
+-- 2. PL TABLE (Product Line Taxonomy)
 -- =========================================================
 
 CREATE TABLE IF NOT EXISTS PL (
@@ -32,28 +33,30 @@ CREATE TABLE IF NOT EXISTS PL (
 
     FOREIGN KEY (SKU)
         REFERENCES SKU(SKU)
+        ON DELETE CASCADE
 );
 
 
 -- =========================================================
--- 3. PRICE LIST TABLE
+-- 3. PRICE LIST TABLE (Brand Pricing Baselines)
 -- =========================================================
 
 CREATE TABLE IF NOT EXISTS PRICE_LIST (
     PL VARCHAR(100),
     SKU VARCHAR(50),
-    MAP DECIMAL(10,2),
-    LPP DECIMAL(10,2),
+    MAP DECIMAL(12,2),
+    LPP DECIMAL(12,2),
 
     PRIMARY KEY (PL, SKU),
 
     FOREIGN KEY (PL, SKU)
         REFERENCES PL(PL, SKU)
+        ON DELETE CASCADE
 );
 
 
 -- =========================================================
--- 4. SELLER MAPPING TABLE
+-- 4. SELLER MAPPING TABLE (Entity Homologation)
 -- =========================================================
 
 CREATE TABLE IF NOT EXISTS SELLER_MAPPING (
@@ -63,7 +66,7 @@ CREATE TABLE IF NOT EXISTS SELLER_MAPPING (
 
 
 -- =========================================================
--- 5. CATEGORY MAPPING TABLE
+-- 5. CATEGORY MAPPING TABLE (Taxonomy Hierarchy)
 -- =========================================================
 
 CREATE TABLE IF NOT EXISTS CATEGORY_MAPPING (
@@ -74,11 +77,12 @@ CREATE TABLE IF NOT EXISTS CATEGORY_MAPPING (
 
     FOREIGN KEY (PL, SKU)
         REFERENCES PL(PL, SKU)
+        ON DELETE CASCADE
 );
 
 
 -- =========================================================
--- 6. PROMOTION TABLE
+-- 6. PROMOTION TABLE (Seasonal Promotional Rules)
 -- =========================================================
 
 CREATE TABLE IF NOT EXISTS PROMOTION (
@@ -91,4 +95,85 @@ CREATE TABLE IF NOT EXISTS PROMOTION (
 
     FOREIGN KEY (PL, SKU)
         REFERENCES PL(PL, SKU)
+        ON DELETE CASCADE
+);
+
+
+-- =========================================================
+-- 7. SELLER TABLE (Daily Marketplace Surveillance Feed)
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS SELLER_TABLE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Seller_name VARCHAR(255),
+    SKU VARCHAR(50),
+    Region VARCHAR(20),
+    Advertised_price DECIMAL(12,2),
+    Marketplace VARCHAR(50),
+    Screenshot VARCHAR(255),
+    Live_link TEXT,
+    Last_time_collected DATE,
+
+    INDEX idx_seller_sku (SKU),
+    INDEX idx_seller_name (Seller_name),
+    INDEX idx_collected_date (Last_time_collected)
+);
+
+
+-- =========================================================
+-- 8. PRICE MONITORING TABLE (Full Audit Trail - 147,900 Rows)
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS PRICE_MONITORING_TABLE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    SKU VARCHAR(50),
+    Violation_date DATE,
+    PL VARCHAR(100),
+    Category VARCHAR(50),
+    Sub_category VARCHAR(50),
+    Region VARCHAR(20),
+    Marketplace VARCHAR(50),
+    seller_name VARCHAR(255),
+    homologated_name VARCHAR(255),
+    MAP_Price DECIMAL(12,2),
+    LPP DECIMAL(12,2),
+    Advertised_price DECIMAL(12,2),
+    Season VARCHAR(10),
+    Promotional_price DECIMAL(12,2),
+
+    INDEX idx_pm_sku (SKU),
+    INDEX idx_pm_date (Violation_date),
+    INDEX idx_pm_homologated (homologated_name)
+);
+
+
+-- =========================================================
+-- 9. VIOLATION TABLE (Enforcement Ledger - 15,936 Rows)
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS VIOLATION_TABLE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    SKU VARCHAR(50),
+    Violation_date DATE,
+    PL VARCHAR(100),
+    Category VARCHAR(50),
+    Sub_category VARCHAR(50),
+    Region VARCHAR(20),
+    Marketplace VARCHAR(50),
+    seller_name VARCHAR(255),
+    homologated_name VARCHAR(255),
+    MAP_Price DECIMAL(12,2),
+    LPP DECIMAL(12,2),
+    Advertised_price DECIMAL(12,2),
+    Season VARCHAR(10),
+    Promotion VARCHAR(255),
+    Promotional_price DECIMAL(12,2),
+    Screenshot VARCHAR(255),
+    Violation_Type VARCHAR(100),
+    Price_Difference DECIMAL(12,2),
+
+    INDEX idx_vio_sku (SKU),
+    INDEX idx_vio_date (Violation_date),
+    INDEX idx_vio_homologated (homologated_name),
+    INDEX idx_vio_type (Violation_Type)
 );

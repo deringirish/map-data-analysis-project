@@ -1,269 +1,261 @@
+import os
+import sys
+from pathlib import Path
 import pandas as pd
+import numpy as np
 import mysql.connector
 from getpass import getpass
-from pathlib import Path
 
 # =========================================================
-# 1. DATA PATH
+# 1. PATH CONFIGURATION
 # =========================================================
-
-# Current file: src/database/database_population.py
-# CSV files: data_processed/database_tables/
-
-DATA_PATH = Path(__file__).resolve().parents[2] / "data_processed" / "database_tables"
-
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
 
 # =========================================================
 # 2. MYSQL CONNECTION
 # =========================================================
+mysql_user = os.environ.get("MYSQL_USER", "root")
+mysql_password = os.environ.get("MYSQL_PASSWORD")
 
-password = getpass("Enter MySQL password: ")
+if not mysql_password:
+    try:
+        mysql_password = getpass(f"Enter MySQL password for user '{mysql_user}': ")
+    except Exception:
+        mysql_password = ""
 
-connection = mysql.connector.connect(
-    host="localhost", port=3306, user="root", password=password, database="MAP_PROJECT"
-)
-
-cursor = connection.cursor()
-
-print("Connected to MySQL successfully.")
-
+print(f"Connecting to MySQL ({mysql_user}@localhost:3306)...")
 
 try:
+    connection = mysql.connector.connect(
+        host="localhost",
+        port=3306,
+        user=mysql_user,
+        password=mysql_password,
+        autocommit=False
+    )
+    cursor = connection.cursor()
+    print(" Connected to MySQL server successfully.")
+except mysql.connector.Error as err:
+    print(f" Connection failed: {err}")
+    sys.exit(1)
 
-    # =====================================================
-    # 3. CSV FILE PATHS
-    # =====================================================
+try:
+    # =========================================================
+    # 3. INITIALIZE DATABASE & SCHEMA
+    # =========================================================
+    cursor.execute("CREATE DATABASE IF NOT EXISTS MAP_PROJECT;")
+    cursor.execute("USE MAP_PROJECT;")
+    
+    # Run create_tables.sql
+    ddl_file = Path(__file__).resolve().parent / "create_tables.sql"
+    if ddl_file.exists():
+        ddl_script = ddl_file.read_text(encoding="utf-8")
+        # Split on semicolon, omitting delimiters/comments
+        statements = [s.strip() for s in ddl_script.split(";") if s.strip()]
+        for stmt in statements:
+            if not stmt.upper().startswith("--"):
+                cursor.execute(stmt)
+        connection.commit()
+        print(" Schema verified and all tables initialized.")
 
-    sku_file = DATA_PATH / "sku_table.csv"
-    pl_file = DATA_PATH / "pl_table.csv"
-    price_list_file = DATA_PATH / "price_list_table.csv"
-    seller_mapping_file = DATA_PATH / "seller_mapping_table.csv"
-    category_mapping_file = DATA_PATH / "category_mapping_table.csv"
-    promotion_file = DATA_PATH / "promotion_table.csv"
-
-    # =====================================================
-    # 4. CHECK CSV FILES
-    # =====================================================
-
-    files = {
-        "SKU": sku_file,
-        "PL": pl_file,
-        "PRICE_LIST": price_list_file,
-        "SELLER_MAPPING": seller_mapping_file,
-        "CATEGORY_MAPPING": category_mapping_file,
-        "PROMOTION": promotion_file,
-    }
-
-    for table_name, file_path in files.items():
-
-        if not file_path.exists():
-            raise FileNotFoundError(f"{table_name} CSV file not found:\n{file_path}")
-
-    print("All CSV files found successfully.")
-
-    # =====================================================
-    # 5. READ CSV FILES
-    # =====================================================
-
-    sku_table = pd.read_csv(sku_file)
-
-    pl_table = pd.read_csv(pl_file)
-
-    price_list_table = pd.read_csv(price_list_file)
-
-    seller_mapping_table = pd.read_csv(seller_mapping_file)
-
-    category_mapping_table = pd.read_csv(category_mapping_file)
-
-    promotion_table = pd.read_csv(promotion_file)
-
-    print("All CSV files loaded successfully.")
-
-    # =====================================================
-    # 6. INSERT SKU TABLE
-    # =====================================================
-
-    sku_query = """
-    INSERT INTO SKU (PN, SKU)
-    VALUES (%s, %s)
-    """
-
-    sku_data = [(row["PN"], row["SKU"]) for _, row in sku_table.iterrows()]
-
-    cursor.executemany(sku_query, sku_data)
-
-    print(f"SKU: {cursor.rowcount} rows inserted.")
-
-    # =====================================================
-    # 7. INSERT PL TABLE
-    # =====================================================
-
-    pl_query = """
-    INSERT INTO PL (PL, SKU, SUB_CATEGORY)
-    VALUES (%s, %s, %s)
-    """
-
-    pl_data = [
-        (row["PL"], row["SKU"], row["SUB_CATEGORY"]) for _, row in pl_table.iterrows()
+    # =========================================================
+    # 4. TRUNCATE EXISTING TABLES (IN REVERSE DEPENDENCY ORDER)
+    # =========================================================
+    cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
+    tables_to_truncate = [
+        "VIOLATION_TABLE",
+        "PRICE_MONITORING_TABLE",
+        "SELLER_TABLE",
+        "PROMOTION",
+        "CATEGORY_MAPPING",
+        "PRICE_LIST",
+        "PL",
+        "SELLER_MAPPING",
+        "SKU"
     ]
+    for tbl in tables_to_truncate:
+        cursor.execute(f"TRUNCATE TABLE {tbl};")
+    cursor.execute("SET FOREIGN_KEY_CHECKS = 1;")
+    connection.commit()
+    print(" Cleared existing tables for fresh batch population.\n")
 
-    cursor.executemany(pl_query, pl_data)
+    # =========================================================
+    # 5. POPULATE MASTER & MAPPING TABLES
+    # =========================================================
+    
+    # 5.1 SKU TABLE
+    sku_df = pd.read_csv(DATA_PATH / "sku_table.csv")
+    sku_data = [(row["PN"], row["SKU"]) for _, row in sku_df.iterrows()]
+    cursor.executemany("INSERT INTO SKU (PN, SKU) VALUES (%s, %s)", sku_data)
+    print(f"✓ SKU:                    {cursor.rowcount:,} rows inserted.")
 
-    print(f"PL: {cursor.rowcount} rows inserted.")
+    # 5.2 PL TABLE
+    pl_df = pd.read_csv(DATA_PATH / "pl_table.csv")
+    pl_data = [(row["PL"], row["SKU"], row["SUB_CATEGORY"]) for _, row in pl_df.iterrows()]
+    cursor.executemany("INSERT INTO PL (PL, SKU, SUB_CATEGORY) VALUES (%s, %s, %s)", pl_data)
+    print(f"✓ PL:                     {cursor.rowcount:,} rows inserted.")
 
-    # =====================================================
-    # 8. INSERT PRICE LIST TABLE
-    # =====================================================
+    # 5.3 PRICE LIST TABLE
+    price_df = pd.read_csv(DATA_PATH / "price_list_table.csv")
+    price_data = [(row["PL"], row["SKU"], float(row["MAP"]), float(row["LPP"])) for _, row in price_df.iterrows()]
+    cursor.executemany("INSERT INTO PRICE_LIST (PL, SKU, MAP, LPP) VALUES (%s, %s, %s, %s)", price_data)
+    print(f"✓ PRICE_LIST:             {cursor.rowcount:,} rows inserted.")
 
-    price_list_query = """
-    INSERT INTO PRICE_LIST (PL, SKU, MAP, LPP)
-    VALUES (%s, %s, %s, %s)
-    """
+    # 5.4 SELLER MAPPING TABLE
+    seller_map_df = pd.read_csv(DATA_PATH / "seller_mapping_table.csv")
+    seller_map_data = [(row["SELLER_NAME"], row["HOMOLOGATED_NAME"]) for _, row in seller_map_df.iterrows()]
+    cursor.executemany("INSERT INTO SELLER_MAPPING (SELLER_NAME, HOMOLOGATED_NAME) VALUES (%s, %s)", seller_map_data)
+    print(f"✓ SELLER_MAPPING:         {cursor.rowcount:,} rows inserted.")
 
-    price_list_data = [
-        (row["PL"], row["SKU"], row["MAP"], row["LPP"])
-        for _, row in price_list_table.iterrows()
-    ]
+    # 5.5 CATEGORY MAPPING TABLE
+    cat_map_df = pd.read_csv(DATA_PATH / "category_mapping_table.csv")
+    cat_map_data = [(row["CATEGORY"], row["SUB_CATEGORY"], row["PL"], row["SKU"]) for _, row in cat_map_df.iterrows()]
+    cursor.executemany("INSERT INTO CATEGORY_MAPPING (CATEGORY, SUB_CATEGORY, PL, SKU) VALUES (%s, %s, %s, %s)", cat_map_data)
+    print(f"✓ CATEGORY_MAPPING:       {cursor.rowcount:,} rows inserted.")
 
-    cursor.executemany(price_list_query, price_list_data)
-
-    print(f"PRICE_LIST: {cursor.rowcount} rows inserted.")
-
-    # =====================================================
-    # 9. INSERT SELLER MAPPING TABLE
-    # =====================================================
-
-    seller_mapping_query = """
-    INSERT INTO SELLER_MAPPING
-    (SELLER_NAME, HOMOLOGATED_NAME)
-    VALUES (%s, %s)
-    """
-
-    seller_mapping_data = [
-        (row["SELLER_NAME"], row["HOMOLOGATED_NAME"])
-        for _, row in seller_mapping_table.iterrows()
-    ]
-
-    cursor.executemany(seller_mapping_query, seller_mapping_data)
-
-    print(f"SELLER_MAPPING: " f"{cursor.rowcount} rows inserted.")
-
-    # =====================================================
-    # 10. INSERT CATEGORY MAPPING TABLE
-    # =====================================================
-
-    category_mapping_query = """
-    INSERT INTO CATEGORY_MAPPING
-    (CATEGORY, SUB_CATEGORY, PL, SKU)
-    VALUES (%s, %s, %s, %s)
-    """
-
-    category_mapping_data = [
-        (row["CATEGORY"], row["SUB_CATEGORY"], row["PL"], row["SKU"])
-        for _, row in category_mapping_table.iterrows()
-    ]
-
-    cursor.executemany(category_mapping_query, category_mapping_data)
-
-    print(f"CATEGORY_MAPPING: " f"{cursor.rowcount} rows inserted.")
-
-    # =====================================================
-    # 11. CHECK PROMOTION DATA
-    # =====================================================
-
-    invalid_promotion = promotion_table[
-        promotion_table[["PL", "SKU", "SEASON", "PROMOTION"]].isna().any(axis=1)
-    ].copy()
-
-    if not invalid_promotion.empty:
-
-        print("\nWARNING: Invalid promotion records found:")
-
-        print(invalid_promotion)
-
-        print(f"\nNumber of invalid promotion records: " f"{len(invalid_promotion)}")
-
-    # Keep only valid promotion records
-    valid_promotion_table = promotion_table.dropna(
-        subset=["PL", "SKU", "SEASON", "PROMOTION"]
-    ).copy()
-
-    # =====================================================
-    # 12. INSERT PROMOTION TABLE
-    # =====================================================
-
-    promotion_query = """
-    INSERT INTO PROMOTION
-    (PL, SKU, SEASON, PROMOTION)
-    VALUES (%s, %s, %s, %s)
-    """
-
-    promotion_data = [
-        (row["PL"], row["SKU"], row["SEASON"], row["PROMOTION"])
-        for _, row in valid_promotion_table.iterrows()
-    ]
-
-    cursor.executemany(promotion_query, promotion_data)
-
-    print(f"PROMOTION: " f"{cursor.rowcount} valid rows inserted.")
-
-    # =====================================================
-    # 13. COMMIT ALL DATA
-    # =====================================================
+    # 5.6 PROMOTION TABLE
+    prom_df = pd.read_csv(DATA_PATH / "promotion_table.csv").dropna(subset=["PL", "SKU", "SEASON", "PROMOTION"])
+    prom_data = [(row["PL"], row["SKU"], row["SEASON"], row["PROMOTION"]) for _, row in prom_df.iterrows()]
+    cursor.executemany("INSERT INTO PROMOTION (PL, SKU, SEASON, PROMOTION) VALUES (%s, %s, %s, %s)", prom_data)
+    print(f"✓ PROMOTION:              {cursor.rowcount:,} rows inserted.")
 
     connection.commit()
 
-    print("\nAll valid data inserted successfully.")
+    # =========================================================
+    # 6. BATCH POPULATE LARGE DATASETS (10,000 ROWS/CHUNK)
+    # =========================================================
+    CHUNK_SIZE = 10000
 
-    # =====================================================
-    # 14. DATABASE ROW COUNTS
-    # =====================================================
+    # 6.1 SELLER TABLE (147,900 Rows)
+    print("\nIngesting SELLER_TABLE (147,900 rows in batches)...")
+    seller_df = pd.read_csv(DATA_PATH / "seller_table.csv")
+    seller_insert_query = """
+    INSERT INTO SELLER_TABLE 
+    (Seller_name, SKU, Region, Advertised_price, Marketplace, Screenshot, Live_link, Last_time_collected)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    """
+    seller_records = []
+    for _, r in seller_df.iterrows():
+        seller_records.append((
+            str(r["Seller_name"]) if pd.notna(r["Seller_name"]) else None,
+            str(r["SKU"]) if pd.notna(r["SKU"]) else None,
+            str(r["Region"]) if pd.notna(r["Region"]) else None,
+            float(r["Advertised_price"]) if pd.notna(r["Advertised_price"]) else None,
+            str(r["Marketplace"]) if pd.notna(r["Marketplace"]) else None,
+            str(r["Screenshot"]) if pd.notna(r["Screenshot"]) else None,
+            str(r["Live_link"]) if pd.notna(r["Live_link"]) else None,
+            str(r["Last time collected"]) if pd.notna(r["Last time collected"]) else None
+        ))
+        if len(seller_records) >= CHUNK_SIZE:
+            cursor.executemany(seller_insert_query, seller_records)
+            connection.commit()
+            seller_records = []
+    if seller_records:
+        cursor.executemany(seller_insert_query, seller_records)
+        connection.commit()
+    print(f"✓ SELLER_TABLE:           {len(seller_df):,} rows inserted.")
 
-    tables = [
-        "SKU",
-        "PL",
-        "PRICE_LIST",
-        "SELLER_MAPPING",
-        "CATEGORY_MAPPING",
-        "PROMOTION",
+    # 6.2 PRICE MONITORING TABLE (147,900 Rows)
+    print("\nIngesting PRICE_MONITORING_TABLE (147,900 rows in batches)...")
+    pm_df = pd.read_csv(DATA_PATH / "price_monitoring_table.csv")
+    pm_insert_query = """
+    INSERT INTO PRICE_MONITORING_TABLE
+    (SKU, Violation_date, PL, Category, Sub_category, Region, Marketplace, seller_name, 
+     homologated_name, MAP_Price, LPP, Advertised_price, Season, Promotional_price)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """
+    pm_records = []
+    for _, r in pm_df.iterrows():
+        pm_records.append((
+            str(r["SKU"]) if pd.notna(r["SKU"]) else None,
+            str(r["Violation_date"]) if pd.notna(r["Violation_date"]) else None,
+            str(r["PL"]) if pd.notna(r["PL"]) else None,
+            str(r["Category"]) if pd.notna(r["Category"]) else None,
+            str(r["Sub_category"]) if pd.notna(r["Sub_category"]) else None,
+            str(r["Region"]) if pd.notna(r["Region"]) else None,
+            str(r["Marketplace"]) if pd.notna(r["Marketplace"]) else None,
+            str(r["seller_name"]) if pd.notna(r["seller_name"]) else None,
+            str(r["homologated_name"]) if pd.notna(r["homologated_name"]) else None,
+            float(r["MAP_Price"]) if pd.notna(r["MAP_Price"]) else None,
+            float(r["LPP"]) if pd.notna(r["LPP"]) else None,
+            float(r["Advertised_price"]) if pd.notna(r["Advertised_price"]) else None,
+            str(r["Season"]) if pd.notna(r["Season"]) else None,
+            float(r["Promotional_price"]) if pd.notna(r["Promotional_price"]) else None
+        ))
+        if len(pm_records) >= CHUNK_SIZE:
+            cursor.executemany(pm_insert_query, pm_records)
+            connection.commit()
+            pm_records = []
+    if pm_records:
+        cursor.executemany(pm_insert_query, pm_records)
+        connection.commit()
+    print(f"✓ PRICE_MONITORING_TABLE: {len(pm_df):,} rows inserted.")
+
+    # 6.3 VIOLATION TABLE (15,936 Rows)
+    print("\nIngesting VIOLATION_TABLE (15,936 rows in batches)...")
+    v_df = pd.read_csv(DATA_PATH / "violation_table.csv")
+    v_insert_query = """
+    INSERT INTO VIOLATION_TABLE
+    (SKU, Violation_date, PL, Category, Sub_category, Region, Marketplace, seller_name, 
+     homologated_name, MAP_Price, LPP, Advertised_price, Season, Promotion, Promotional_price, 
+     Screenshot, Violation_Type, Price_Difference)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """
+    v_records = []
+    for _, r in v_df.iterrows():
+        v_records.append((
+            str(r["SKU"]) if pd.notna(r["SKU"]) else None,
+            str(r["Violation_date"]) if pd.notna(r["Violation_date"]) else None,
+            str(r["PL"]) if pd.notna(r["PL"]) else None,
+            str(r["Category"]) if pd.notna(r["Category"]) else None,
+            str(r["Sub_category"]) if pd.notna(r["Sub_category"]) else None,
+            str(r["Region"]) if pd.notna(r["Region"]) else None,
+            str(r["Marketplace"]) if pd.notna(r["Marketplace"]) else None,
+            str(r["seller_name"]) if pd.notna(r["seller_name"]) else None,
+            str(r["homologated_name"]) if pd.notna(r["homologated_name"]) else None,
+            float(r["MAP_Price"]) if pd.notna(r["MAP_Price"]) else None,
+            float(r["LPP"]) if pd.notna(r["LPP"]) else None,
+            float(r["Advertised_price"]) if pd.notna(r["Advertised_price"]) else None,
+            str(r["Season"]) if pd.notna(r["Season"]) else None,
+            str(r["Promotion"]) if pd.notna(r["Promotion"]) else None,
+            float(r["Promotional_price"]) if pd.notna(r["Promotional_price"]) else None,
+            str(r["Screenshot"]) if pd.notna(r["Screenshot"]) else None,
+            str(r["Violation_Type"]) if pd.notna(r["Violation_Type"]) else None,
+            float(r["Price_Difference"]) if pd.notna(r["Price_Difference"]) else None
+        ))
+        if len(v_records) >= CHUNK_SIZE:
+            cursor.executemany(v_insert_query, v_records)
+            connection.commit()
+            v_records = []
+    if v_records:
+        cursor.executemany(v_insert_query, v_records)
+        connection.commit()
+    print(f"✓ VIOLATION_TABLE:        {len(v_df):,} rows inserted.")
+
+    # =========================================================
+    # 7. FINAL AUDIT & SUMMARY VERIFICATION
+    # =========================================================
+    all_tables = [
+        "SKU", "PL", "PRICE_LIST", "SELLER_MAPPING", 
+        "CATEGORY_MAPPING", "PROMOTION", "SELLER_TABLE", 
+        "PRICE_MONITORING_TABLE", "VIOLATION_TABLE"
     ]
+    print("\n=========================================================")
+    print("           FINAL DATABASE POPULATION SUMMARY             ")
+    print("=========================================================")
+    for tbl in all_tables:
+        cursor.execute(f"SELECT COUNT(*) FROM {tbl};")
+        cnt = cursor.fetchone()[0]
+        print(f"• {tbl:<25} {cnt:>10,} rows")
+    print("=========================================================")
+    print(" All 9 tables populated and committed to MySQL.")
 
-    print("\nDatabase row counts:")
-
-    for table in tables:
-
-        cursor.execute(f"SELECT COUNT(*) FROM {table}")
-
-        count = cursor.fetchone()[0]
-
-        print(f"{table}: {count}")
-
-
-except Exception as error:
-
-    # =====================================================
-    # 15. ROLLBACK IF ANY ERROR OCCURS
-    # =====================================================
-
+except Exception as err:
     connection.rollback()
-
-    print("\nERROR OCCURRED.")
-
-    print("All database changes have been rolled back.")
-
-    print(f"\nError: {error}")
-
+    print(f"\n Error occurred during database population: {err}")
     raise
-
-
 finally:
-
-    # =====================================================
-    # 16. CLOSE CONNECTION
-    # =====================================================
-
     cursor.close()
-
     connection.close()
-
     print("\nMySQL connection closed.")
