@@ -2,34 +2,39 @@ import os
 import sys
 from pathlib import Path
 import pandas as pd
-import numpy as np
 import mysql.connector
-from getpass import getpass
+from dotenv import load_dotenv
 
 # =========================================================
-# 1. PATH CONFIGURATION
+# 1. LOAD CONFIGURATION & ENVIRONMENT VARIABLES
 # =========================================================
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
 
-# =========================================================
-# 2. MYSQL CONNECTION
-# =========================================================
-mysql_user = os.environ.get("MYSQL_USER", "root")
-mysql_password = os.environ.get("MYSQL_PASSWORD")
+# Load environment variables from .env file at project root
+load_dotenv(dotenv_path=BASE_DIR / ".env")
 
-if not mysql_password:
+mysql_host = os.getenv("MYSQL_HOST", "localhost")
+mysql_port = int(os.getenv("MYSQL_PORT", 3306))
+mysql_user = os.getenv("MYSQL_USER", "root")
+mysql_password = os.getenv("MYSQL_PASSWORD")
+
+if mysql_password is None:
+    from getpass import getpass
     try:
         mysql_password = getpass(f"Enter MySQL password for user '{mysql_user}': ")
     except Exception:
         mysql_password = ""
 
-print(f"Connecting to MySQL ({mysql_user}@localhost:3306)...")
+print(f"Connecting to MySQL ({mysql_user}@{mysql_host}:{mysql_port})...")
 
+# =========================================================
+# 2. MYSQL CONNECTION
+# =========================================================
 try:
     connection = mysql.connector.connect(
-        host="localhost",
-        port=3306,
+        host=mysql_host,
+        port=mysql_port,
         user=mysql_user,
         password=mysql_password,
         autocommit=False
@@ -38,6 +43,7 @@ try:
     print(" Connected to MySQL server successfully.")
 except mysql.connector.Error as err:
     print(f" Connection failed: {err}")
+    print("\n Tip: Check your MYSQL_PASSWORD in the .env file.")
     sys.exit(1)
 
 try:
@@ -51,7 +57,6 @@ try:
     ddl_file = Path(__file__).resolve().parent / "create_tables.sql"
     if ddl_file.exists():
         ddl_script = ddl_file.read_text(encoding="utf-8")
-        # Split on semicolon, omitting delimiters/comments
         statements = [s.strip() for s in ddl_script.split(";") if s.strip()]
         for stmt in statements:
             if not stmt.upper().startswith("--"):
