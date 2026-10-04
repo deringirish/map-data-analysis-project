@@ -34,7 +34,7 @@ with sync_playwright() as p:
     # =====================================================
 
     project_root = Path(__file__).resolve().parents[2]
-    scraped_dir = project_root / "data_code" / "scraped"
+    scraped_dir = project_root / "data_processed" / "scraped"
     screenshot_folder = scraped_dir / "screenshots"
     screenshot_folder.mkdir(parents=True, exist_ok=True)
 
