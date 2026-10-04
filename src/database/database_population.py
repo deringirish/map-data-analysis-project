@@ -8,9 +8,9 @@ from pathlib import Path
 # =========================================================
 
 # Current file: src/database/database_population.py
-# CSV files: data_code/derived/
+# CSV files: data_code/database_tables/
 
-DATA_PATH = Path(__file__).resolve().parents[2] / "data_code" / "derived"
+DATA_PATH = Path(__file__).resolve().parents[2] / "data_code" / "database_tables"
 
 
 # =========================================================
