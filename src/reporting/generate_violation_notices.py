@@ -267,12 +267,6 @@ def generate_all_notices_and_update_tables():
         create_violation_notice(homologated_name, category, group, full_path)
         doc_paths[(homologated_name, category)] = rel_path
 
-        # Print live progress
-        if idx <= 5 or idx % 25 == 0 or idx == total_groups:
-            print(f"  [{idx:3d}/{total_groups}] Generated: {file_name} ({len(group)} records)")
-        elif idx == 6:
-            print(f"  ... processing remaining notices ...")
-
     # Assign relative doc path to violation table
     v_df["Notice_Doc_Path"] = v_df.apply(
         lambda r: doc_paths.get((r["homologated_name"], r["Category"]), None),
@@ -287,4 +281,15 @@ def generate_all_notices_and_update_tables():
 
 
 if __name__ == "__main__":
+    print("=" * 65)
+    print(" MAP COMPLIANCE: VIOLATION NOTICE GENERATION ENGINE")
+    print("=" * 65)
+    print("1. Reading violation records from database / violation table...")
+    print("2. Grouping violations by Seller and Product Category...")
+    print("3. Generating category-level .docx warning notices with itemized sub-categories...")
+    print("4. Updating Notice_Doc_Path in violation audit records...")
+    print("-" * 65)
     generate_all_notices_and_update_tables()
+    print("=" * 65)
+    print(" Pipeline execution finished successfully!")
+    print("=" * 65)
