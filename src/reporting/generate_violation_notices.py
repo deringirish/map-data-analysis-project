@@ -256,17 +256,22 @@ def generate_all_notices_and_update_tables():
     print(f"Loaded {len(v_df):,} violation records.")
     combos = v_df.groupby(["homologated_name", "Category"])
 
-    # Path mapping dictionary
+    total_groups = len(combos)
     doc_paths = {}
-
-    print(f"Generating professional notices for {len(combos)} Reseller x Category groups...")
-    for (homologated_name, category), group in combos:
+    print(f"Generating professional notices for {total_groups} Reseller x Category groups...")
+    for idx, ((homologated_name, category), group) in enumerate(combos, 1):
         file_name = f"{sanitize_filename(homologated_name)}_{sanitize_filename(category)}_Warning_Notice.docx"
         full_path = NOTICES_DIR / file_name
         rel_path = f"data_processed/reports/notices/{file_name}"
 
         create_violation_notice(homologated_name, category, group, full_path)
         doc_paths[(homologated_name, category)] = rel_path
+
+        # Print live progress
+        if idx <= 5 or idx % 25 == 0 or idx == total_groups:
+            print(f"  [{idx:3d}/{total_groups}] Generated: {file_name} ({len(group)} records)")
+        elif idx == 6:
+            print(f"  ... processing remaining notices ...")
 
     # Assign relative doc path to violation table
     v_df["Notice_Doc_Path"] = v_df.apply(
