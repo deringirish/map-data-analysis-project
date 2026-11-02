@@ -1,4 +1,4 @@
-# ⚖️ Minimum Advertised Price (MAP) Compliance & Brand Protection Analytics Engine
+# ⚖️ Minimum Advertised Price (MAP) Data Analysis Engine
 
 [![Python](https://img.shields.io/badge/Python-3.14%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Database](https://img.shields.io/badge/MySQL-8.0%20(3NF)-orange.svg?logo=mysql&logoColor=white)](https://www.mysql.com/)
@@ -56,7 +56,7 @@ Quantifies legal enforcement escalation: 253 accounts placed under Critical 30-D
 ## 📁 System Architecture & Directory Structure
 
 ```text
-map-compliance-engine/
+map-data-analysis-engine/
 │
 ├── data_inputs/                               # Clean, categorized raw input assets
 │   ├── governance/                            # Charter, Data Dictionary & Session Specs
@@ -250,4 +250,4 @@ SELECT 'SUSPENDED_CATEGORIES', COUNT(*) FROM SUSPENDED_CATEGORIES;
 
 * **Author**: Derin Girish D G
 * **Role**: Lead Data Engineer / Architect
-* **Companion System**: Designed to integrate directly with the **MAP Market Simulator & Operations Portal**, providing interactive price simulations, dynamic promotion scheduling, and real-time executive dashboard controls.
+* **Companion System**: Designed to integrate directly with **`map-market-simulation-engine`**, providing interactive price simulations, dynamic promotion scheduling, and real-time executive dashboard controls.

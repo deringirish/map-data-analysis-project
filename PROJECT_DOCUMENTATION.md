@@ -1,4 +1,4 @@
-# MAP Compliance & Brand Protection Analytics Engine: Comprehensive Architecture & Technical Blueprint
+# MAP Data Analysis Engine: Comprehensive Architecture & Technical Blueprint
 
 **Author:** Derin Girish D G  
 **Project Domain:** E-Commerce Market Intelligence, Minimum Advertised Price (MAP) Compliance, Brand Protection & Legal Enforcement  

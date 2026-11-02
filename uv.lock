@@ -1037,7 +1037,7 @@ wheels = [
 ]
 
 [[package]]
-name = "map-compliance-engine"
+name = "map-data-analysis-engine"
 version = "1.0.0"
 source = { virtual = "." }
 dependencies = [

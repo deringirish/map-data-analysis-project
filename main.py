@@ -61,7 +61,7 @@ def run_database_validation():
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Minimum Advertised Price (MAP) Compliance & Brand Protection Engine"
+        description="Minimum Advertised Price (MAP) Data Analysis & Compliance Engine"
     )
     parser.add_argument(
         "--all", action="store_true", default=False,
@@ -95,7 +95,7 @@ def main():
         args.all = True
 
     print("=" * 65)
-    print("   MAP POLICY COMPLIANCE & BRAND PROTECTION ENGINE v1.0")
+    print("   MAP DATA ANALYSIS & COMPLIANCE ENGINE v1.0")
     print("=" * 65)
 
     if args.populate_db:
