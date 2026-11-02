@@ -1,32 +1,73 @@
-# Python-generated files
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[oc]
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
 build/
+develop-eggs/
 dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
 wheels/
-*.egg-info
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
 # Virtual environments
 .venv/
-env/
 venv/
+ENV/
+env/
+env.bak/
+venv.bak/
 
-# Jupyter Notebook checkpoints
+# Jupyter Notebook checkpoints & autosaves
 .ipynb_checkpoints/
+*-checkpoint.ipynb
 
-# Office temporary lock files
+# Office / Word / Excel temporary lock files
 ~$*.docx
 ~$*.xlsx
+*.tmp
 
-# OS generated files
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 Desktop.ini
-.DS_Store
 
-# Editor directories
+# IDE & Editor configurations
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
 
 # Environment variables & secrets
 .env
-.env.*
+.env.local
+.env.*.local
+!.env.example
+
+# Pytest & test coverage
+.coverage
+htmlcov/
+.pytest_cache/

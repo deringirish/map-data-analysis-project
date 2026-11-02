@@ -1,11 +1,12 @@
 # ⚖️ Minimum Advertised Price (MAP) Data Analysis Engine
 
-[![Python](https://img.shields.io/badge/Python-3.14%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![CI Pipeline](https://github.com/deringirish/Map-Data-Analysis-Project/actions/workflows/ci.yml/badge.svg)](https://github.com/deringirish/Map-Data-Analysis-Project/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.14-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Database](https://img.shields.io/badge/MySQL-8.0%20(3NF)-orange.svg?logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![Environment](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
+[![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
 [![Reporting](https://img.shields.io/badge/DOCX%20Engine-279%20Legal%20Notices-red.svg)](data_processed/reports/notices/)
-[![Visualizations](https://img.shields.io/badge/Visual%20Analytics-6%20Charts%20(300%20DPI)-teal.svg)](data_processed/reports/figures/)
-[![License](https://img.shields.io/badge/License-Proprietary-gray.svg)](#)
+[![Visual Analytics](https://img.shields.io/badge/Visual%20Analytics-6%20Charts%20(300%20DPI)-teal.svg)](data_processed/reports/figures/)
 
 An enterprise-grade, end-to-end data engineering and analytics solution for tracking, auditing, and legally enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
 
@@ -248,6 +249,7 @@ SELECT 'SUSPENDED_CATEGORIES', COUNT(*) FROM SUSPENDED_CATEGORIES;
 
 ## 👨‍💻 Author & Architecture Context
 
-* **Author**: Derin Girish D G
+* **Author**: Derin Girish
 * **Role**: Lead Data Engineer / Architect
+* **License**: [MIT License](LICENSE) (Copyright © 2026 Derin Girish)
 * **Companion System**: Designed to integrate directly with **`map-market-simulation-engine`**, providing interactive price simulations, dynamic promotion scheduling, and real-time executive dashboard controls.

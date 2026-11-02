@@ -4,6 +4,10 @@ version = "1.0.0"
 description = "Enterprise Minimum Advertised Price (MAP) Data Analysis & Compliance Engine"
 readme = "README.md"
 requires-python = ">=3.14.0"
+license = { text = "MIT" }
+authors = [
+    { name = "Derin Girish", email = "deringirish@gmail.com" }
+]
 dependencies = [
     "ipykernel>=7.3.0",
     "matplotlib>=3.10.0",

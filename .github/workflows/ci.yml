@@ -1,0 +1,82 @@
+name: MAP Compliance CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  audit-and-validate:
+    name: Build, Audit & Validate Engine
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: MAP_PROJECT
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: MAP_PROJECT
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install uv Package Manager
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          version: "latest"
+
+      - name: Set up Python Environment
+        run: |
+          uv python install 3.12
+          uv sync
+
+      - name: Verify Input Files & Catalog Integrity
+        run: |
+          test -d data_inputs/governance
+          test -d data_inputs/master_catalog
+          test -d data_inputs/marketplace_feeds/daily_seller_feeds
+          echo "All data inputs verified successfully."
+
+      - name: Execute Full End-to-End Compliance Pipeline
+        run: |
+          uv run python main.py --all --populate-db --validate
+
+      - name: Verify Generated Analytics Assets
+        run: |
+          test -f data_processed/reports/figures/01_violations_by_marketplace.png
+          test -f data_processed/reports/figures/02_top_10_violating_resellers.png
+          test -f data_processed/reports/figures/03_daily_violation_trend.png
+          test -f data_processed/reports/figures/04_category_infraction_breakdown.png
+          test -f data_processed/reports/figures/05_price_deficit_distribution.png
+          test -f data_processed/reports/figures/06_category_suspension_status.png
+          test -f data_processed/reports/category_suspensions_audit.csv
+          test -d data_processed/reports/notices
+          echo "All visual analytics and legal audit outputs validated."
+
+      - name: Upload Compliance Figures & Audit Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: map-compliance-audit-reports
+          path: |
+            data_processed/reports/figures/*.png
+            data_processed/reports/category_suspensions_audit.csv
+          retention-days: 14
