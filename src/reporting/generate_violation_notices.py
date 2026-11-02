@@ -279,6 +279,47 @@ def generate_all_notices_and_update_tables():
     print(f" -> data_processed/reports/notices/")
     print(f" Updated {v_table_path} with new column: 'Notice_Doc_Path' (100% Complete!)")
 
+    # Optional live update to MySQL
+    sync_notice_paths_to_mysql(doc_paths)
+
+
+def sync_notice_paths_to_mysql(doc_paths: dict):
+    """Optionally syncs Notice_Doc_Path directly to MySQL VIOLATION_TABLE."""
+    from dotenv import load_dotenv
+    load_dotenv(dotenv_path=BASE_DIR / ".env")
+    mysql_host = os.getenv("MYSQL_HOST", "localhost")
+    mysql_port = int(os.getenv("MYSQL_PORT", 3306))
+    mysql_user = os.getenv("MYSQL_USER", "root")
+    mysql_password = os.getenv("MYSQL_PASSWORD")
+    mysql_database = os.getenv("MYSQL_DATABASE", "MAP_PROJECT")
+
+    if not mysql_password:
+        return
+
+    try:
+        import mysql.connector
+        conn = mysql.connector.connect(
+            host=mysql_host,
+            port=mysql_port,
+            user=mysql_user,
+            password=mysql_password,
+            database=mysql_database
+        )
+        cur = conn.cursor()
+        update_query = """
+        UPDATE VIOLATION_TABLE 
+        SET Notice_Doc_Path = %s 
+        WHERE homologated_name = %s AND Category = %s;
+        """
+        params = [(path, seller, cat) for (seller, cat), path in doc_paths.items()]
+        cur.executemany(update_query, params)
+        conn.commit()
+        print(f" Synced Notice_Doc_Path for {len(params)} groups into MySQL VIOLATION_TABLE.")
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print(f" [Notice] MySQL sync skipped: {e}")
+
 
 if __name__ == "__main__":
     print("=" * 65)

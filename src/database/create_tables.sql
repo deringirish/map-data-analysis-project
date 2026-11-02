@@ -178,3 +178,31 @@ CREATE TABLE IF NOT EXISTS VIOLATION_TABLE (
     INDEX idx_vio_homologated (homologated_name),
     INDEX idx_vio_type (Violation_Type)
 );
+
+
+-- =========================================================
+-- 10. SUSPENDED CATEGORIES (Enforcement Escalation - 279 Rows)
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS SUSPENDED_CATEGORIES (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    homologated_name VARCHAR(255),
+    Category VARCHAR(50),
+    Total_Infractions INT,
+    Distinct_Violation_Dates INT,
+    Distinct_SKUs_Violated INT,
+    Marketplaces_Audited TEXT,
+    Earliest_Violation DATE,
+    Latest_Violation DATE,
+    Max_Single_Deficit DECIMAL(12,2),
+    Total_Price_Deficit DECIMAL(12,2),
+    Enforcement_Status VARCHAR(50),
+    Legal_Remedy TEXT,
+    Suspension_Duration_Days INT,
+    Suspension_Effective_Date DATE,
+    Suspension_Expiry_Date VARCHAR(50),
+
+    INDEX idx_susp_seller (homologated_name),
+    INDEX idx_susp_cat (Category),
+    INDEX idx_susp_status (Enforcement_Status)
+);

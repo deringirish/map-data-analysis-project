@@ -1,0 +1,280 @@
+homologated_name,Category,Total_Infractions,Distinct_Violation_Dates,Distinct_SKUs_Violated,Marketplaces_Audited,Earliest_Violation,Latest_Violation,Max_Single_Deficit,Total_Price_Deficit,Enforcement_Status,Legal_Remedy,Suspension_Duration_Days,Suspension_Effective_Date,Suspension_Expiry_Date
+Ross Stores,PH,30,15,2,Amazon,2025-12-21,2026-01-05,199716.03,5287933.65,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Sherwin-Williams,PH,80,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,810166.04,4051107.05,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+J.C. Penney Company,PC,112,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,340926.92,3947600.67,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Stater Bros Holdings,PC,84,15,7,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,78932.69,3817681.5,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Gap,PH,15,15,1,Flipkart,2025-12-21,2026-01-05,230143.58,3452153.6999999997,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Piggly Wiggly,PC,128,15,10,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,81484.75,3433110.29,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Army and Air Force Exchange Service,PH,24,15,2,Amazon,2025-12-21,2026-01-05,904483.3,3367466.49,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+The Kroger Co.,PC,85,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,103249.63,3068780.87,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dollar Tree,PC,105,15,8,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,123479.03,2891553.05,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Bass Pro,PC,135,15,11,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,123109.18,2827420.89,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Big Lots,PC,85,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,96985.27,2801829.69,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+AVB Brandsource,PC,114,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,321235.18,2715620.33,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Walgreens Boots Alliance,PC,96,15,8,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,202904.89,2701151.11,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Alimentation Couche-Tard,PC,103,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,181128.96,2663215.11,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Royal Ahold Delhaize USA,PC,131,15,10,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,64717.5,2636601.94,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Best Buy,PH,38,15,4,"Flipkart, eBay",2025-12-21,2026-01-05,169801.85,2625219.33,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Meijer,PC,96,15,8,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,174665.87,2598499.39,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Good Neighbor Pharmacy,PH,30,15,2,"Amazon, Snapdeal",2025-12-21,2026-01-05,162723.81,2560533.45,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Tractor Supply Co.,PC,69,15,5,"Flipkart, eBay",2025-12-21,2026-01-05,113584.36,2484959.4,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+BJ's Wholesale Club,PH,28,15,2,"Amazon, Flipkart",2025-12-21,2026-01-05,158407.72,2431714.23,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Qurate Retail,PC,74,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,119018.03,2361504.4099999997,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+AutoZone,PC,76,15,6,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,141044.49,2335992.2800000003,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Kohl's,PH,9,9,1,Flipkart,2025-12-22,2026-01-05,607844.86,2311975.67,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Health Mart Systems,PC,82,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,119295.25,2304389.46,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Sprouts Farmers Market,PC,111,15,9,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,89998.84,2289047.29,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Publix Super Markets,PC,105,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,47011.63,2270439.7399999998,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Kohl's,PC,78,15,6,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,49552.75,2230521.65,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Camping World,PC,97,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,157677.59,2191101.38,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Foot Locker,PC,84,15,6,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,229642.04,2172892.96,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+True Value Co.,PC,100,15,8,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,70059.83,2168681.6,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dillard's,PH,40,15,4,"Amazon, eBay",2025-12-21,2026-01-05,125578.71,2146487.83,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Chewy.com,PC,90,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,154573.8,2129273.29,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Burlington,PC,47,15,3,"Snapdeal, eBay",2025-12-21,2026-01-05,165373.07,2117432.49,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+CVS Health Corporation,PC,62,15,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,253896.84,2077604.11,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Bath & Body Works,PC,44,15,4,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,272774.79,2054505.44,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+7-Eleven,PC,65,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,144886.68,2023015.28,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Target,PC,57,13,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-22,2026-01-05,244189.27,2008543.15,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Discount Tire,PC,76,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,131182.84,1934209.79,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ikea North American Svcs,PC,77,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,102587.33,1914787.79,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Royal Ahold Delhaize USA,PH,9,9,1,Snapdeal,2025-12-22,2026-01-05,496353.84,1884261.56,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Raley's Supermarkets,PC,87,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,97135.39,1846235.73,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+H.E. Butt Grocery,PC,73,15,5,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,87115.34,1839664.64,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Nordstrom,PC,99,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,116224.69,1787411.55,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Victoria's Secret,PC,85,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,72294.29,1731559.8699999999,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Menards,PC,57,15,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,91914.77,1726384.11,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Academy Sports,PC,91,15,8,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,69658.83,1721901.6700000002,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Wegmans Food Market,PC,91,15,7,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,53277.29,1719024.09,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Northeast Grocery,PC,83,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,101287.97,1710391.41,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Sherwin-Williams,PC,28,15,2,"Amazon, Flipkart",2025-12-21,2026-01-05,328886.76,1678548.46,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dollar General,PC,51,15,4,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,129730.79,1672172.15,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Williams-Sonoma,PC,87,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,175912.37,1665665.3800000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Lululemon,PC,98,15,8,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,109279.5,1641195.45,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ross Stores,PC,54,15,4,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,176256.4,1610946.75,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dick's Sporting Goods,PC,63,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,84498.84,1521490.32,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Lowe's Companies,PC,64,15,6,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,95553.03,1518951.35,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ingles,PC,94,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,81713.25,1509540.81,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Petco,PC,84,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,76378.17,1485208.74,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Giant Eagle,PC,65,15,5,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,55355.34,1471071.96,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Barnes and Noble Booksellers,PC,87,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,88161.02,1456956.42,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Macy's,PH,32,15,3,"Flipkart, Snapdeal",2025-12-21,2026-01-05,95105.54,1454269.63,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Staples,PC,81,15,7,"Flipkart, eBay",2025-12-21,2026-01-05,118472.11,1453213.56,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Signet Jewelers,PC,63,15,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,198636.31,1430457.67,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dollar Tree,PH,22,14,2,Amazon,2025-12-21,2026-01-05,218248.86,1429443.72,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Sephora (LVMH),PC,76,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,75213.64,1419642.77,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Best Buy,PC,40,15,4,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,279367.65,1407519.92,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Save-A-Lot,PC,30,15,3,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,85565.5,1356741.47,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ace Hardware,PC,52,15,4,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,115236.47,1348281.56,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Army and Air Force Exchange Service,PC,58,15,5,"Snapdeal, eBay",2025-12-21,2026-01-05,112819.89,1342247.73,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Advance Auto,PC,53,13,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-22,2026-01-05,172725.96,1322940.56,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Amazon.com,PH,15,15,1,eBay,2025-12-21,2026-01-05,85067.6,1276014.0,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Apple Stores / iTunes,PC,42,15,4,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,52620.46,1261162.17,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Hudson's Bay,PC,89,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,73571.65,1253775.6,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+PetSmart,PC,64,15,5,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,156030.49,1224645.29,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Hy Vee,PC,63,15,5,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,45084.62,1206208.15,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Office Depot,PC,59,15,5,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,35358.11,1198937.53,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Wayfair,PC,64,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,55489.43,1181222.8,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Schnucks,PC,82,15,7,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,49571.53,1165957.28,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Amway,PC,50,15,4,"Flipkart, Snapdeal",2025-12-21,2026-01-05,87484.73,1163573.54,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dell Technologies,PC,65,15,8,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,152643.66,1158008.05,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+TJX Companies,PC,87,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,80883.88,1137846.87,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Costco Wholesale,PC,41,15,4,"Snapdeal, eBay",2025-12-21,2026-01-05,126970.32,1134776.8800000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Wakefern / ShopRite,PC,61,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,117617.84,1110144.6,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dollar General,PH,52,15,4,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,141753.1,1070516.56,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Harbor Freight Tools,PC,66,15,5,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,113659.67,1054631.1400000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Good Neighbor Pharmacy,PC,66,15,6,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,95816.57,1031311.7,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+WinCo Foods,PC,73,15,7,"Snapdeal, eBay",2025-12-21,2026-01-05,27351.33,1008601.72,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Petco,PH,13,13,1,Snapdeal,2025-12-22,2026-01-05,221121.99,984007.52,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Exxon Mobil Corporation,PC,63,15,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,28024.58,964744.3200000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+The Home Depot,PC,69,15,7,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,99697.23,961496.09,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Shell Oil Company,PC,62,15,6,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,34538.37,921360.85,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Chedraui,PH,26,15,2,"Flipkart, Snapdeal",2025-12-21,2026-01-05,57719.71,911579.13,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ulta Beauty,PC,31,15,3,"Amazon, eBay",2025-12-21,2026-01-05,51126.22,885060.61,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Gap,PC,24,15,2,Snapdeal,2025-12-21,2026-01-05,71913.15,868245.83,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Albertsons Companies,PC,78,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,81549.4,834539.99,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+PetSmart,PH,45,15,3,"Amazon, Flipkart",2025-12-21,2026-01-05,37622.48,766267.9500000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+AT&T Wireless,PC,69,15,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,48683.73,764989.1,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Total Wine & More,PC,65,15,6,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,28542.75,764561.1699999999,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+BJ's Wholesale Club,PC,34,13,4,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,145896.51,763432.08,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Tapestry,PC,45,15,4,Flipkart,2025-12-21,2026-01-05,39279.91,747677.22,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Defense Commissary Agency,PC,48,15,4,"Flipkart, Snapdeal",2025-12-21,2026-01-05,67018.79,740589.27,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Verizon Wireless,PC,34,13,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,88980.73,733881.79,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Hobby Lobby Stores,PC,48,14,5,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,62239.75,700413.72,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+AutoZone,PH,30,15,2,"Amazon, Flipkart",2025-12-21,2026-01-05,43571.92,677846.85,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Lowe's Companies,PH,20,13,2,"Snapdeal, eBay",2025-12-22,2026-01-05,142308.1,674131.98,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+The Home Depot,PH,15,15,1,Amazon,2025-12-21,2026-01-05,43017.39,645260.85,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Amazon.com,PC,75,15,8,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,45778.48,600467.0,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Southeastern Grocers,PC,69,15,6,"Snapdeal, eBay",2025-12-21,2026-01-05,64866.59,583204.86,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+J.C. Penney Company,PH,41,14,4,"Amazon, eBay",2025-12-21,2026-01-05,115256.38,568788.4400000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dillard's,PC,41,15,4,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,21724.17,558931.53,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Costco Wholesale,PH,24,15,2,"Flipkart, eBay",2025-12-21,2026-01-05,54924.37,556688.65,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Aldi,PC,41,15,3,"Amazon, Flipkart",2025-12-21,2026-01-05,32657.27,555899.13,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Bath & Body Works,PH,13,13,1,Amazon,2025-12-22,2026-01-05,113136.77,544076.33,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Macy's,PC,23,14,2,"Flipkart, Snapdeal",2025-12-21,2026-01-05,107335.23,530804.54,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+True Value Co.,PH,24,13,2,"Amazon, eBay",2025-12-22,2026-01-05,116756.25,508612.21,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+AT&T Wireless,PH,43,15,3,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,18843.61,483232.11,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Weis Markets,PC,58,15,5,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,44999.92,474024.82,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Michaels Stores,PC,53,15,4,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,47400.57,466841.5,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Staples,PH,23,12,3,"Flipkart, eBay",2025-12-21,2026-01-05,89334.52,449624.92000000004,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+O'Reilly Auto Parts,PC,46,15,4,"Snapdeal, eBay",2025-12-21,2026-01-05,19269.87,398610.22,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Hobby Lobby Stores,SUP,116,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,26440.93,396204.97,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Rite Aid,PC,52,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,15566.16,375735.75,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dell Technologies,PH,30,15,2,"Flipkart, Snapdeal",2025-12-21,2026-01-05,20016.57,360381.15,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+WinCo Foods,PH,34,15,3,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,17320.68,333106.27,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Williams-Sonoma,SUP,89,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,21544.54,323559.89,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Piggly Wiggly,PH,4,4,1,Amazon,2025-12-22,2026-01-04,119828.17,322381.66000000003,CONDITIONAL_PROBATION,48-Hour Final Cure Notice Before Automatic Category Deactivation,0,2026-01-06,N/A (Probationary)
+TJX Companies,SUP,112,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,21770.29,307027.02999999997,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Walmart,SUP,100,15,10,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,10458.48,268107.9,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ulta Beauty,SUP,116,15,10,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,8994.29,265464.68,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+American Eagle,PC,31,15,3,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,21325.72,252131.36,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Walmart,PC,21,15,2,Snapdeal,2025-12-21,2026-01-05,63159.18,251806.35,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Gap,SUP,135,15,12,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,15944.43,246623.66,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Raley's Supermarkets,SUP,89,15,7,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,23359.43,246595.75,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Harbor Freight Tools,PH,34,15,3,"Flipkart, eBay",2025-12-21,2026-01-05,13732.11,229380.74,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Williams-Sonoma,PH,4,4,1,Flipkart,2025-12-22,2026-01-04,80388.1,229091.48,CONDITIONAL_PROBATION,48-Hour Final Cure Notice Before Automatic Category Deactivation,0,2026-01-06,N/A (Probationary)
+Albertsons Companies,PH,40,14,4,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,26964.84,227736.26,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Save-A-Lot,SUP,121,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4649.59,223529.73,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Health Mart Systems,PH,27,15,2,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,13533.41,219143.35,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Verizon Wireless,PH,11,11,1,Snapdeal,2025-12-22,2026-01-05,59351.34,217844.28,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Discount Tire,SUP,94,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,18849.81,211455.61000000002,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Southeastern Grocers,PH,35,15,3,"Flipkart, Snapdeal",2025-12-21,2026-01-05,11931.26,211329.47,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Tapestry,SUP,83,14,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,21496.17,208308.66999999998,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+The Home Depot,SUP,60,15,5,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,8791.09,206465.74,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dillard's,SUP,88,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,16174.8,205434.04,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Apple Stores / iTunes,SUP,93,15,9,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,11785.62,204621.59,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Wayfair,PH,28,15,2,"Amazon, eBay",2025-12-21,2026-01-05,34762.3,203019.55,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Exxon Mobil Corporation,PH,20,11,2,"Snapdeal, eBay",2025-12-22,2026-01-05,36111.55,202482.92,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+H.E. Butt Grocery,PH,24,13,2,eBay,2025-12-22,2026-01-05,37017.66,199218.94,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+My Demoulas,PC,15,15,1,Amazon,2025-12-21,2026-01-05,12842.57,192638.55,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ikea North American Svcs,PH,15,15,1,Amazon,2025-12-21,2026-01-05,12755.67,191335.05,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Neiman Marcus,SUP,152,15,13,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,6830.15,186374.61,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Chewy.com,SUP,83,15,6,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,5558.32,181530.62,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Piggly Wiggly,SUP,48,15,4,"Amazon, Snapdeal",2025-12-21,2026-01-05,21114.63,178329.73,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Defense Commissary Agency,PH,24,13,2,"Amazon, Flipkart",2025-12-22,2026-01-05,25812.38,175543.1,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Casey's General Store,PC,31,13,3,"Flipkart, Snapdeal",2025-12-21,2026-01-05,28185.09,174579.47,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Southeastern Grocers,SUP,50,15,4,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,23176.89,170047.88999999998,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Lululemon,PH,30,15,2,"Amazon, eBay",2025-12-21,2026-01-05,5707.12,168859.95,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Sprouts Farmers Market,SUP,89,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,8632.19,167949.21,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Meijer,SUP,98,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,8617.3,166388.66999999998,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Amway,PH,27,12,3,"Amazon, Snapdeal",2025-12-21,2026-01-05,34192.32,165920.28,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Qurate Retail,SUP,69,15,5,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,23172.0,165560.8,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Sephora (LVMH),PH,39,13,3,"Amazon, Snapdeal",2025-12-22,2026-01-05,16723.66,162477.44,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ross Stores,SUP,99,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,5686.31,159969.75,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Aldi,SUP,85,15,7,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,7395.25,157745.32,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Rite Aid,SUP,100,15,8,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,7002.43,156305.88,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Giant Eagle,SUP,118,15,10,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4588.23,154642.88,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Wegmans Food Market,SUP,101,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,5096.62,152841.85,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Target,PH,15,15,1,Flipkart,2025-12-21,2026-01-05,10174.26,152613.9,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Chedraui,PC,17,10,3,"Flipkart, Snapdeal, eBay",2025-12-22,2026-01-05,33511.69,152444.22,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Barnes and Noble Booksellers,SUP,91,15,8,"Amazon, eBay",2025-12-21,2026-01-05,4671.16,148393.03,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Casey's General Store,SUP,127,15,11,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,5158.73,145461.35,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Bath & Body Works,SUP,73,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,8445.55,142958.35,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+American Eagle,SUP,89,14,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,11626.62,139376.66999999998,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Verizon Wireless,SUP,93,15,8,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,6536.58,137578.61,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+My Demoulas,SUP,117,15,13,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,5459.42,137241.22,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Shell Oil Company,SUP,87,15,8,"Amazon, Flipkart",2025-12-21,2026-01-05,11509.09,135357.53,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Best Buy,SUP,94,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,10740.13,128908.37,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Walgreens Boots Alliance,SUP,62,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,16350.29,127171.14,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+AVB Brandsource,PH,24,15,2,"Amazon, Flipkart",2025-12-21,2026-01-05,25436.7,124595.51999999999,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Chewy.com,PH,15,15,1,Snapdeal,2025-12-21,2026-01-05,8258.44,123876.6,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+7-Eleven,PH,31,15,4,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,16869.91,122217.44,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Sephora (LVMH),SUP,66,15,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4116.21,120883.47,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Wakefern / ShopRite,SUP,80,15,6,"Flipkart, Snapdeal",2025-12-21,2026-01-05,6976.82,119918.76000000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Total Wine & More,PH,15,15,1,Snapdeal,2025-12-21,2026-01-05,7932.39,118985.85,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dell Technologies,SUP,70,15,6,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,7999.66,118059.75,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Academy Sports,SUP,65,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,11462.87,114581.26,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Walmart,PH,15,15,1,Flipkart,2025-12-21,2026-01-05,7630.74,114461.09999999999,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Office Depot,SUP,77,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,6222.07,114179.63,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Petco,SUP,73,15,6,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,21659.75,114080.63,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Alimentation Couche-Tard,SUP,43,15,3,"Amazon, Flipkart",2025-12-21,2026-01-05,5639.71,111574.90000000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Costco Wholesale,SUP,66,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4683.41,111454.19,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Sherwin-Williams,SUP,73,15,8,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,11679.62,109750.38,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Shell Oil Company,PH,15,15,1,Amazon,2025-12-21,2026-01-05,7262.09,108931.35,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+O'Reilly Auto Parts,SUP,94,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,7975.97,108126.14,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Tractor Supply Co.,SUP,83,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,11137.17,107368.03,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Defense Commissary Agency,SUP,94,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,11389.67,107042.2,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Big Lots,SUP,83,15,8,"Amazon, eBay",2025-12-21,2026-01-05,6797.76,106508.39,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Lululemon,SUP,60,15,5,"Amazon, Flipkart",2025-12-21,2026-01-05,7054.07,106441.95,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Health Mart Systems,SUP,92,15,8,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,3697.95,106190.59,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Stater Bros Holdings,PH,13,13,1,Snapdeal,2025-12-22,2026-01-05,23589.23,105842.0,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ace Hardware,SUP,90,15,8,"Snapdeal, eBay",2025-12-21,2026-01-05,7464.05,104022.61,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+The Kroger Co.,PH,30,15,2,"Flipkart, eBay",2025-12-21,2026-01-05,5035.26,100737.45,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Amway,SUP,67,14,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,13186.02,98445.84,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Menards,PH,18,11,2,"Flipkart, Snapdeal",2025-12-22,2026-01-05,22797.35,96347.41,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+CVS Health Corporation,SUP,88,14,10,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,5719.48,96001.39,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Harbor Freight Tools,SUP,42,15,4,"Snapdeal, eBay",2025-12-21,2026-01-05,8374.47,94108.95999999999,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Lowe's Companies,SUP,76,15,6,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,4535.64,94055.95,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dollar General,SUP,86,15,8,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,7152.74,91798.22,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Save-A-Lot,PH,8,8,1,Flipkart,2025-12-21,2026-01-04,23673.12,91094.45999999999,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+WinCo Foods,SUP,43,15,4,"Snapdeal, eBay",2025-12-21,2026-01-05,11683.68,91064.25,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Apple Stores / iTunes,PH,26,15,2,"Snapdeal, eBay",2025-12-21,2026-01-05,16676.19,90563.5,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Stater Bros Holdings,SUP,72,15,7,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,10120.55,90477.38,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Aldi,PH,9,9,1,Snapdeal,2025-12-22,2026-01-05,25567.51,89718.69,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Michaels Stores,SUP,83,15,8,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,2048.11,88196.94,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ikea North American Svcs,SUP,55,15,6,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,5802.46,87858.1,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Chedraui,SUP,101,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4987.92,87701.0,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Kohl's,SUP,91,15,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4887.0,87676.82,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Michaels Stores,PH,27,15,2,Amazon,2025-12-21,2026-01-05,9580.99,86832.06,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Menards,SUP,67,15,6,"Amazon, Flipkart",2025-12-21,2026-01-05,2425.47,86421.20999999999,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Nordstrom,PH,24,13,2,"Flipkart, eBay",2025-12-22,2026-01-05,16392.5,86119.67,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dollar Tree,SUP,58,15,7,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,7511.8,85623.83,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Wayfair,SUP,59,15,5,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,6191.23,84716.85,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Weis Markets,SUP,54,15,5,"Amazon, eBay",2025-12-21,2026-01-05,3195.57,83970.32,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Burlington,PH,13,13,1,Amazon,2025-12-22,2026-01-05,18395.81,80238.84000000001,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Schnucks,SUP,64,14,7,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,8193.04,79940.57,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Nordstrom,SUP,33,14,4,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,17233.07,78896.3,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ace Hardware,PH,22,11,2,"Snapdeal, eBay",2025-12-22,2026-01-05,15820.13,78164.56999999999,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Macy's,SUP,74,15,7,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,6251.57,77287.08,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Victoria's Secret,SUP,53,15,5,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,10198.6,76769.42,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Amazon.com,SUP,83,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,3448.61,72443.07,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+The Kroger Co.,SUP,62,15,5,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,3954.53,71789.17,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Bass Pro,PH,21,13,2,"Flipkart, eBay",2025-12-21,2026-01-05,12041.35,71516.56,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Hy Vee,PH,30,15,2,eBay,2025-12-21,2026-01-05,2903.61,71042.7,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+PetSmart,SUP,80,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,7346.75,70221.09,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Burlington,SUP,86,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,3531.91,68235.22,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Total Wine & More,SUP,86,15,7,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,2195.96,68093.99,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Neiman Marcus,PC,7,7,1,Amazon,2025-12-22,2026-01-04,23331.04,67176.5,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Neiman Marcus,PH,9,9,1,Flipkart,2025-12-22,2026-01-05,19482.73,66376.89,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Northeast Grocery,PH,15,15,1,Flipkart,2025-12-21,2026-01-05,4293.04,64395.6,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dick's Sporting Goods,SUP,70,15,6,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,7497.49,63956.3,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Foot Locker,SUP,73,14,8,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,6035.13,63353.71,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Albertsons Companies,SUP,48,15,4,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,4184.27,62704.47,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Weis Markets,PH,9,9,1,Flipkart,2025-12-22,2026-01-05,16060.64,59278.68,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Foot Locker,PH,9,9,1,Flipkart,2025-12-22,2026-01-05,16323.83,59110.14,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Publix Super Markets,SUP,54,15,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,3222.21,56583.07,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+AVB Brandsource,SUP,54,15,6,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,6065.06,56412.47,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+American Eagle,PH,15,15,1,eBay,2025-12-21,2026-01-05,3725.65,55884.75,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Schnucks,PH,9,9,1,Flipkart,2025-12-22,2026-01-05,13521.95,52545.670000000006,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+AutoZone,SUP,55,13,6,"Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4619.99,51767.38,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Hy Vee,SUP,60,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,5864.77,51339.57,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Army and Air Force Exchange Service,SUP,63,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,2551.34,48714.03,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+AT&T Wireless,SUP,48,15,5,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,2317.44,46232.049999999996,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Northeast Grocery,SUP,47,15,4,"Snapdeal, eBay",2025-12-21,2026-01-05,4889.5,45206.76,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Signet Jewelers,SUP,76,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,5338.83,44138.44,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Office Depot,PH,11,11,1,Amazon,2025-12-22,2026-01-05,10648.68,43695.48,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Hudson's Bay,SUP,47,14,6,"Amazon, Flipkart, Snapdeal",2025-12-21,2026-01-05,5569.51,41981.33,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Royal Ahold Delhaize USA,SUP,43,15,3,"Amazon, Snapdeal, eBay",2025-12-21,2026-01-05,4828.82,41919.08,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Exxon Mobil Corporation,SUP,55,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,7921.37,41531.75,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ulta Beauty,PH,9,9,1,Snapdeal,2025-12-22,2026-01-05,11911.82,40609.41,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+H.E. Butt Grocery,SUP,46,13,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4125.42,37432.979999999996,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+BJ's Wholesale Club,SUP,77,15,6,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,4200.2,37377.57,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+7-Eleven,SUP,26,15,2,"Snapdeal, eBay",2025-12-21,2026-01-05,3338.14,35866.25,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Publix Super Markets,PH,10,10,1,Snapdeal,2025-12-21,2026-01-04,5930.94,33346.61,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+O'Reilly Auto Parts,PH,12,12,1,Amazon,2025-12-21,2026-01-05,5993.52,33048.68,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+True Value Co.,SUP,65,15,7,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,2766.72,31439.04,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Ingles,SUP,50,15,5,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,1533.23,31297.49,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Camping World,SUP,44,15,4,"Amazon, Snapdeal",2025-12-21,2026-01-05,2189.23,30329.02,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Giant Eagle,PH,12,12,1,Flipkart,2025-12-21,2026-01-05,5431.66,29900.98,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Advance Auto,SUP,82,15,9,"Amazon, Flipkart, Snapdeal, eBay",2025-12-21,2026-01-05,2210.98,29722.37,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Target,SUP,77,15,5,"Amazon, Snapdeal",2025-12-21,2026-01-05,1619.2,28919.72,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Signet Jewelers,PH,18,11,2,"Flipkart, eBay",2025-12-22,2026-01-05,3938.7,26246.04,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Good Neighbor Pharmacy,SUP,31,11,4,"Flipkart, Snapdeal, eBay",2025-12-22,2026-01-05,4486.47,22941.57,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+J.C. Penney Company,SUP,29,13,3,"Amazon, Flipkart, eBay",2025-12-21,2026-01-05,3770.31,21554.02,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Dick's Sporting Goods,PH,12,12,1,Amazon,2025-12-21,2026-01-05,3152.65,20152.219999999998,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Qurate Retail,PH,11,11,1,eBay,2025-12-22,2026-01-05,3319.24,13608.289999999999,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Camping World,PH,4,4,1,Flipkart,2025-12-22,2026-01-04,6057.87,12305.4,CONDITIONAL_PROBATION,48-Hour Final Cure Notice Before Automatic Category Deactivation,0,2026-01-06,N/A (Probationary)
+Staples,SUP,19,15,2,"Snapdeal, eBay",2025-12-21,2026-01-05,521.37,5356.53,CRITICAL_SUSPENSION,30-Day Complete Wholesale Freeze & Catalog De-listing,30,2026-01-06,2026-02-05
+Alimentation Couche-Tard,PH,4,4,1,Flipkart,2025-12-22,2026-01-04,1663.88,3380.76,CONDITIONAL_PROBATION,48-Hour Final Cure Notice Before Automatic Category Deactivation,0,2026-01-06,N/A (Probationary)
+Bass Pro,SUP,9,9,1,Flipkart,2025-12-22,2026-01-05,751.84,2734.82,FORMAL_SUSPENSION,30-Day Category Suspension Pending Formal Cure,30,2026-01-06,2026-02-05
+Casey's General Store,PH,4,4,1,eBay,2025-12-22,2026-01-04,823.32,2227.28,CONDITIONAL_PROBATION,48-Hour Final Cure Notice Before Automatic Category Deactivation,0,2026-01-06,N/A (Probationary)

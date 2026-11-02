@@ -71,6 +71,7 @@ try:
     # =========================================================
     cursor.execute("SET FOREIGN_KEY_CHECKS = 0;")
     tables_to_truncate = [
+        "SUSPENDED_CATEGORIES",
         "VIOLATION_TABLE",
         "PRICE_MONITORING_TABLE",
         "SELLER_TABLE",
@@ -241,13 +242,49 @@ try:
         connection.commit()
     print(f"[OK] VIOLATION_TABLE:        {len(v_df):,} rows inserted.")
 
+    # 6.4 SUSPENDED CATEGORIES (279 Rows)
+    susp_csv = DATA_PATH / "suspended_categories_table.csv"
+    if susp_csv.exists():
+        print("\nIngesting SUSPENDED_CATEGORIES (279 rows)...")
+        susp_df = pd.read_csv(susp_csv)
+        susp_insert = """
+        INSERT INTO SUSPENDED_CATEGORIES (
+            homologated_name, Category, Total_Infractions, Distinct_Violation_Dates,
+            Distinct_SKUs_Violated, Marketplaces_Audited, Earliest_Violation, Latest_Violation,
+            Max_Single_Deficit, Total_Price_Deficit, Enforcement_Status, Legal_Remedy,
+            Suspension_Duration_Days, Suspension_Effective_Date, Suspension_Expiry_Date
+        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        susp_records = []
+        for _, r in susp_df.iterrows():
+            susp_records.append((
+                str(r["homologated_name"]),
+                str(r["Category"]),
+                int(r["Total_Infractions"]),
+                int(r["Distinct_Violation_Dates"]),
+                int(r["Distinct_SKUs_Violated"]),
+                str(r["Marketplaces_Audited"]),
+                str(r["Earliest_Violation"]),
+                str(r["Latest_Violation"]),
+                float(r["Max_Single_Deficit"]),
+                float(r["Total_Price_Deficit"]),
+                str(r["Enforcement_Status"]),
+                str(r["Legal_Remedy"]),
+                int(r["Suspension_Duration_Days"]),
+                str(r["Suspension_Effective_Date"]),
+                str(r["Suspension_Expiry_Date"])
+            ))
+        cursor.executemany(susp_insert, susp_records)
+        connection.commit()
+        print(f"[OK] SUSPENDED_CATEGORIES:   {len(susp_df):,} rows inserted.")
+
     # =========================================================
     # 7. FINAL AUDIT & SUMMARY VERIFICATION
     # =========================================================
     all_tables = [
         "SKU", "PL", "PRICE_LIST", "SELLER_MAPPING", 
         "CATEGORY_MAPPING", "PROMOTION", "SELLER_TABLE", 
-        "PRICE_MONITORING_TABLE", "VIOLATION_TABLE"
+        "PRICE_MONITORING_TABLE", "VIOLATION_TABLE", "SUSPENDED_CATEGORIES"
     ]
     print("\n=========================================================")
     print("           FINAL DATABASE POPULATION SUMMARY             ")
@@ -257,7 +294,7 @@ try:
         cnt = cursor.fetchone()[0]
         print(f"• {tbl:<25} {cnt:>10,} rows")
     print("=========================================================")
-    print(" All 9 tables populated and committed to MySQL.")
+    print(" All 10 tables populated and committed to MySQL.")
 
 except Exception as err:
     connection.rollback()

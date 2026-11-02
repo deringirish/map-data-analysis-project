@@ -1,8 +1,8 @@
-# MAP Data Analysis Project: Comprehensive Architecture & Technical Blueprint
+# MAP Compliance & Brand Protection Analytics Engine: Comprehensive Architecture & Technical Blueprint
 
 **Author:** Derin Girish D G  
 **Project Domain:** E-Commerce Market Intelligence, Minimum Advertised Price (MAP) Compliance, Brand Protection & Legal Enforcement  
-**Target Environment:** Python 3.14+ (managed via `uv`), MySQL 8.0+ (3NF Relational Warehouse), Automated DOCX Document Engine, Playwright Scraping Subsystem  
+**Target Environment:** Python 3.14+ (managed via `uv`), MySQL 8.0+ (3NF Relational Warehouse), Automated DOCX Document Engine, Seaborn/Matplotlib Visual Intelligence Subsystem  
 
 ---
 
@@ -66,6 +66,7 @@ Monitored marketplaces include **Amazon**, **Flipkart**, **eBay**, and specializ
 │     • SELLER_TABLE (147,900 rows)           [Raw Daily Marketplace Telemetry]          │
 │     • PRICE_MONITORING_TABLE (147,900 rows) [Full Audit Trail - Compliant & Violations]│
 │     • VIOLATION_TABLE (15,936 rows)         [Enforcement Ledger + Notice Document Path]│
+│     • SUSPENDED_CATEGORIES (279 rows)       [Charter Obj 4: Legal Freeze & Escalation] │
 └───────────────────────────────────────────┬────────────────────────────────────────────┘
                                             │
                                             ▼
@@ -319,7 +320,9 @@ SELECT 'SELLER_TABLE', COUNT(*) FROM SELLER_TABLE
 UNION ALL
 SELECT 'PRICE_MONITORING_TABLE', COUNT(*) FROM PRICE_MONITORING_TABLE
 UNION ALL
-SELECT 'VIOLATION_TABLE', COUNT(*) FROM VIOLATION_TABLE;
+SELECT 'VIOLATION_TABLE', COUNT(*) FROM VIOLATION_TABLE
+UNION ALL
+SELECT 'SUSPENDED_CATEGORIES', COUNT(*) FROM SUSPENDED_CATEGORIES;
 ```
 
 **Verification Results:**
@@ -332,7 +335,18 @@ SELECT 'VIOLATION_TABLE', COUNT(*) FROM VIOLATION_TABLE;
 * `SELLER_TABLE`: 147,900 rows
 * `PRICE_MONITORING_TABLE`: 147,900 rows
 * `VIOLATION_TABLE`: 15,936 rows
+* `SUSPENDED_CATEGORIES`: 279 rows (253 Critical Suspensions, 21 Formal Suspensions, 5 Conditional Probations)
 * `Notice_Doc_Path` Population: 15,936 rows mapped to 279 generated documents with zero null entries.
+
+
+### 8.3 Executive Visual Analytics & Evidence Figures
+All analytical visualizations are generated at 300 DPI for executive presentations:
+* `01_violations_by_marketplace.png`: Non-compliant incident frequency and cumulative price deficit by marketplace (Amazon, Flipkart, eBay, etc.).
+* `02_top_10_violating_resellers.png`: Top corporate offender entities ranked by total under-MAP margin erosion.
+* `03_daily_violation_trend.png`: 15-day surveillance timeline tracking non-compliance surges during holiday sales.
+* `04_category_infraction_breakdown.png`: Volume distribution across Personal Computers (PC), Print Hardware (PH), and Supplies (PS).
+* `05_price_deficit_distribution.png`: Statistical density and percentile analysis (Median vs 90th percentile) of pricing gaps.
+* `06_category_suspension_status.png`: Account escalation distribution across Critical Freeze, Formal Suspension, and Probation.
 
 ### 8.2 Data Quality & Integrity Checks
 * **Referential Integrity**: Zero orphaned foreign keys across `PL`, `PRICE_LIST`, `CATEGORY_MAPPING`, and `PROMOTION`.
@@ -347,5 +361,5 @@ SELECT 'VIOLATION_TABLE', COUNT(*) FROM VIOLATION_TABLE;
 * **Data Processing**: Pandas, NumPy, OpenPyXL, PyYAML
 * **Relational Database**: MySQL 8.0 (InnoDB, utf8mb4, B-Tree Indexes)
 * **Document Synthesis**: python-docx, oxml (Open Packaging Conventions)
-* **Web Scraping & Evidence Capture**: Playwright, BeautifulSoup4
+* **Visual Analytics & Reporting**: Matplotlib 3.10+, Seaborn 0.13+ (Executive Intelligence Charts)
 * **Security & Configuration**: python-dotenv (`.env` credential isolation)

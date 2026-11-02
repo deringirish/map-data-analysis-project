@@ -47,7 +47,8 @@ tables = [
     "PROMOTION",
     "SELLER_TABLE",
     "PRICE_MONITORING_TABLE",
-    "VIOLATION_TABLE"
+    "VIOLATION_TABLE",
+    "SUSPENDED_CATEGORIES"
 ]
 
 print("=========================================================")
