@@ -4,11 +4,21 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.14-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Database](https://img.shields.io/badge/MySQL-8.0%20(3NF)-orange.svg?logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
+[![Interactive BI](https://img.shields.io/badge/Streamlit%20BI-Interactive%20Hub-FF4B4B.svg?logo=streamlit)](dashboard.py)
+[![Advanced SQL](https://img.shields.io/badge/SQL-Window%20Functions%20%26%20CTEs-blue.svg)](src/database/analytics/)
 [![Reporting](https://img.shields.io/badge/DOCX%20Engine-279%20Legal%20Notices-red.svg)](data_processed/reports/notices/)
-[![Visual Analytics](https://img.shields.io/badge/Visual%20Analytics-6%20Charts%20(300%20DPI)-teal.svg)](data_processed/reports/figures/)
+[![Executive Briefing](https://img.shields.io/badge/C--Suite-Briefing%20Engine-purple.svg)](data_processed/reports/executive_briefing/)
 
-An enterprise-grade, end-to-end data engineering and analytics solution for tracking, auditing, and legally enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
+An enterprise-grade, end-to-end data analytics and business intelligence platform for tracking, auditing, and legally enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
+
+---
+
+## 💼 Business Case Study (STAR Framework)
+
+* **S (Situation)**: During the critical 15-day holiday commercial window, rogue and unauthorized resellers engaged in aggressive algorithmic undercutting across 147,900 omni-channel product listings, eroding authorized dealer margins and causing destructive cross-platform price wars across 5 global markets.
+* **T (Task)**: Design a unified data intelligence platform to ingest omni-channel price telemetry, normalize 5 foreign currencies, audit listings against statutory MAP and promotional (LPP) floors, identify chronic recidivists, and automate legal enforcement actions.
+* **A (Action)**: Architected a normalized 3NF MySQL relational warehouse (10 tables, 147k records), engineered automated category suspension algorithms under Charter Objective 4, authored an advanced analytical SQL suite (window functions, Pareto 80/20, price contagion tracking), built an interactive Streamlit BI stakeholder dashboard, and synthesized 279 formal legal warning notices.
+* **R (Result)**: Audited 147,900 listings, identified 15,936 confirmed non-compliant breaches, uncovered ₹21.20 Crores in cumulative margin deficit, enforced 279 thirty-day category wholesale suspensions, and delivered board-ready C-suite executive briefings.
 
 ---
 
@@ -249,7 +259,52 @@ SELECT 'SUSPENDED_CATEGORIES', COUNT(*) FROM SUSPENDED_CATEGORIES;
 
 ## 👨‍💻 Author & Architecture Context
 
+## 📊 Interactive Stakeholder BI Dashboard & Analytics Hub
+
+The platform features an enterprise **Streamlit BI Hub** for interactive data exploration, executive KPI monitoring, and entity-level investigation:
+
+```bash
+# Launch the interactive BI platform
+python run_dashboard.py
+# Or via master CLI:
+python main.py --dashboard
+```
+
+### Key Interactive Views:
+1. **Executive KPI Scorecards**: Live totals for Audited Listings (147k), Cumulative Margin Deficit (₹21.20 Cr), and Charter Obj. 4 Suspensions (279).
+2. **Surveillance Trajectory (Daily Trend)**: Interactive time-series area charts illustrating holiday discounting spikes.
+3. **Reseller Surveillance & Recidivism Hub**: Deep-dive search tool for inspecting individual corporate reseller infraction histories and legal notice paths.
+4. **Visual Analytics & Treemaps**: Box plots of category deficit severity and hierarchical treemaps of sub-category margin leakage.
+5. **Audit Data Export**: One-click download of filtered audit telemetry in CSV format.
+
+---
+
+## 🗄️ Advanced Analytical SQL Suite (`src/database/analytics/`)
+
+For data analysis and business intelligence teams, the repository includes production-grade analytical SQL queries utilizing advanced window functions, CTEs, and cohort models:
+
+| Query File | Advanced SQL Techniques | Business Problem Solved |
+|---|---|---|
+| [`01_moving_averages.sql`](src/database/analytics/01_moving_averages.sql) | `ROWS BETWEEN 6 PRECEDING AND CURRENT ROW`, CTEs | 7-Day Rolling Moving Averages of Deficit & Discount Velocity |
+| [`02_pareto_concentration.sql`](src/database/analytics/02_pareto_concentration.sql) | `DENSE_RANK()`, Running Window Sums | Pareto 80/20 Rule: Identifies top offenders driving 80% of margin loss |
+| [`03_price_cascades.sql`](src/database/analytics/03_price_cascades.sql) | `LAG()`, `LEAD()`, `FIRST_VALUE()` | Algorithmic Price Matching Contagion & Cross-Channel Cascades |
+| [`04_recidivism_cohorts.sql`](src/database/analytics/04_recidivism_cohorts.sql) | Cohort Entry Grouping, Survival Rates | Reseller Compliance Rehabilitation vs Strike 3 Suspension Escalation |
+
+---
+
+## 📑 C-Suite Executive Briefing Synthesis
+
+Generate formal executive briefing documentation for the Chief Commercial Officer (CCO) and Executive Board:
+
+```bash
+python main.py --briefing
+```
+* Output: `data_processed/reports/executive_briefing/MAP_Compliance_Executive_Briefing.docx`
+
+---
+
+## 👨‍💻 Author & Architecture Context
+
 * **Author**: Derin Girish
-* **Role**: Lead Data Engineer / Architect
+* **Role**: Lead Data Analyst / Quantitative Architect
 * **License**: [MIT License](LICENSE) (Copyright © 2026 Derin Girish)
-* **Companion System**: Designed to integrate directly with **`map-market-simulation-engine`**, providing interactive price simulations, dynamic promotion scheduling, and real-time executive dashboard controls.
