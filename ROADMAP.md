@@ -35,5 +35,5 @@ This roadmap elevates the core 3NF MySQL warehouse and batch processing engine i
 - [x] **Step 11:** Implement Automated Executive Summary Briefing Generator (`src/reporting/generate_executive_briefing.py`)
 
 ### Phase 4: Portfolio Storytelling & Master Orchestration
-- [ ] **Step 12:** Update Master CLI Orchestrator (`main.py`) with `--dashboard` and `--briefing` execution flags
+- [x] **Step 12:** Update Master CLI Orchestrator (`main.py`) with `--dashboard` and `--briefing` execution flags
 - [ ] **Step 13:** Refactor `README.md` with STAR Framework, Live Dashboard preview, and Analytical Architecture

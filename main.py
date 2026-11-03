@@ -16,6 +16,7 @@ sys.path.append(str(BASE_DIR))
 from src.enforcement.category_suspension_engine import evaluate_category_suspensions, plot_suspension_overview, sync_suspensions_to_mysql
 from src.reporting.generate_visualizations import generate_all_figures
 from src.reporting.generate_violation_notices import generate_all_notices_and_update_tables
+from src.reporting.generate_executive_briefing import generate_executive_briefing
 
 
 def run_suspension_pipeline():
@@ -39,6 +40,22 @@ def run_notice_pipeline():
     print(" [STAGE 3] AUTOMATED LEGAL WARNING NOTICE GENERATION")
     print("=" * 65)
     generate_all_notices_and_update_tables()
+
+
+def run_briefing_pipeline():
+    print("\n" + "=" * 65)
+    print(" [STAGE 4] C-SUITE EXECUTIVE BRIEFING SYNTHESIS")
+    print("=" * 65)
+    generate_executive_briefing()
+
+
+def run_dashboard():
+    print("\n" + "=" * 65)
+    print(" [DASHBOARD] LAUNCHING INTERACTIVE STREAMLIT BI PLATFORM")
+    print("=" * 65)
+    import subprocess
+    script = BASE_DIR / "dashboard.py"
+    subprocess.run(["streamlit", "run", str(script)])
 
 
 def run_database_population():
@@ -87,11 +104,19 @@ def main():
         "--validate", action="store_true",
         help="Execute MySQL table record validation audit"
     )
+    parser.add_argument(
+        "--briefing", action="store_true",
+        help="Generate C-suite executive briefing document (.docx)"
+    )
+    parser.add_argument(
+        "--dashboard", action="store_true",
+        help="Launch the interactive Streamlit BI stakeholder dashboard"
+    )
 
     args = parser.parse_args()
 
     # Default to running all reporting/enforcement stages if no specific flag passed
-    if not any([args.all, args.suspend, args.charts, args.notices, args.populate_db, args.validate]):
+    if not any([args.all, args.suspend, args.charts, args.notices, args.populate_db, args.validate, args.briefing, args.dashboard]):
         args.all = True
 
     print("=" * 65)
@@ -110,8 +135,14 @@ def main():
     if args.all or args.notices:
         run_notice_pipeline()
 
+    if args.all or args.briefing:
+        run_briefing_pipeline()
+
     if args.validate:
         run_database_validation()
+
+    if args.dashboard:
+        run_dashboard()
 
     print("\n" + "=" * 65)
     print(" Pipeline execution finished successfully!")
