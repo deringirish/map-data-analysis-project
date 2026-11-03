@@ -21,7 +21,7 @@ This roadmap elevates the core 3NF MySQL warehouse and batch processing engine i
 - [x] **Step 1:** Configure `streamlit` and `plotly` dependencies in `pyproject.toml` & establish `ROADMAP.md`
 - [x] **Step 2:** Build high-performance data loader & caching engine with MySQL and CSV fallback (`src/dashboard/data_loader.py`)
 - [x] **Step 3:** Implement Executive KPI Overview & Multi-Marketplace Filter Shell (`src/dashboard/views/overview.py`)
-- [ ] **Step 4:** Implement Reseller Surveillance & Recidivism Deep-Dive Hub (`src/dashboard/views/resellers.py`)
+- [x] **Step 4:** Implement Reseller Surveillance & Recidivism Deep-Dive Hub (`src/dashboard/views/resellers.py`)
 - [ ] **Step 5:** Implement Interactive Visual Analytics & Price Deficit Drilldown (`src/dashboard/views/analytics.py`)
 - [ ] **Step 6:** Assemble Master Dashboard (`dashboard.py`) and 1-Click Launch Runner (`run_dashboard.py`)
 
