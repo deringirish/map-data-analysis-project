@@ -29,7 +29,7 @@ This roadmap elevates the core 3NF MySQL warehouse and batch processing engine i
 - [x] **Step 7:** Author Moving Averages & Discount Velocity Window Queries (`src/database/analytics/01_moving_averages.sql`)
 - [x] **Step 8:** Author Pareto 80/20 Chronic Offender Concentration Queries (`src/database/analytics/02_pareto_concentration.sql`)
 - [x] **Step 9:** Author Price Cascade & Competitor Undercutting Lead/Lag Queries (`src/database/analytics/03_price_cascades.sql`)
-- [ ] **Step 10:** Author Recidivism Cohort Survival & Strike Escalation Queries (`src/database/analytics/04_recidivism_cohorts.sql`)
+- [x] **Step 10:** Author Recidivism Cohort Survival & Strike Escalation Queries (`src/database/analytics/04_recidivism_cohorts.sql`)
 
 ### Phase 3: Automated Board-Ready Executive Briefing
 - [ ] **Step 11:** Implement Automated Executive Summary Briefing Generator (`src/reporting/generate_executive_briefing.py`)
