@@ -23,7 +23,7 @@ This roadmap elevates the core 3NF MySQL warehouse and batch processing engine i
 - [x] **Step 3:** Implement Executive KPI Overview & Multi-Marketplace Filter Shell (`src/dashboard/views/overview.py`)
 - [x] **Step 4:** Implement Reseller Surveillance & Recidivism Deep-Dive Hub (`src/dashboard/views/resellers.py`)
 - [x] **Step 5:** Implement Interactive Visual Analytics & Price Deficit Drilldown (`src/dashboard/views/analytics.py`)
-- [ ] **Step 6:** Assemble Master Dashboard (`dashboard.py`) and 1-Click Launch Runner (`run_dashboard.py`)
+- [x] **Step 6:** Assemble Master Dashboard (`dashboard.py`) and 1-Click Launch Runner (`run_dashboard.py`)
 
 ### Phase 2: Advanced Analytical SQL & Cohort Analytics Suite
 - [ ] **Step 7:** Author Moving Averages & Discount Velocity Window Queries (`src/database/analytics/01_moving_averages.sql`)
