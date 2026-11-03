@@ -27,7 +27,7 @@ This roadmap elevates the core 3NF MySQL warehouse and batch processing engine i
 
 ### Phase 2: Advanced Analytical SQL & Cohort Analytics Suite
 - [x] **Step 7:** Author Moving Averages & Discount Velocity Window Queries (`src/database/analytics/01_moving_averages.sql`)
-- [ ] **Step 8:** Author Pareto 80/20 Chronic Offender Concentration Queries (`src/database/analytics/02_pareto_concentration.sql`)
+- [x] **Step 8:** Author Pareto 80/20 Chronic Offender Concentration Queries (`src/database/analytics/02_pareto_concentration.sql`)
 - [ ] **Step 9:** Author Price Cascade & Competitor Undercutting Lead/Lag Queries (`src/database/analytics/03_price_cascades.sql`)
 - [ ] **Step 10:** Author Recidivism Cohort Survival & Strike Escalation Queries (`src/database/analytics/04_recidivism_cohorts.sql`)
 
