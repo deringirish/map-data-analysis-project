@@ -21,7 +21,7 @@ def main():
     dashboard_script = BASE_DIR / "dashboard.py"
     try:
         subprocess.run(
-            ["uv", "run", "streamlit", "run", str(dashboard_script), "--server.headless=true"],
+            [sys.executable, "-m", "streamlit", "run", str(dashboard_script), "--server.headless=true"],
             check=True,
         )
     except KeyboardInterrupt:

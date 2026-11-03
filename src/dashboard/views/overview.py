@@ -80,7 +80,7 @@ def render_overview_view(df_v: pd.DataFrame, df_s: pd.DataFrame):
             margin=dict(l=30, r=30, t=50, b=30),
             hovermode="x unified",
         )
-        st.plotly_chart(fig_trend, use_container_width=True)
+        st.plotly_chart(fig_trend, width="stretch")
 
     with c_right:
         st.markdown("#### 🛒 Infractions by Marketplace Channel")
@@ -108,7 +108,7 @@ def render_overview_view(df_v: pd.DataFrame, df_s: pd.DataFrame):
             margin=dict(l=30, r=30, t=50, b=30),
             showlegend=False,
         )
-        st.plotly_chart(fig_mp, use_container_width=True)
+        st.plotly_chart(fig_mp, width="stretch")
 
     # 3. Bottom Row: Category Breakdown & Spot FX Cross-Border Telemetry
     col_cat, col_fx = st.columns([5, 5])
@@ -134,7 +134,7 @@ def render_overview_view(df_v: pd.DataFrame, df_s: pd.DataFrame):
             plot_bgcolor="rgba(0,0,0,0)",
             margin=dict(l=30, r=30, t=50, b=30),
         )
-        st.plotly_chart(fig_cat, use_container_width=True)
+        st.plotly_chart(fig_cat, width="stretch")
 
     with col_fx:
         st.markdown("#### 🌐 Cross-Border Source Regions")
@@ -159,4 +159,4 @@ def render_overview_view(df_v: pd.DataFrame, df_s: pd.DataFrame):
             margin=dict(l=30, r=30, t=50, b=30),
             yaxis_title="Deficit in INR (₹)",
         )
-        st.plotly_chart(fig_reg, use_container_width=True)
+        st.plotly_chart(fig_reg, width="stretch")

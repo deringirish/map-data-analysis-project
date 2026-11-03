@@ -37,7 +37,7 @@ def render_analytics_view(df_v: pd.DataFrame):
             yaxis_title="Deficit in INR (₹)",
             showlegend=False,
         )
-        st.plotly_chart(fig_box, use_container_width=True)
+        st.plotly_chart(fig_box, width="stretch")
 
     # 2. Scatter Plot: Advertised Price vs. Authorized MAP Price
     with col_scatter:
@@ -72,7 +72,7 @@ def render_analytics_view(df_v: pd.DataFrame):
             xaxis_title="Statutory MAP (₹)",
             yaxis_title="Advertised Offer Price (₹)",
         )
-        st.plotly_chart(fig_scatter, use_container_width=True)
+        st.plotly_chart(fig_scatter, width="stretch")
 
     # 3. Treemap: Sub-Category Hierarchy
     st.markdown("#### 🗺️ Sub-Category Infraction Treemap")
@@ -95,7 +95,7 @@ def render_analytics_view(df_v: pd.DataFrame):
         paper_bgcolor="rgba(0,0,0,0)",
         margin=dict(l=20, r=20, t=40, b=20),
     )
-    st.plotly_chart(fig_tree, use_container_width=True)
+    st.plotly_chart(fig_tree, width="stretch")
 
     # 4. Filtered Data Download
     st.markdown("---")

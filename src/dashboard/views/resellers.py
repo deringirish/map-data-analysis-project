@@ -54,11 +54,11 @@ def render_resellers_view(df_v: pd.DataFrame, df_s: pd.DataFrame):
             yaxis=dict(autorange="reversed"),
             margin=dict(l=30, r=30, t=50, b=30),
         )
-        st.plotly_chart(fig_top, use_container_width=True)
+        st.plotly_chart(fig_top, width="stretch")
 
         st.dataframe(
             top_sellers.style.format({"Total_Deficit": "₹{:,.2f}", "Infractions": "{:,}"}),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -95,7 +95,7 @@ def render_resellers_view(df_v: pd.DataFrame, df_s: pd.DataFrame):
             r_data[display_cols].sort_values(by="Violation_date", ascending=False).style.format(
                 {"MAP_Price": "₹{:,.2f}", "LPP": "₹{:,.2f}", "Advertised_price": "₹{:,.2f}", "Price_Difference": "₹{:,.2f}"}
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -120,6 +120,6 @@ def render_resellers_view(df_v: pd.DataFrame, df_s: pd.DataFrame):
             ].sort_values(by="Total_Price_Deficit", ascending=False).style.format(
                 {"Total_Price_Deficit": "₹{:,.2f}", "Total_Infractions": "{:,}"}
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
