@@ -19,7 +19,7 @@ This roadmap elevates the core 3NF MySQL warehouse and batch processing engine i
 
 ### Phase 1: Interactive Stakeholder BI Dashboard (Streamlit & Plotly)
 - [x] **Step 1:** Configure `streamlit` and `plotly` dependencies in `pyproject.toml` & establish `ROADMAP.md`
-- [ ] **Step 2:** Build high-performance data loader & caching engine with MySQL and CSV fallback (`src/dashboard/data_loader.py`)
+- [x] **Step 2:** Build high-performance data loader & caching engine with MySQL and CSV fallback (`src/dashboard/data_loader.py`)
 - [ ] **Step 3:** Implement Executive KPI Overview & Multi-Marketplace Filter Shell (`src/dashboard/views/overview.py`)
 - [ ] **Step 4:** Implement Reseller Surveillance & Recidivism Deep-Dive Hub (`src/dashboard/views/resellers.py`)
 - [ ] **Step 5:** Implement Interactive Visual Analytics & Price Deficit Drilldown (`src/dashboard/views/analytics.py`)
