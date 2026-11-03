@@ -32,7 +32,7 @@ This roadmap elevates the core 3NF MySQL warehouse and batch processing engine i
 - [x] **Step 10:** Author Recidivism Cohort Survival & Strike Escalation Queries (`src/database/analytics/04_recidivism_cohorts.sql`)
 
 ### Phase 3: Automated Board-Ready Executive Briefing
-- [ ] **Step 11:** Implement Automated Executive Summary Briefing Generator (`src/reporting/generate_executive_briefing.py`)
+- [x] **Step 11:** Implement Automated Executive Summary Briefing Generator (`src/reporting/generate_executive_briefing.py`)
 
 ### Phase 4: Portfolio Storytelling & Master Orchestration
 - [ ] **Step 12:** Update Master CLI Orchestrator (`main.py`) with `--dashboard` and `--briefing` execution flags
