@@ -1,6 +1,6 @@
-# ⚖️ Minimum Advertised Price (MAP) Data Analysis Engine
+# ⚖️ Map Data Analysis Project
 
-[![CI Pipeline](https://github.com/deringirish/Map-Data-Analysis-Project/actions/workflows/ci.yml/badge.svg)](https://github.com/deringirish/Map-Data-Analysis-Project/actions)
+[![CI Pipeline](https://github.com/deringirish/map-data-analysis-project/actions/workflows/ci.yml/badge.svg)](https://github.com/deringirish/map-data-analysis-project/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.14-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Database](https://img.shields.io/badge/MySQL-8.0%20(3NF)-orange.svg?logo=mysql&logoColor=white)](https://www.mysql.com/)
@@ -9,7 +9,21 @@
 [![Reporting](https://img.shields.io/badge/DOCX%20Engine-279%20Legal%20Notices-red.svg)](data_processed/reports/notices/)
 [![Executive Briefing](https://img.shields.io/badge/C--Suite-Briefing%20Engine-purple.svg)](data_processed/reports/executive_briefing/)
 
-An enterprise-grade, end-to-end data analytics and business intelligence platform for tracking, auditing, and legally enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
+An enterprise-grade data analytics, business intelligence, and legal compliance enforcement platform for tracking, auditing, and enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
+
+---
+
+## 🖥️ Interactive Streamlit BI Stakeholder Dashboard
+
+The platform features an executive-grade **Streamlit BI Platform** for interactive data exploration, omni-channel surveillance, and entity-level enforcement tracking:
+
+![Streamlit Interactive BI Dashboard](data_processed/reports/figures/00_streamlit_dashboard_preview.png)
+
+* **Executive KPI Scorecards**: Live totals for Audited Listings (147,900), Confirmed Infractions (15,936), Cumulative Margin at Risk (₹1.85 Cr / ₹18.5M+ deficit), and Charter Obj. 4 Suspensions (279).
+* **Holiday Shopping Surveillance Trajectory**: Interactive time-series area charts monitoring daily infraction spikes across the 15-day peak holiday window.
+* **Reseller Surveillance & Recidivism Hub**: Search and filter individual corporate parent resellers, audit their violation history, and inspect linked legal warning notices.
+* **Deep Visual Analytics & Boxplots**: Sub-category margin leakage analysis, price undercutting severity distributions, and cross-channel risk profiling.
+* **Audit Telemetry Export**: 1-click filtered CSV exports for commercial audit and vendor negotiations.
 
 ---
 
@@ -18,7 +32,7 @@ An enterprise-grade, end-to-end data analytics and business intelligence platfor
 * **S (Situation)**: During the critical 15-day holiday commercial window, rogue and unauthorized resellers engaged in aggressive algorithmic undercutting across 147,900 omni-channel product listings, eroding authorized dealer margins and causing destructive cross-platform price wars across 5 global markets.
 * **T (Task)**: Design a unified data intelligence platform to ingest omni-channel price telemetry, normalize 5 foreign currencies, audit listings against statutory MAP and promotional (LPP) floors, identify chronic recidivists, and automate legal enforcement actions.
 * **A (Action)**: Architected a normalized 3NF MySQL relational warehouse (10 tables, 147k records), engineered automated category suspension algorithms under Charter Objective 4, authored an advanced analytical SQL suite (window functions, Pareto 80/20, price contagion tracking), built an interactive Streamlit BI stakeholder dashboard, and synthesized 279 formal legal warning notices.
-* **R (Result)**: Audited 147,900 listings, identified 15,936 confirmed non-compliant breaches, uncovered ₹21.20 Crores in cumulative margin deficit, enforced 279 thirty-day category wholesale suspensions, and delivered board-ready C-suite executive briefings.
+* **R (Result)**: Audited 147,900 listings, identified 15,936 confirmed non-compliant breaches, uncovered ₹1.85 Crores in direct price undercutting deficit (and ₹21.20 Cr total exposed volume), enforced 279 thirty-day category wholesale suspensions, and delivered board-ready C-suite executive briefings.
 
 ---
 
@@ -35,6 +49,26 @@ This system monitors and audits omni-channel marketplace price telemetry across 
 * 🇬🇧 **UK** (United Kingdom) — GBP (£) $\to$ Spot FX Normalized
 * 🇨🇦 **CAN** (Canada) — CAD ($) $\to$ Spot FX Normalized
 * 🇦🇪 **UAE** (United Arab Emirates) — AED (AED) $\to$ Spot FX Normalized
+
+---
+
+## 🛠️ Complete Program Execution Guide
+
+The platform provides multiple execution paths tailored to distinct roles (Executives, Data Analysts, Legal Counsel, and Data Engineers). Below is a complete guide to running every program in the repository along with its specific business purpose:
+
+| Command | Entry File / Module | Target Role | Primary Business Purpose & Output |
+|:---|:---|:---|:---|
+| `python run_dashboard.py` | `run_dashboard.py` | Business Stakeholders / CCO | **1-Click Streamlit Dashboard Launcher**: Starts the interactive BI server on `localhost:8501` in headless mode. Used by stakeholders for visual filtering, Pareto analysis, and real-time surveillance. |
+| `streamlit run dashboard.py` | `dashboard.py` | BI Developers / Analysts | **Direct Streamlit Development Mode**: Runs Streamlit with hot-reloading and development toolbars enabled. |
+| `python main.py --all` | `main.py` | Pipeline Automation / CI/CD | **Full End-to-End Orchestration**: Executes all stages sequentially (Evaluates Suspensions $\to$ Renders all 300 DPI Charts $\to$ Generates 279 Legal Notices $\to$ Synthesizes Executive Briefing). |
+| `python main.py --dashboard` | `main.py` | Operations Teams | **CLI Dashboard Launcher**: Spawns the Streamlit BI interface directly from the master CLI. |
+| `python main.py --briefing` | `src/reporting/` | Executive Board / CCO | **C-Suite Executive Briefing Generator**: Synthesizes a formal Word document (`MAP_Compliance_Executive_Briefing.docx`) with audit metrics, financial exposure, and governance findings. |
+| `python main.py --suspend` | `src/enforcement/` | Compliance Officers | **Charter Objective 4 Suspension Engine**: Identifies chronic recidivist resellers (3+ distinct infraction dates), applies 30-day category wholesale freezes, updates `suspended_categories_table.csv`, and syncs with MySQL. |
+| `python main.py --charts` | `src/reporting/` | Data Analysts / Marketing | **Publication-Grade Figure Generation**: Renders all 6 analytical figures at 300 DPI (`data_processed/reports/figures/`) plus the high-resolution dashboard preview graphic. |
+| `python main.py --notices` | `src/reporting/` | Legal Counsel | **Legal Warning Notice Engine**: Synthesizes 279 branded `.docx` formal warning notices with itemized violation tables and escalation clauses into `data_processed/reports/notices/`. |
+| `python main.py --populate-db` | `src/database/` | Data Engineers | **MySQL Relational Warehouse Ingestion**: Loads all 10 normalized 3NF CSV tables into MySQL using high-throughput batch insertion (10,000 rows/batch). |
+| `python main.py --validate` | `src/database/` | Database Administrators | **Relational Integrity Audit**: Queries live MySQL record counts, verifies referential integrity, and ensures row parity against CSV sources. |
+| `jupyter lab` or `notebook` | `src/notebooks/` | Data Scientists / Analysts | **Exploratory Data Analysis**: Step-by-step walkthroughs in `01_data_ingestion_and_population.ipynb` (ETL) and `02_price_monitoring_and_violations.ipynb` (analytics & FX conversion). |
 
 ---
 
@@ -67,7 +101,7 @@ Quantifies legal enforcement escalation: 253 accounts placed under Critical 30-D
 ## 📁 System Architecture & Directory Structure
 
 ```text
-map-data-analysis-engine/
+Map Data Analysis Project/
 │
 ├── data_inputs/                               # Clean, categorized raw input assets
 │   ├── governance/                            # Charter, Data Dictionary & Session Specs
@@ -101,12 +135,17 @@ map-data-analysis-engine/
 │   │   ├── lpp_data.csv
 │   │   └── promotional_skus.csv
 │   └── reports/                               # Generated enforcement & executive outputs
-│       ├── figures/                           # 6 High-resolution charts (300 DPI .png)
+│       ├── figures/                           # 6 High-res charts + dashboard preview (300 DPI)
 │       ├── notices/                           # 279 Formatted legal warning notices (.docx)
+│       ├── executive_briefing/                # C-suite executive briefing document (.docx)
 │       └── category_suspensions_audit.csv     # Formal category suspension report
 │
 ├── src/                                       # Core implementation codebase
-│   ├── database/                              # MySQL DDL & ingestion pipeline
+│   ├── dashboard/                             # Interactive Streamlit BI architecture
+│   │   ├── data_loader.py                     # Optimized cached data retrieval
+│   │   └── views/                             # Modular views (Overview, Resellers, Analytics)
+│   ├── database/                              # MySQL DDL, analytics queries & ingestion
+│   │   ├── analytics/                         # 4 Production analytical SQL queries
 │   │   ├── create_tables.sql                  # 10-table 3NF relational schema
 │   │   ├── database_population.py             # Batch chunked ingestion (10,000 rows/batch)
 │   │   ├── database_validator.sql             # SQL verification queries
@@ -117,14 +156,19 @@ map-data-analysis-engine/
 │   │   ├── 01_data_ingestion_and_population.ipynb # Multi-format deserialization & 3NF export
 │   │   └── 02_price_monitoring_and_violations.ipynb # LPP auditing, FX parity & chart generation
 │   └── reporting/                             # Document synthesis & visual analytics
+│       ├── generate_dashboard_preview.py      # High-res Streamlit UI preview generator
+│       ├── generate_executive_briefing.py     # C-suite executive briefing Word generator
 │       ├── generate_violation_notices.py      # Automated .docx warning notice engine
 │       └── generate_visualizations.py         # Publication-grade chart generation
 │
 ├── .env.example                               # Database environment template
+├── dashboard.py                               # Master Streamlit BI dashboard
 ├── main.py                                    # Central CLI orchestration entrypoint
 ├── pyproject.toml                             # uv-managed dependency definitions
+├── run_dashboard.py                           # 1-Click interactive dashboard runner
 ├── uv.lock                                    # Deterministic dependency lockfile
-└── PROJECT_DOCUMENTATION.md                   # Full 350-line technical architecture specification
+├── PROJECT_DOCUMENTATION.md                   # Full technical architecture specification
+└── ROADMAP.md                                 # Strategic evolution & analytics roadmap
 ```
 
 ---
@@ -148,58 +192,16 @@ The system deploys a strictly normalized **3NF Relational Warehouse** across 10 
 
 ---
 
-## 🚀 Installation & Quickstart
+## 🗄️ Advanced Analytical SQL Suite (`src/database/analytics/`)
 
-### 1. Prerequisites
-* **Python 3.14+** (managed via [`uv`](https://github.com/astral-sh/uv))
-* **MySQL 8.0+** running locally or on a remote server
+For data analysis and business intelligence teams, the repository includes production-grade analytical SQL queries utilizing advanced window functions, CTEs, and cohort models:
 
-### 2. Environment Setup
-Clone the repository and synchronize virtual environment dependencies:
-```powershell
-# Clone the repository
-git clone https://github.com/deringirish/Map-Data-Analysis-Project.git
-cd Map-Data-Analysis-Project
-
-# Synchronize all locked dependencies
-uv sync
-```
-
-### 3. Database Configuration
-Copy `.env.example` to `.env` and configure your MySQL credentials:
-```ini
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=your_password_here
-MYSQL_DATABASE=MAP_PROJECT
-```
-
----
-
-## 💻 Command Line Interface (`main.py`)
-
-The platform includes a unified CLI orchestrator to execute specific modules or the entire end-to-end compliance lifecycle:
-
-```powershell
-# Execute the full compliance suite (Suspensions, Visual Charts & 279 Warning Notices)
-python main.py --all
-
-# Run only the Category Suspension engine (Charter Objective 4)
-python main.py --suspend
-
-# Generate all 6 publication-grade visual analytics figures (300 DPI)
-python main.py --charts
-
-# Generate all 279 category-segmented .docx legal warning notices
-python main.py --notices
-
-# Populate the MySQL 3NF database from normalized tables (10,000 rows/batch)
-python main.py --populate-db
-
-# Validate live table counts and integrity in MySQL
-python main.py --validate
-```
+| Query File | Advanced SQL Techniques | Business Problem Solved |
+|---|---|---|
+| [`01_moving_averages.sql`](src/database/analytics/01_moving_averages.sql) | `ROWS BETWEEN 6 PRECEDING AND CURRENT ROW`, CTEs | 7-Day Rolling Moving Averages of Deficit & Discount Velocity |
+| [`02_pareto_concentration.sql`](src/database/analytics/02_pareto_concentration.sql) | `DENSE_RANK()`, Running Window Sums | Pareto 80/20 Rule: Identifies top offenders driving 80% of margin loss |
+| [`03_price_cascades.sql`](src/database/analytics/03_price_cascades.sql) | `LAG()`, `LEAD()`, `FIRST_VALUE()` | Algorithmic Price Matching Contagion & Cross-Channel Cascades |
+| [`04_recidivism_cohorts.sql`](src/database/analytics/04_recidivism_cohorts.sql) | Cohort Entry Grouping, Survival Rates | Reseller Compliance Rehabilitation vs Strike 3 Suspension Escalation |
 
 ---
 
@@ -213,6 +215,34 @@ For every offending `(Homologated_Reseller, Category)` pair, the reporting engin
 * **Executive Summary Box**: Aggregated SKU infraction count, marketplaces audited, and maximum price deficit.
 * **Itemized Sub-Category Tables**: Alternating navy-shaded rows detailing observation date, advertised price, MAP/LPP floor, deficit, and violation class.
 * **3-Tier Legal Escalation Protocol**: Formal clauses establishing 48-hour cure requirements $\to$ 30-day category freeze $\to$ authorized partner termination.
+
+---
+
+## 🚀 Installation & Quickstart
+
+### 1. Prerequisites
+* **Python 3.12+ or 3.14+** (managed via [`uv`](https://github.com/astral-sh/uv))
+* **MySQL 8.0+** running locally or on a remote server (optional for SQL warehouse)
+
+### 2. Environment Setup
+```powershell
+# Clone the repository
+git clone https://github.com/deringirish/map-data-analysis-project.git
+cd map-data-analysis-project
+
+# Synchronize all locked dependencies
+uv sync
+```
+
+### 3. Database Configuration (Optional)
+Copy `.env.example` to `.env` and configure your MySQL credentials:
+```ini
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=your_password_here
+MYSQL_DATABASE=MAP_PROJECT
+```
 
 ---
 
@@ -259,52 +289,7 @@ SELECT 'SUSPENDED_CATEGORIES', COUNT(*) FROM SUSPENDED_CATEGORIES;
 
 ## 👨‍💻 Author & Architecture Context
 
-## 📊 Interactive Stakeholder BI Dashboard & Analytics Hub
-
-The platform features an enterprise **Streamlit BI Hub** for interactive data exploration, executive KPI monitoring, and entity-level investigation:
-
-```bash
-# Launch the interactive BI platform
-python run_dashboard.py
-# Or via master CLI:
-python main.py --dashboard
-```
-
-### Key Interactive Views:
-1. **Executive KPI Scorecards**: Live totals for Audited Listings (147k), Cumulative Margin Deficit (₹21.20 Cr), and Charter Obj. 4 Suspensions (279).
-2. **Surveillance Trajectory (Daily Trend)**: Interactive time-series area charts illustrating holiday discounting spikes.
-3. **Reseller Surveillance & Recidivism Hub**: Deep-dive search tool for inspecting individual corporate reseller infraction histories and legal notice paths.
-4. **Visual Analytics & Treemaps**: Box plots of category deficit severity and hierarchical treemaps of sub-category margin leakage.
-5. **Audit Data Export**: One-click download of filtered audit telemetry in CSV format.
-
----
-
-## 🗄️ Advanced Analytical SQL Suite (`src/database/analytics/`)
-
-For data analysis and business intelligence teams, the repository includes production-grade analytical SQL queries utilizing advanced window functions, CTEs, and cohort models:
-
-| Query File | Advanced SQL Techniques | Business Problem Solved |
-|---|---|---|
-| [`01_moving_averages.sql`](src/database/analytics/01_moving_averages.sql) | `ROWS BETWEEN 6 PRECEDING AND CURRENT ROW`, CTEs | 7-Day Rolling Moving Averages of Deficit & Discount Velocity |
-| [`02_pareto_concentration.sql`](src/database/analytics/02_pareto_concentration.sql) | `DENSE_RANK()`, Running Window Sums | Pareto 80/20 Rule: Identifies top offenders driving 80% of margin loss |
-| [`03_price_cascades.sql`](src/database/analytics/03_price_cascades.sql) | `LAG()`, `LEAD()`, `FIRST_VALUE()` | Algorithmic Price Matching Contagion & Cross-Channel Cascades |
-| [`04_recidivism_cohorts.sql`](src/database/analytics/04_recidivism_cohorts.sql) | Cohort Entry Grouping, Survival Rates | Reseller Compliance Rehabilitation vs Strike 3 Suspension Escalation |
-
----
-
-## 📑 C-Suite Executive Briefing Synthesis
-
-Generate formal executive briefing documentation for the Chief Commercial Officer (CCO) and Executive Board:
-
-```bash
-python main.py --briefing
-```
-* Output: `data_processed/reports/executive_briefing/MAP_Compliance_Executive_Briefing.docx`
-
----
-
-## 👨‍💻 Author & Architecture Context
-
 * **Author**: Derin Girish
 * **Role**: Lead Data Analyst / Quantitative Architect
+* **Repository**: [https://github.com/deringirish/map-data-analysis-project.git](https://github.com/deringirish/map-data-analysis-project.git)
 * **License**: [MIT License](LICENSE) (Copyright © 2026 Derin Girish)

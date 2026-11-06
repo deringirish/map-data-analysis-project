@@ -1,5 +1,5 @@
 [project]
-name = "map-data-analysis-engine"
+name = "map-data-analysis-project"
 version = "1.0.0"
 description = "Enterprise Minimum Advertised Price (MAP) Data Analysis & Compliance Engine"
 readme = "README.md"
