@@ -55,7 +55,7 @@ def run_dashboard():
     print("=" * 65)
     import subprocess
     script = BASE_DIR / "dashboard.py"
-    subprocess.run(["streamlit", "run", str(script)])
+    subprocess.run([sys.executable, "-m", "streamlit", "run", str(script)])
 
 
 def run_database_population():

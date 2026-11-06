@@ -217,13 +217,6 @@ def generate_all_figures():
     plot_category_infraction_breakdown(df)
     plot_price_deficit_distribution(df)
 
-    # Generate master dashboard preview
-    try:
-        from src.reporting.generate_dashboard_preview import create_dashboard_preview
-        create_dashboard_preview()
-    except Exception as e:
-        print(f" Warning: Could not generate dashboard preview: {e}")
-
     print("=" * 60)
     print(f" All 5 publication-quality figures successfully saved to:")
     print(f" -> {FIGURES_DIR}")

@@ -58,10 +58,9 @@ The platform provides multiple execution paths tailored to distinct roles (Execu
 
 | Command | Entry File / Module | Target Role | Primary Business Purpose & Output |
 |:---|:---|:---|:---|
-| `python run_dashboard.py` | `run_dashboard.py` | Business Stakeholders / CCO | **1-Click Streamlit Dashboard Launcher**: Starts the interactive BI server on `localhost:8501` in headless mode. Used by stakeholders for visual filtering, Pareto analysis, and real-time surveillance. |
-| `streamlit run dashboard.py` | `dashboard.py` | BI Developers / Analysts | **Direct Streamlit Development Mode**: Runs Streamlit with hot-reloading and development toolbars enabled. |
+| `streamlit run dashboard.py` | `dashboard.py` | Business Stakeholders / CCO | **Interactive BI Dashboard**: Launches the Streamlit executive intelligence hub on `localhost:8501`. Used by stakeholders for visual filtering, Pareto analysis, and real-time surveillance. |
+| `python main.py --dashboard` | `main.py` | Operations Teams | **CLI Dashboard Launcher**: Spawns the Streamlit BI interface directly from the master CLI orchestrator. |
 | `python main.py --all` | `main.py` | Pipeline Automation / CI/CD | **Full End-to-End Orchestration**: Executes all stages sequentially (Evaluates Suspensions $\to$ Renders all 300 DPI Charts $\to$ Generates 279 Legal Notices $\to$ Synthesizes Executive Briefing). |
-| `python main.py --dashboard` | `main.py` | Operations Teams | **CLI Dashboard Launcher**: Spawns the Streamlit BI interface directly from the master CLI. |
 | `python main.py --briefing` | `src/reporting/` | Executive Board / CCO | **C-Suite Executive Briefing Generator**: Synthesizes a formal Word document (`MAP_Compliance_Executive_Briefing.docx`) with audit metrics, financial exposure, and governance findings. |
 | `python main.py --suspend` | `src/enforcement/` | Compliance Officers | **Charter Objective 4 Suspension Engine**: Identifies chronic recidivist resellers (3+ distinct infraction dates), applies 30-day category wholesale freezes, updates `suspended_categories_table.csv`, and syncs with MySQL. |
 | `python main.py --charts` | `src/reporting/` | Data Analysts / Marketing | **Publication-Grade Figure Generation**: Renders all 6 analytical figures at 300 DPI (`data_processed/reports/figures/`) plus the high-resolution dashboard preview graphic. |
@@ -156,7 +155,6 @@ Map Data Analysis Project/
 │   │   ├── 01_data_ingestion_and_population.ipynb # Multi-format deserialization & 3NF export
 │   │   └── 02_price_monitoring_and_violations.ipynb # LPP auditing, FX parity & chart generation
 │   └── reporting/                             # Document synthesis & visual analytics
-│       ├── generate_dashboard_preview.py      # High-res Streamlit UI preview generator
 │       ├── generate_executive_briefing.py     # C-suite executive briefing Word generator
 │       ├── generate_violation_notices.py      # Automated .docx warning notice engine
 │       └── generate_visualizations.py         # Publication-grade chart generation
@@ -165,10 +163,8 @@ Map Data Analysis Project/
 ├── dashboard.py                               # Master Streamlit BI dashboard
 ├── main.py                                    # Central CLI orchestration entrypoint
 ├── pyproject.toml                             # uv-managed dependency definitions
-├── run_dashboard.py                           # 1-Click interactive dashboard runner
 ├── uv.lock                                    # Deterministic dependency lockfile
-├── PROJECT_DOCUMENTATION.md                   # Full technical architecture specification
-└── ROADMAP.md                                 # Strategic evolution & analytics roadmap
+└── PROJECT_DOCUMENTATION.md                   # Full technical architecture specification
 ```
 
 ---
