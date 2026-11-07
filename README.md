@@ -1,14 +1,29 @@
 # ⚖️ Minimum Advertised Price (MAP) Data Analysis Engine
 
 [![CI Pipeline](https://github.com/deringirish/Map-Data-Analysis-Project/actions/workflows/ci.yml/badge.svg)](https://github.com/deringirish/Map-Data-Analysis-Project/actions)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://map-data-analysis-project.streamlit.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.14-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![Database](https://img.shields.io/badge/MySQL-8.0%20(3NF)-orange.svg?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Python](https://img.shields.io/badge/Python-3.12-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![Database](https://img.shields.io/badge/Database-MySQL%20%7C%20SQLite%20Dual--Engine-orange.svg?logo=sqlite&logoColor=white)](src/database/)
 [![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
+[![Test Suite](https://img.shields.io/badge/pytest-21%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
 [![Reporting](https://img.shields.io/badge/DOCX%20Engine-279%20Legal%20Notices-red.svg)](data_processed/reports/notices/)
 [![Visual Analytics](https://img.shields.io/badge/Visual%20Analytics-6%20Charts%20(300%20DPI)-teal.svg)](data_processed/reports/figures/)
 
-An enterprise-grade, end-to-end data engineering and analytics solution for tracking, auditing, and legally enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
+An enterprise-grade, end-to-end data engineering and analytics platform for tracking, auditing, statistically analyzing, and legally enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
+
+---
+
+## 🌐 Live Interactive Executive Dashboard
+
+Experience the compliance portal live:
+👉 **[Launch MAP Compliance BI Hub](https://map-data-analysis-project.streamlit.app)** *(Hosted on Streamlit Community Cloud)*
+
+* **📅 Time-Series Surveillance Scrubber:** Dynamically filter violation telemetry across all 15 holiday shopping days.
+* **🏷️ Multi-Channel Market Segmentation:** Filter by marketplace (Amazon, Flipkart, Snapdeal, eBay) and category (Personal Computers, Print Hardware, Supplies).
+* **📈 Statistical Hypothesis Testing & Pareto Lorenz Curve:** Real-time Kruskal-Wallis non-parametric test results ($p = 0.0141$) and 80/20 reseller concentration curve.
+* **📁 Reseller Case File Explorer:** Instant audit lookup across 900 storefronts linking to 279 generated legal warning notices.
+* **⚡ 24/7 Always-On Reliability:** Automated keep-alive workflow prevents cloud container hibernation.
 
 ---
 
