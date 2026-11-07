@@ -1,0 +1,5 @@
+Seller_name,SKU,Advertised_price,Last time collected
+Store X,SKU_99,0.0,2025-12-25
+Store Y,,100.0,2025-12-25
+,SKU_88,200.0,2025-12-25
+Store Z,SKU_77,300.0,INVALID_DATE_FORMAT

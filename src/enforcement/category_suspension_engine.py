@@ -26,10 +26,12 @@ FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 load_dotenv(dotenv_path=BASE_DIR / ".env")
 
 
-def evaluate_category_suspensions() -> pd.DataFrame:
+def evaluate_category_suspensions(as_of_date: str = None) -> pd.DataFrame:
     """
     Evaluates violation history by Reseller and Product Category to determine
     formal Category Suspension actions under the Authorized Reseller Agreement.
+    Audit date is dynamically determined from the dataset (latest date + 1 day)
+    or explicitly provided via `as_of_date`.
     """
     v_table_path = DATA_PATH / "violation_table.csv"
     if not v_table_path.exists():
@@ -77,8 +79,16 @@ def evaluate_category_suspensions() -> pd.DataFrame:
     agg_df["Legal_Remedy"] = [r[1] for r in results]
     agg_df["Suspension_Duration_Days"] = [r[2] for r in results]
 
-    # Calculate effective dates
-    audit_date = datetime.strptime("2026-01-06", "%Y-%m-%d")
+    # Calculate effective dates dynamically
+    if as_of_date:
+        audit_date = datetime.strptime(str(as_of_date), "%Y-%m-%d")
+    else:
+        max_date_str = str(v_df["Violation_date"].dropna().max())
+        if max_date_str and max_date_str != "nan":
+            audit_date = datetime.strptime(max_date_str, "%Y-%m-%d") + timedelta(days=1)
+        else:
+            audit_date = datetime.now()
+
     agg_df["Suspension_Effective_Date"] = audit_date.strftime("%Y-%m-%d")
     agg_df["Suspension_Expiry_Date"] = agg_df.apply(
         lambda r: (audit_date + timedelta(days=int(r["Suspension_Duration_Days"]))).strftime("%Y-%m-%d")
@@ -278,10 +288,16 @@ def sync_suspensions_to_mysql(agg_df: pd.DataFrame):
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Category Suspension Evaluation Engine")
+    parser.add_argument("--as-of-date", type=str, default=None,
+                        help="Audit reference date (YYYY-MM-DD). Defaults to latest date + 1 day.")
+    args = parser.parse_args()
+
     print("=" * 65)
     print(" MAP COMPLIANCE: CATEGORY SUSPENSION ENFORCEMENT ENGINE")
     print("=" * 65)
-    df = evaluate_category_suspensions()
+    df = evaluate_category_suspensions(as_of_date=args.as_of_date)
     plot_suspension_overview(df)
     sync_suspensions_to_mysql(df)
     print("=" * 65)

@@ -172,11 +172,23 @@ MYSQL_DATABASE=MAP_PROJECT
 The platform includes a unified CLI orchestrator to execute specific modules or the entire end-to-end compliance lifecycle:
 
 ```powershell
-# Execute the full compliance suite (Suspensions, Visual Charts & 279 Warning Notices)
+# Execute the full compliance suite (Guardrails, Suspensions, Charts, Notices & Statistical Battery)
 python main.py --all
 
-# Run only the Category Suspension engine (Charter Objective 4)
-python main.py --suspend
+# Launch the interactive Streamlit BI Dashboard portal
+python main.py --dashboard    # or: python dashboard.py
+
+# Run the automated pytest testing suite (21 unit & integrity tests)
+python main.py --tests        # or: uv run pytest
+
+# Execute inferential statistical hypothesis testing battery (Kruskal-Wallis, ANOVA)
+python main.py --stats
+
+# Run automated ingestion data quality guardrails audit
+python main.py --guardrails
+
+# Run Category Suspension evaluation with optional dynamic as-of audit date
+python main.py --suspend --as-of-date 2026-01-06
 
 # Generate all 6 publication-grade visual analytics figures (300 DPI)
 python main.py --charts
@@ -184,10 +196,10 @@ python main.py --charts
 # Generate all 279 category-segmented .docx legal warning notices
 python main.py --notices
 
-# Populate the MySQL 3NF database from normalized tables (10,000 rows/batch)
-python main.py --populate-db
+# Populate the 3NF warehouse (supports auto-fallback or explicit --engine sqlite/mysql)
+python main.py --populate-db --engine sqlite
 
-# Validate live table counts and integrity in MySQL
+# Validate live table counts and integrity in MySQL or SQLite
 python main.py --validate
 ```
 

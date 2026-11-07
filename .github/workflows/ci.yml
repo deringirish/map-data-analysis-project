@@ -55,9 +55,17 @@ jobs:
           test -d data_inputs/marketplace_feeds/daily_seller_feeds
           echo "All data inputs verified successfully."
 
-      - name: Execute Full End-to-End Compliance Pipeline
+      - name: Execute Automated Unit & Statistical Tests
         run: |
-          uv run python main.py --all --populate-db --validate
+          uv run pytest -v
+
+      - name: Execute Full End-to-End Compliance Pipeline (MySQL)
+        run: |
+          uv run python main.py --all --populate-db --validate --engine mysql
+
+      - name: Execute SQLite Dual-Engine Ingestion & Validation
+        run: |
+          uv run python main.py --populate-db --validate --engine sqlite
 
       - name: Verify Generated Analytics Assets
         run: |
