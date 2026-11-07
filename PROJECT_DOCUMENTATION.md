@@ -2,7 +2,7 @@
 
 **Author:** Derin Girish D G  
 **Project Domain:** E-Commerce Market Intelligence, Minimum Advertised Price (MAP) Compliance, Brand Protection & Legal Enforcement  
-**Target Environment:** Python 3.14+ (managed via `uv`), MySQL 8.0+ (3NF Relational Warehouse), Automated DOCX Document Engine, Seaborn/Matplotlib Visual Intelligence Subsystem  
+**Target Environment:** Python 3.12+ (managed via `uv`), Relational 3NF Warehouse (MySQL 8.0+ / SQLite 3), Automated DOCX Document Engine, Seaborn/Matplotlib Visual Intelligence Subsystem  
 
 ---
 
@@ -33,7 +33,7 @@ Monitored marketplaces include **Amazon**, **Flipkart**, **eBay**, and specializ
 │   PN_SKU.xml         product_info.json    MAP_PL_SKU.yaml    seller_name.xlsx          │
 │   (Part Numbers)     (Catalog Specs)      (MAP Baselines)    (Seller Aliases)          │
 │   lpp_calcuation.xlsx (Formulas & FX)     promotion_sku.xlsx (Seasonal Calendars)      │
-│   Daily Feeds: 15 Daily CSVs (2025-12-21 to 2026-01-05) -> 147,900 Scraped Records     │
+│   Daily Feeds: 15 Daily CSVs (2025-12-21 to 2026-01-05) -> 147,900 Feed Records       │
 └───────────────────────────────────────────┬────────────────────────────────────────────┘
                                             │
                                             ▼
@@ -257,21 +257,8 @@ A central data engineering decision in this platform is separating:
 
 ---
 
-## 6. Live Web Scraping Subsystem
 
-To supplement synthetic and batch data feeds with real-time field intelligence, the repository includes production scrapers built using **Playwright**:
-
-* **Amazon Scraper (`src/scrapers/amazon_scraper.py`)**:
-  * Targets Amazon.in product detail pages and search results.
-  * Handles dynamic DOM hydration, extracting SKU, title, advertised price, seller name, rating, and prime status.
-  * Captures timestamped full-page proof screenshots stored in `data_processed/scraped/screenshots/`.
-* **Flipkart Scraper (`src/scrapers/flipkart_scraper.py`)**:
-  * Extracts buy-box seller identity, current selling price, MRP, and discount tags.
-  * Captures listing visual proof for audit defense.
-
----
-
-## 7. Automated Legal Violation Notice Engine
+## 6. Automated Legal Violation Notice Engine
 
 ### 7.1 Category-Centric Architecture
 Reseller organizations frequently manage diverse multi-brand departments. To ensure legal compliance notices are actionable and routed to the correct merchant team, notices are generated using a **two-tier hierarchy**:
@@ -298,7 +285,7 @@ Each notice is built with executive-level corporate document formatting:
 
 ---
 
-## 8. Verification & Production Audits
+## 7. Verification & Production Audits
 
 ### 8.1 Row Count Verification
 Automated validation scripts (`src/database/database_validation.py` and `database_validator.sql`) verify consistency across all storage tiers:
@@ -355,11 +342,11 @@ All analytical visualizations are generated at 300 DPI for executive presentatio
 
 ---
 
-## 9. Technology Stack
+## 8. Technology Stack
 
 * **Programming Language**: Python 3.14 (managed with `uv`)
 * **Data Processing**: Pandas, NumPy, OpenPyXL, PyYAML
-* **Relational Database**: MySQL 8.0 (InnoDB, utf8mb4, B-Tree Indexes)
+* **Relational Database**: MySQL 8.0 & SQLite 3 (3NF Relational Warehouse)
 * **Document Synthesis**: python-docx, oxml (Open Packaging Conventions)
 * **Visual Analytics & Reporting**: Matplotlib 3.10+, Seaborn 0.13+ (Executive Intelligence Charts)
 * **Security & Configuration**: python-dotenv (`.env` credential isolation)

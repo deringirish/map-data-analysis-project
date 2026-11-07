@@ -150,90 +150,131 @@ def plot_suspension_overview(agg_df: pd.DataFrame):
 
 
 def sync_suspensions_to_mysql(agg_df: pd.DataFrame):
-    """Optionally syncs the suspension ledger to MySQL if connected."""
+    """Syncs the suspension ledger to MySQL or SQLite depending on available engine."""
+    records = []
+    for _, r in agg_df.iterrows():
+        records.append((
+            str(r["homologated_name"]),
+            str(r["Category"]),
+            int(r["Total_Infractions"]),
+            int(r["Distinct_Violation_Dates"]),
+            int(r["Distinct_SKUs_Violated"]),
+            str(r["Marketplaces_Audited"]),
+            str(r["Earliest_Violation"]),
+            str(r["Latest_Violation"]),
+            float(r["Max_Single_Deficit"]),
+            float(r["Total_Price_Deficit"]),
+            str(r["Enforcement_Status"]),
+            str(r["Legal_Remedy"]),
+            int(r["Suspension_Duration_Days"]),
+            str(r["Suspension_Effective_Date"]),
+            str(r["Suspension_Expiry_Date"])
+        ))
+
     mysql_host = os.getenv("MYSQL_HOST", "localhost")
     mysql_port = int(os.getenv("MYSQL_PORT", 3306))
     mysql_user = os.getenv("MYSQL_USER", "root")
-    mysql_password = os.getenv("MYSQL_PASSWORD")
+    mysql_password = os.getenv("MYSQL_PASSWORD", "")
     mysql_database = os.getenv("MYSQL_DATABASE", "MAP_PROJECT")
 
-    if not mysql_password:
-        print(" [Info] MYSQL_PASSWORD not set in .env. Skipping live MySQL sync.")
-        return
+    mysql_synced = False
+    if mysql_password:
+        try:
+            import mysql.connector
+            conn = mysql.connector.connect(
+                host=mysql_host,
+                port=mysql_port,
+                user=mysql_user,
+                password=mysql_password,
+                database=mysql_database
+            )
+            cur = conn.cursor()
+            cur.execute("DROP TABLE IF EXISTS SUSPENDED_CATEGORIES;")
+            cur.execute("""
+            CREATE TABLE SUSPENDED_CATEGORIES (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                homologated_name VARCHAR(255),
+                Category VARCHAR(50),
+                Total_Infractions INT,
+                Distinct_Violation_Dates INT,
+                Distinct_SKUs_Violated INT,
+                Marketplaces_Audited TEXT,
+                Earliest_Violation DATE,
+                Latest_Violation DATE,
+                Max_Single_Deficit DECIMAL(12,2),
+                Total_Price_Deficit DECIMAL(12,2),
+                Enforcement_Status VARCHAR(50),
+                Legal_Remedy TEXT,
+                Suspension_Duration_Days INT,
+                Suspension_Effective_Date DATE,
+                Suspension_Expiry_Date VARCHAR(50),
+                INDEX idx_susp_seller (homologated_name),
+                INDEX idx_susp_cat (Category),
+                INDEX idx_susp_status (Enforcement_Status)
+            );
+            """)
 
-    try:
-        import mysql.connector
-        conn = mysql.connector.connect(
-            host=mysql_host,
-            port=mysql_port,
-            user=mysql_user,
-            password=mysql_password,
-            database=mysql_database
-        )
-        cur = conn.cursor()
+            insert_query = """
+            INSERT INTO SUSPENDED_CATEGORIES (
+                homologated_name, Category, Total_Infractions, Distinct_Violation_Dates,
+                Distinct_SKUs_Violated, Marketplaces_Audited, Earliest_Violation, Latest_Violation,
+                Max_Single_Deficit, Total_Price_Deficit, Enforcement_Status, Legal_Remedy,
+                Suspension_Duration_Days, Suspension_Effective_Date, Suspension_Expiry_Date
+            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+            """
 
-        # Create table if not exists
-        cur.execute("DROP TABLE IF EXISTS SUSPENDED_CATEGORIES;")
-        cur.execute("""
-        CREATE TABLE SUSPENDED_CATEGORIES (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            homologated_name VARCHAR(255),
-            Category VARCHAR(50),
-            Total_Infractions INT,
-            Distinct_Violation_Dates INT,
-            Distinct_SKUs_Violated INT,
-            Marketplaces_Audited TEXT,
-            Earliest_Violation DATE,
-            Latest_Violation DATE,
-            Max_Single_Deficit DECIMAL(12,2),
-            Total_Price_Deficit DECIMAL(12,2),
-            Enforcement_Status VARCHAR(50),
-            Legal_Remedy TEXT,
-            Suspension_Duration_Days INT,
-            Suspension_Effective_Date DATE,
-            Suspension_Expiry_Date VARCHAR(50),
-            INDEX idx_susp_seller (homologated_name),
-            INDEX idx_susp_cat (Category),
-            INDEX idx_susp_status (Enforcement_Status)
-        );
-        """)
+            cur.executemany(insert_query, records)
+            conn.commit()
+            cur.close()
+            conn.close()
+            mysql_synced = True
+            print(f" Successfully loaded {len(records):,} category suspension records into MySQL `SUSPENDED_CATEGORIES` table.")
+        except Exception as e:
+            print(f" MySQL synchronization notice: {e}")
 
-        insert_query = """
-        INSERT INTO SUSPENDED_CATEGORIES (
-            homologated_name, Category, Total_Infractions, Distinct_Violation_Dates,
-            Distinct_SKUs_Violated, Marketplaces_Audited, Earliest_Violation, Latest_Violation,
-            Max_Single_Deficit, Total_Price_Deficit, Enforcement_Status, Legal_Remedy,
-            Suspension_Duration_Days, Suspension_Effective_Date, Suspension_Expiry_Date
-        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-        """
-
-        records = []
-        for _, r in agg_df.iterrows():
-            records.append((
-                str(r["homologated_name"]),
-                str(r["Category"]),
-                int(r["Total_Infractions"]),
-                int(r["Distinct_Violation_Dates"]),
-                int(r["Distinct_SKUs_Violated"]),
-                str(r["Marketplaces_Audited"]),
-                str(r["Earliest_Violation"]),
-                str(r["Latest_Violation"]),
-                float(r["Max_Single_Deficit"]),
-                float(r["Total_Price_Deficit"]),
-                str(r["Enforcement_Status"]),
-                str(r["Legal_Remedy"]),
-                int(r["Suspension_Duration_Days"]),
-                str(r["Suspension_Effective_Date"]),
-                str(r["Suspension_Expiry_Date"])
-            ))
-
-        cur.executemany(insert_query, records)
-        conn.commit()
-        print(f" Successfully loaded {len(records):,} category suspension records into MySQL `SUSPENDED_CATEGORIES` table.")
-        cur.close()
-        conn.close()
-    except Exception as e:
-        print(f" MySQL synchronization notice: {e}")
+    # Fallback or complement to local SQLite
+    sqlite_db = DATA_PATH / "map_project.db"
+    if not mysql_synced or sqlite_db.exists():
+        try:
+            import sqlite3
+            s_conn = sqlite3.connect(str(sqlite_db))
+            s_cur = s_conn.cursor()
+            s_cur.execute("DROP TABLE IF EXISTS SUSPENDED_CATEGORIES;")
+            s_cur.execute("""
+            CREATE TABLE SUSPENDED_CATEGORIES (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                homologated_name TEXT,
+                Category TEXT,
+                Total_Infractions INTEGER,
+                Distinct_Violation_Dates INTEGER,
+                Distinct_SKUs_Violated INTEGER,
+                Marketplaces_Audited TEXT,
+                Earliest_Violation DATE,
+                Latest_Violation DATE,
+                Max_Single_Deficit REAL,
+                Total_Price_Deficit REAL,
+                Enforcement_Status TEXT,
+                Legal_Remedy TEXT,
+                Suspension_Duration_Days INTEGER,
+                Suspension_Effective_Date DATE,
+                Suspension_Expiry_Date TEXT
+            );
+            """)
+            s_insert = """
+            INSERT INTO SUSPENDED_CATEGORIES (
+                homologated_name, Category, Total_Infractions, Distinct_Violation_Dates,
+                Distinct_SKUs_Violated, Marketplaces_Audited, Earliest_Violation, Latest_Violation,
+                Max_Single_Deficit, Total_Price_Deficit, Enforcement_Status, Legal_Remedy,
+                Suspension_Duration_Days, Suspension_Effective_Date, Suspension_Expiry_Date
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            """
+            s_cur.executemany(s_insert, records)
+            s_conn.commit()
+            s_cur.close()
+            s_conn.close()
+            print(f" Successfully synced {len(records):,} category suspension records into SQLite `SUSPENDED_CATEGORIES` ({sqlite_db.name}).")
+        except Exception as se:
+            print(f" SQLite synchronization notice: {se}")
 
 
 def main():

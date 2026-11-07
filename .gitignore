@@ -67,6 +67,11 @@ Desktop.ini
 .env.*.local
 !.env.example
 
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
 # Pytest & test coverage
 .coverage
 htmlcov/
