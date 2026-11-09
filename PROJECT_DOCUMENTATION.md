@@ -344,9 +344,12 @@ All analytical visualizations are generated at 300 DPI for executive presentatio
 
 ## 8. Technology Stack
 
-* **Programming Language**: Python 3.14 (managed with `uv`)
+* **Programming Language**: Python 3.12 (managed with `uv`)
 * **Data Processing**: Pandas, NumPy, OpenPyXL, PyYAML
-* **Relational Database**: MySQL 8.0 & SQLite 3 (3NF Relational Warehouse)
+* **Relational Database**: MySQL 8.0 & SQLite 3 (Dual-Engine 3NF Relational Warehouse)
+* **Statistical Testing**: SciPy (Kruskal-Wallis, Mann-Whitney U, ANOVA, Distribution Moments)
+* **Interactive BI Hub**: Streamlit 1.38+, Plotly Express & Graph Objects
+* **Automated Testing Suite**: pytest (21 Unit & Schema Integrity Tests)
 * **Document Synthesis**: python-docx, oxml (Open Packaging Conventions)
 * **Visual Analytics & Reporting**: Matplotlib 3.10+, Seaborn 0.13+ (Executive Intelligence Charts)
 * **Security & Configuration**: python-dotenv (`.env` credential isolation)

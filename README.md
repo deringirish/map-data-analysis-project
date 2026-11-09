@@ -156,8 +156,8 @@ The system deploys a strictly normalized **3NF Relational Warehouse** across 10 
 ## 🚀 Installation & Quickstart
 
 ### 1. Prerequisites
-* **Python 3.14+** (managed via [`uv`](https://github.com/astral-sh/uv))
-* **MySQL 8.0+** running locally or on a remote server
+* **Python 3.12+** (managed via [`uv`](https://github.com/astral-sh/uv))
+* **MySQL 8.0+** or **SQLite 3** (zero-configuration local fallback included via `map_project.db`)
 
 ### 2. Environment Setup
 Clone the repository and synchronize virtual environment dependencies:

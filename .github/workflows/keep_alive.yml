@@ -2,8 +2,8 @@ name: Streamlit Keep-Alive
 
 on:
   schedule:
-    # Run every 3 days at 06:00 UTC (well within Streamlit's 7-day inactivity window)
-    - cron: '0 6 */3 * *'
+    # Run daily at 06:00 UTC to keep the Streamlit app active and responsive
+    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       app_url:
