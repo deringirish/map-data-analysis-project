@@ -17,6 +17,7 @@ from src.enforcement.category_suspension_engine import evaluate_category_suspens
 from src.reporting.generate_visualizations import generate_all_figures
 from src.reporting.generate_violation_notices import generate_all_notices_and_update_tables
 from src.reporting.generate_executive_briefing import main as generate_executive_briefing
+from src.analytics.recidivism_predictor import run_recidivism_pipeline
 
 
 def run_suspension_pipeline(as_of_date: str = None):
@@ -47,6 +48,13 @@ def run_briefing_pipeline():
     print(" [STAGE 4] AUTOMATED EXECUTIVE C-SUITE BRIEFING GENERATION")
     print("=" * 65)
     generate_executive_briefing()
+
+
+def run_predictive_risk_pipeline():
+    print("\n" + "=" * 65)
+    print(" [STAGE 5] PREDICTIVE RESELLER RECIDIVISM RISK (ML LAYER)")
+    print("=" * 65)
+    run_recidivism_pipeline()
 
 
 def run_database_population(engine: str = None):
@@ -125,6 +133,10 @@ def main():
         help="Generate automated 1-page Executive C-Suite Intelligence Briefing (HTML and Markdown)"
     )
     parser.add_argument(
+        "--predict", action="store_true",
+        help="Execute predictive machine learning reseller recidivism risk model (Random Forest & Logistic Regression)"
+    )
+    parser.add_argument(
         "--populate-db", action="store_true",
         help="Execute 3NF database schema batch population"
     )
@@ -160,7 +172,7 @@ def main():
     args = parser.parse_args()
 
     # Default to running all reporting/enforcement stages if no specific flag passed
-    if not any([args.all, args.suspend, args.charts, args.notices, args.briefing, args.populate_db, args.validate, args.guardrails, args.stats, args.tests, args.dashboard]):
+    if not any([args.all, args.suspend, args.charts, args.notices, args.briefing, args.predict, args.populate_db, args.validate, args.guardrails, args.stats, args.tests, args.dashboard]):
         args.all = True
 
     print("=" * 65)
@@ -187,6 +199,9 @@ def main():
 
     if args.all or args.briefing:
         run_briefing_pipeline()
+
+    if args.all or args.predict:
+        run_predictive_risk_pipeline()
 
     if args.stats or args.all:
         run_stats_pipeline()

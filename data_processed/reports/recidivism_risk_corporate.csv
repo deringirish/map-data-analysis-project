@@ -1,0 +1,101 @@
+homologated_name,Max_Risk_Score,Mean_Risk_Score,Total_Corporate_Deficit,Total_Corporate_Violations,Categories_Audited,Primary_Risk_Category,Overall_Corporate_Tier,Corporate_Legal_Remedy
+Big Lots,0.996,0.5117,2908338.08,168,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Health Mart Systems,0.996,0.3477,2629723.4,201,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Discount Tire,0.996,0.523,2145665.4,170,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Foot Locker,0.995,0.3626,2295356.81,166,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Raley's Supermarkets,0.9948,0.518,2092831.48,176,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Northeast Grocery,0.9933,0.3438,1819993.77,145,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+J.C. Penney Company,0.9926,0.4951,4537943.13,182,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Alimentation Couche-Tard,0.9926,0.3437,2778170.77,150,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Dollar Tree,0.9917,0.5684,4406620.6,185,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Piggly Wiggly,0.9917,0.4193,3933821.68,180,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Royal Ahold Delhaize USA,0.991,0.5127,4562782.58,183,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Bass Pro,0.9905,0.3528,2901672.27,165,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+AutoZone,0.9902,0.4325,3065606.5100000002,161,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Qurate Retail,0.9898,0.3559,2540673.4999999995,154,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Victoria's Secret,0.9897,0.5168,1808329.2899999998,138,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+The Kroger Co.,0.9888,0.3498,3241307.49,177,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Chewy.com,0.9888,0.352,2434680.5100000002,188,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Ikea North American Svcs,0.9888,0.3508,2193980.94,147,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+AVB Brandsource,0.9878,0.3558,2896628.3200000003,192,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Petco,0.9873,0.5499,2583296.89,170,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Sephora (LVMH),0.9873,0.3603,1703003.68,181,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Wegmans Food Market,0.9867,0.4934,1871865.9400000002,192,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Sherwin-Williams,0.9865,0.6169,5839405.89,181,"PC, PH, SUP",PH,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Williams-Sonoma,0.9849,0.3977,2218316.75,180,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Meijer,0.9845,0.5126,2764888.06,194,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+True Value Co.,0.9845,0.4932,2708732.85,189,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Nordstrom,0.9835,0.3556,1952427.52,156,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+7-Eleven,0.9833,0.3417,2181098.97,122,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Camping World,0.9832,0.3411,2233735.8,145,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Walgreens Boots Alliance,0.9822,0.518,2828322.25,158,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Sprouts Farmers Market,0.981,0.5124,2456996.5,200,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Stater Bros Holdings,0.9788,0.3526,4014000.88,169,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+H.E. Butt Grocery,0.9788,0.371,2076316.5599999998,143,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Barnes and Noble Booksellers,0.9772,0.5005,1605349.45,178,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+CVS Health Corporation,0.9755,0.5097,2173605.5,150,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Signet Jewelers,0.9755,0.355,1500842.15,157,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Ross Stores,0.9752,0.5928,7058850.15,183,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Dick's Sporting Goods,0.9737,0.3425,1605598.84,145,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Lululemon,0.9713,0.353,1916497.3499999999,188,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Dollar General,0.9697,0.6579,2834486.93,189,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Ingles,0.969,0.4846,1540838.3,144,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Ace Hardware,0.9657,0.3464,1530468.74,164,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Kohl's,0.9646,0.5039,4630174.14,178,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Wakefern / ShopRite,0.9627,0.4938,1230063.36,141,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Academy Sports,0.9612,0.5092,1836482.9300000002,156,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Dell Technologies,0.9603,0.3484,1636448.9500000002,165,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Staples,0.9554,0.4509,1908195.01,123,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+PetSmart,0.9529,0.4036,2061134.33,189,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Bath & Body Works,0.9518,0.4946,2741540.12,130,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Wayfair,0.9397,0.349,1468959.2,151,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Army and Air Force Exchange Service,0.9363,0.5419,4758428.25,145,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Menards,0.936,0.3355,1909152.73,142,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Giant Eagle,0.9355,0.328,1655615.82,195,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Lowe's Companies,0.9272,0.4806,2287139.2800000003,160,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Amway,0.9255,0.3453,1427939.6600000001,144,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Publix Super Markets,0.9251,0.3257,2360369.42,169,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Burlington,0.9245,0.3357,2265906.5500000003,146,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Best Buy,0.9148,0.5752,4161647.62,172,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Harbor Freight Tools,0.9023,0.3159,1378120.84,142,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Tractor Supply Co.,0.9014,0.4758,2592327.4299999997,152,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Advance Auto,0.8854,0.469,1352662.9300000002,135,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Dillard's,0.8804,0.3416,2910853.4,169,"PC, PH, SUP",PH,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Costco Wholesale,0.8732,0.4492,1802919.7200000002,131,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Target,0.8636,0.3028,2190076.77,149,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Good Neighbor Pharmacy,0.8584,0.5768,3614786.72,127,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+TJX Companies,0.8369,0.4424,1444873.9000000001,199,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Apple Stores / iTunes,0.8096,0.2931,1556347.26,161,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+BJ's Wholesale Club,0.8017,0.5146,3232523.88,139,"PC, PH, SUP",PH,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Hudson's Bay,0.7988,0.4194,1295756.9300000002,136,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Hy Vee,0.7975,0.291,1328590.42,153,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Schnucks,0.7775,0.2888,1298443.52,155,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Defense Commissary Agency,0.7448,0.2817,1023174.5700000001,166,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+The Home Depot,0.7232,0.3086,1813222.68,144,"PC, PH, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Hobby Lobby Stores,0.7154,0.3879,1096618.69,164,"PC, SUP",PC,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Macy's,0.7055,0.4011,2062361.25,129,"PC, PH, SUP",PH,🔴 High Risk,Critical Account Review & Cross-Category Supply Freeze
+Albertsons Companies,0.6975,0.2635,1124980.72,166,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Verizon Wireless,0.6632,0.3042,1089304.68,138,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Gap,0.6454,0.371,4567023.1899999995,174,"PC, PH, SUP",PH,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Save-A-Lot,0.6088,0.2244,1671365.66,159,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Amazon.com,0.5974,0.3049,1948924.07,173,"PC, PH, SUP",PH,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+AT&T Wireless,0.536,0.223,1294453.26,160,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Chedraui,0.518,0.2166,1151724.35,144,"PC, PH, SUP",PH,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Office Depot,0.4674,0.1839,1356812.6400000001,147,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Tapestry,0.4442,0.247,955985.8899999999,128,"PC, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Shell Oil Company,0.4335,0.1597,1165649.73,164,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Exxon Mobil Corporation,0.3806,0.1735,1208758.99,138,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Southeastern Grocers,0.3586,0.1495,964582.22,154,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Ulta Beauty,0.3579,0.1492,1191134.7,156,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Michaels Stores,0.3102,0.1077,641870.5,163,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+WinCo Foods,0.3012,0.1178,1432772.24,150,"PC, PH, SUP",PC,🟡 Moderate Risk,Targeted Category Probation & Senior Account Audit
+Walmart,0.2349,0.1028,634375.35,136,"PC, PH, SUP",PC,🟢 Low Risk,Routine Compliance Auditing
+Aldi,0.1861,0.0953,803363.14,135,"PC, PH, SUP",PC,🟢 Low Risk,Routine Compliance Auditing
+Weis Markets,0.185,0.09,617273.8200000001,121,"PC, PH, SUP",PC,🟢 Low Risk,Routine Compliance Auditing
+Total Wine & More,0.1318,0.0617,951641.0099999999,166,"PC, PH, SUP",PC,🟢 Low Risk,Routine Compliance Auditing
+American Eagle,0.0587,0.0363,447392.77999999997,135,"PC, PH, SUP",PC,🟢 Low Risk,Routine Compliance Auditing
+Neiman Marcus,0.0561,0.038,319928.0,168,"PC, PH, SUP",PH,🟢 Low Risk,Routine Compliance Auditing
+O'Reilly Auto Parts,0.0504,0.0321,539785.0399999999,152,"PC, PH, SUP",PC,🟢 Low Risk,Routine Compliance Auditing
+My Demoulas,0.0466,0.0332,329879.77,132,"PC, SUP",SUP,🟢 Low Risk,Routine Compliance Auditing
+Casey's General Store,0.041,0.0279,322268.10000000003,162,"PC, PH, SUP",PC,🟢 Low Risk,Routine Compliance Auditing
+Rite Aid,0.0306,0.019,532041.63,152,"PC, SUP",SUP,🟢 Low Risk,Routine Compliance Auditing

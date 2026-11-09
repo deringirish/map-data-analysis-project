@@ -347,9 +347,10 @@ All analytical visualizations are generated at 300 DPI for executive presentatio
 * **Programming Language**: Python 3.12 (managed with `uv`)
 * **Data Processing**: Pandas, NumPy, OpenPyXL, PyYAML
 * **Relational Database**: MySQL 8.0 & SQLite 3 (Dual-Engine 3NF Relational Warehouse)
+* **Machine Learning & Predictive Analytics**: scikit-learn (Random Forest Classifier, Regularized Logistic Regression, Temporal Validation, ROC-AUC)
 * **Statistical Testing**: SciPy (Kruskal-Wallis, Mann-Whitney U, ANOVA, Distribution Moments)
 * **Interactive BI Hub**: Streamlit 1.38+, Plotly Express & Graph Objects
-* **Automated Testing Suite**: pytest (28 Unit & Schema Integrity Tests)
+* **Automated Testing Suite**: pytest (34 Unit, Regression & ML Integrity Tests)
 * **Document Synthesis**: python-docx, oxml (Open Packaging Conventions)
 * **Visual Analytics & Reporting**: Matplotlib 3.10+, Seaborn 0.13+ (Executive Intelligence Charts)
 * **Security & Configuration**: python-dotenv (`.env` credential isolation)
@@ -366,6 +367,7 @@ All analytical visualizations are generated at 300 DPI for executive presentatio
 | `src/analytics/business_kpis.py` | Commercial Intelligence | `violation_table.csv`, `price_monitoring_table.csv` | Global Compliance Rate, Cumulative Margin Deficit, Pareto Metrics | Translates granular violation rows into macro financial risk indicators, compliance curves, and channel conflict metrics. |
 | `src/analytics/statistical_tests.py` | Inferential Statistics | `violation_table.csv` | Test statistics ($H, U, F$), $p$-values, moments | Statistically verifies that cross-marketplace undercutting is non-random using Kruskal-Wallis, Mann-Whitney, and ANOVA. |
 | `src/analytics/policy_simulator.py` | Decision Intelligence | `violation_table.csv` | Elasticity absorption curves, simulated suspension tiers | Models what-if scenarios: promotional discount sensitivity, dynamic recidivism cutoffs, and targeted chronic reseller cures. |
+| `src/analytics/recidivism_predictor.py` | Predictive Machine Learning | `violation_table.csv`, `suspended_categories_table.csv` | `recidivism_risk_cohorts.csv`, `recidivism_risk_corporate.csv` | Supervised classification model (Random Forest vs Logistic Regression) predicting forward reseller recidivism risk (0-100%) and stratifying cohorts into risk tiers. |
 | `src/config/finance_config.py` | Configuration Core | `lpp_calcuation.xlsx` | Normalized FX rates, dynamic category discount matrices | Centralizes multi-currency spot conversion rates and computes baseline Lowest Promotional Price (LPP) floors. |
 | `src/database/data_guardrails.py` | Data Observability | 15 Daily CSV Feeds (147,900 rows) | Conformance health scorecard, `quarantine_records.csv` | Audits raw feeds for non-positive prices, unmapped SKUs, blank sellers, and malformed dates prior to ingestion. |
 | `src/database/create_tables.sql` | Relational DDL (MySQL) | DDL Specifications | 10-table 3NF schema in MySQL 8.0 | Establishes strictly normalized relational warehouse with primary, composite, and foreign key constraints. |
@@ -398,6 +400,17 @@ All analytical visualizations are generated at 300 DPI for executive presentatio
   * **Compliance Elasticity Function:** Simulates expanding allowable promotional discount ceilings (+0.5% to +15.0%). Recalculates dynamic LPP floors: $\text{LPP}_{\text{Sim}} = \text{MAP} \times (1 - (\text{Discount}_{\text{Base}} + \Delta d) / 100)$. Demonstrates that a modest +2.0% holiday allowance absorbs 3.8% of benign infractions while preserving long-term brand equity.
   * **Dynamic Recidivism Thresholds:** Allows policy makers to adjust Critical Suspension cutoffs (e.g. from 12 days to 8 days) and immediately observe the shift in affected partner accounts.
   * **Selective Target Cure Simulator:** Calculates the exact monetary recovery achieved by curing specific high-deficit chronic resellers.
+* **`recidivism_predictor.py` (Supervised Machine Learning Layer):**
+  * **Temporal Problem Formulation ($T_1 \to T_2$):** Partitions surveillance telemetry into early observation window ($T_1$: Dec 21–28, 7,766 infractions) and outcome window ($T_2$: Dec 29–Jan 05, 8,170 infractions). Solves the core commercial prediction task: *evaluating whether an early holiday violator will persist into a severe chronic recidivist causing catastrophic channel price erosion in the peak sales window*.
+  * **Model Architecture & Benchmark Comparison:**
+    * **Champion Model:** `RandomForestClassifier` (100 estimators, max depth 4, min samples leaf 3). Yields **ROC-AUC: 0.9904 (+/- 0.0037)**, **Accuracy: 93.9%**, and **F1 Score: 0.8949** across 5-fold stratified cross-validation.
+    * **Baseline Benchmark:** Regularized `LogisticRegression` with `StandardScaler` pipeline (ROC-AUC: 0.9821, Accuracy: 93.2%, F1: 0.8800).
+  * **Gini Feature Importance Hierarchy:** Identifies key behavioral drivers of chronic non-compliance: Max Single Deficit (32.6%), Average Price Deficit (29.3%), Major Deficit Rate >₹5K (15.9%), Total Violation Volume (5.2%), Violation Velocity per Active Day (4.6%), and Maximum Discount Depth % (4.2%).
+  * **Calibrated Risk Stratification Profile (279 Cohorts):**
+    * 🔴 **High Risk (Score $\ge 70\%$):** 80 cohorts (28.7%) $\to$ Immediate 30-Day Wholesale Supply Freeze & Escalated Legal Notice.
+    * 🟡 **Moderate Risk (Score $30\% - 69\%$):** 29 cohorts (10.4%) $\to$ Targeted Category Probation & Daily Telemetry Tracking.
+    * 🟢 **Low Risk (Score $< 30\%$):** 170 cohorts (60.9%) $\to$ Standard Automated Compliance Monitoring.
+  * **Corporate Account Rollup (100 Entities):** Aggregates cross-category risk exposure to parent commercial entities, tagging corporate leadership with account-level remedies.
 
 #### 2. Relational Warehouse & Ingestion Guardrails (`src/database/`)
 * **`data_guardrails.py`:**
@@ -428,11 +441,12 @@ All analytical visualizations are generated at 300 DPI for executive presentatio
 #### 4. Interactive Web Application (`src/dashboard/` & `dashboard.py`)
 * **`app.py`:**
   * Built using Streamlit 1.38+ and Plotly Express / Graph Objects in a modern Dark Mode palette (`#0E1117` background, `#00D2FF` electric cyan accents, transparent plot backgrounds).
-  * Organized across 4 analytical tabs:
+  * Organized across 5 analytical tabs:
     1. *Executive Overview & Time-Series:* 15-day volume area chart, division donut chart, top 10 reseller margin erosion horizontal bar chart.
     2. *Marketplace & Statistical Rigor:* Channel volume vs deficit bars, Kruskal-Wallis test results, Pareto Lorenz concentration curve, deficit distribution histogram.
     3. *Reseller Compliance & Legal Notices:* Searchable suspension ledger with status filters, and individual reseller dossier viewer linking to generated legal notices.
     4. *What-If Policy Simulator & Elasticity:* Dynamic sliders for promotional discount allowance (+0% to +15%), recidivism cutoff sensitivity, and targeted reseller cure simulations.
+    5. *Predictive Recidivism Risk (ML Engine):* Machine learning risk stratification dashboard with feature importance bar charts, division probability box plots, interactive searchable risk scorecards, and corporate parent entity rollups.
 * **`dashboard.py`:**
   * Root launcher featuring lazy runtime detection. When launched via `python dashboard.py`, it spawns the Streamlit subprocess without triggering bare-mode context warnings; when executed via `streamlit run dashboard.py` (e.g. on Streamlit Community Cloud), it invokes `app.main()` directly.
 
@@ -457,7 +471,7 @@ In enterprise Minimum Advertised Price (MAP) compliance, promotional governance 
 
 ### 9.4 Automated Verification & Regression Suite (`tests/`)
 
-The platform includes 28 automated unit, statistical, and integration tests executed via `pytest`:
+The platform includes 34 automated unit, statistical, machine learning, and integration tests executed via `pytest`:
 
 | Test Module | Test Name | Target Verification Domain |
 | :--- | :--- | :--- |
@@ -489,3 +503,9 @@ The platform includes 28 automated unit, statistical, and integration tests exec
 | `test_statistical_tests.py` | `test_channel_conflict_index_live` | Computes channel conflict index asserting valid positive float metric. |
 | `test_suspension_engine.py` | `test_suspension_tier_classification` | Tests recidivism classification boundaries ($\ge 12$ Critical, $7-11$ Formal, $< 7$ Probation). |
 | `test_suspension_engine.py` | `test_evaluate_category_suspensions_live_run` | Executes suspension evaluation asserting 279 accounts categorized with valid expiry dates. |
+| `test_recidivism_predictor.py` | `test_extract_temporal_features` | Verifies temporal split feature extraction generating valid, non-empty, binary-labeled training pairs. |
+| `test_recidivism_predictor.py` | `test_extract_full_window_features` | Validates full-window feature extraction covering all 279 reseller-category surveillance cohorts. |
+| `test_recidivism_predictor.py` | `test_model_training_and_metrics` | Asserts champion Random Forest achieves ROC-AUC $\ge 0.85$, accuracy $\ge 80\%$, and valid feature importances. |
+| `test_recidivism_predictor.py` | `test_predict_cohort_risk_bounds_and_tiers` | Verifies risk scores strictly bounded in $[0.0, 1.0]$ and correct risk tier stratification (High/Mod/Low). |
+| `test_recidivism_predictor.py` | `test_corporate_risk_aggregation` | Tests roll-up aggregation across 100 corporate parent entities asserting max risk $\ge$ mean risk. |
+| `test_recidivism_predictor.py` | `test_run_recidivism_pipeline_e2e` | End-to-end integration test verifying complete model training, CSV report export, and database sync. |
