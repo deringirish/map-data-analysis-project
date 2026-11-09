@@ -21,7 +21,13 @@ if __name__ == "__main__":
         is_streamlit = False
 
     if is_streamlit:
-        # Running inside an active Streamlit server context (e.g. Streamlit Cloud)
+        # Must be the very first Streamlit command executed in the root script
+        st.set_page_config(
+            page_title="MAP Compliance & Brand Protection BI Hub",
+            page_icon="⚖️",
+            layout="wide",
+            initial_sidebar_state="expanded"
+        )
         from src.dashboard.app import main
         main()
     else:

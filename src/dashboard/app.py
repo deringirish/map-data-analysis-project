@@ -20,12 +20,15 @@ from src.analytics.policy_simulator import (
 from src.analytics.recidivism_predictor import run_recidivism_pipeline
 
 # Configure page
-st.set_page_config(
-    page_title="MAP Compliance & Brand Protection BI Hub",
-    page_icon="⚖️",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+try:
+    st.set_page_config(
+        page_title="MAP Compliance & Brand Protection BI Hub",
+        page_icon="⚖️",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+except Exception:
+    pass
 
 # Dark Theme High-Contrast Palette
 CYAN = "#00D2FF"
