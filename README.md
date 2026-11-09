@@ -6,7 +6,8 @@
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Database](https://img.shields.io/badge/Database-MySQL%20%7C%20SQLite%20Dual--Engine-orange.svg?logo=sqlite&logoColor=white)](src/database/)
 [![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
-[![Test Suite](https://img.shields.io/badge/pytest-21%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
+[![Test Suite](https://img.shields.io/badge/pytest-28%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
+[![Executive Briefing](https://img.shields.io/badge/Executive%20Briefing-HTML%20%7C%20MD-purple.svg)](data_processed/reports/EXECUTIVE_C_SUITE_BRIEFING.html)
 [![Reporting](https://img.shields.io/badge/DOCX%20Engine-279%20Legal%20Notices-red.svg)](data_processed/reports/notices/)
 [![Visual Analytics](https://img.shields.io/badge/Visual%20Analytics-6%20Charts%20(300%20DPI)-teal.svg)](data_processed/reports/figures/)
 
@@ -192,11 +193,14 @@ python main.py --all
 # Launch the interactive Streamlit BI Dashboard portal
 python main.py --dashboard    # or: python dashboard.py
 
-# Run the automated pytest testing suite (21 unit & integrity tests)
+# Run the automated pytest testing suite (28 unit & integrity tests)
 python main.py --tests        # or: uv run pytest
 
 # Execute inferential statistical hypothesis testing battery (Kruskal-Wallis, ANOVA)
 python main.py --stats
+
+# Generate automated Executive C-Suite 1-Page Intelligence Briefing (HTML & Markdown)
+python main.py --briefing
 
 # Run automated ingestion data quality guardrails audit
 python main.py --guardrails

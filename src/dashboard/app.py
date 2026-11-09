@@ -91,6 +91,21 @@ def main():
     else:
         start_d, end_d = str(min_date), str(max_date)
 
+    # Executive Briefing Download
+    briefing_file = REPORTS_DIR / "EXECUTIVE_C_SUITE_BRIEFING.html"
+    if briefing_file.exists():
+        st.sidebar.divider()
+        st.sidebar.markdown("### 📄 C-Suite Deliverables")
+        with open(briefing_file, "r", encoding="utf-8") as bf:
+            briefing_html = bf.read()
+        st.sidebar.download_button(
+            label="📥 Download Executive Briefing (HTML)",
+            data=briefing_html,
+            file_name="EXECUTIVE_C_SUITE_BRIEFING.html",
+            mime="text/html",
+            help="Download a clean, responsive, 1-page executive summary formatted for C-Suite presentation."
+        )
+
     # Apply Filters
     filtered_v = v_df[
         (v_df["Category"].isin(selected_categories)) &

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive C-Suite Briefing | MAP Compliance Intelligence</title>
+<style>
+    :root {
+        --bg: #0F172A;
+        --card-bg: #1E293B;
+        --border: #334155;
+        --text: #F8FAFC;
+        --text-muted: #94A3B8;
+        --cyan: #00D2FF;
+        --crimson: #EF4444;
+        --green: #10B981;
+        --amber: #F59E0B;
+        --blue: #3B82F6;
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 40px 20px;
+        line-height: 1.5;
+    }
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 40px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .header {
+        border-bottom: 2px solid var(--cyan);
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
+    .header h1 {
+        margin: 0 0 8px 0;
+        font-size: 26px;
+        letter-spacing: -0.5px;
+        color: var(--text);
+    }
+    .badge {
+        display: inline-block;
+        background: rgba(0, 210, 255, 0.15);
+        color: var(--cyan);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+    .meta-grid strong { color: var(--text); }
+    .kpi-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin: 25px 0;
+    }
+    .kpi-card {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 18px;
+        text-align: center;
+    }
+    .kpi-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    .kpi-val {
+        font-size: 24px;
+        font-weight: 700;
+        margin-top: 6px;
+        color: var(--text);
+    }
+    .kpi-val.cyan { color: var(--cyan); }
+    .kpi-val.green { color: var(--green); }
+    .kpi-val.crimson { color: var(--crimson); }
+    .kpi-val.amber { color: var(--amber); }
+    h2 {
+        font-size: 17px;
+        color: var(--cyan);
+        border-left: 4px solid var(--cyan);
+        padding-left: 10px;
+        margin: 30px 0 15px 0;
+    }
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .box {
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px;
+    }
+    ul {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 13.5px;
+    }
+    li { margin-bottom: 8px; }
+    .recommendations li {
+        margin-bottom: 12px;
+    }
+    .footer {
+        border-top: 1px solid var(--border);
+        margin-top: 40px;
+        padding-top: 20px;
+        font-size: 12px;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+    }
+    @media print {
+        body { background: #FFF; color: #000; padding: 0; }
+        .container { border: none; box-shadow: none; padding: 20px; background: #FFF; }
+        .kpi-card, .box { border: 1px solid #CCC; background: #F8F9FA; }
+        .header { border-bottom: 2px solid #000; }
+        .badge { background: #EEE; color: #000; }
+        .kpi-val { color: #000 !important; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <span class="badge">Official Brand Protection Intelligence</span>
+        <h1>Executive C-Suite Intelligence Briefing</h1>
+        <div class="meta-grid">
+            <div><strong>Surveillance Cycle:</strong> 2025-12-21 to 2026-01-05 (15 Days)</div>
+            <div><strong>Territory Scope:</strong> IND, USA, UK, CAN, UAE</div>
+            <div><strong>Author:</strong> Lead Brand Protection & Analytics</div>
+        </div>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi-card">
+            <div class="kpi-label">Market Compliance Rate</div>
+            <div class="kpi-val green">89.2%</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Cumulative Margin Deficit</div>
+            <div class="kpi-val crimson">₹211.99M</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Rogue Accounts Frozen</div>
+            <div class="kpi-val amber">0</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Pareto Offender Core</div>
+            <div class="kpi-val cyan">62 Entities (80%)</div>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <div class="box">
+            <h2 style="margin-top: 0;">1. Key Market Discoveries</h2>
+            <ul>
+                <li><strong>Empirical Price War Proof:</strong> Non-parametric Kruskal-Wallis testing proves statistically significant pricing disparity across channels (<em>H</em> = 10.60, <em>p</em> = 0.0141).</li>
+                <li><strong>Channel Severity:</strong> Flipkart algorithms undercut significantly deeper than Amazon (Mann-Whitney <em>p</em> = 0.00257, median gap of ₹3,049.72 vs ₹2,459.68).</li>
+                <li><strong>Pareto 80/20 Law:</strong> Out of 100 corporate resellers, just <strong>62 corporate entities</strong> account for 80% (₹169.59M) of total price erosion.</li>
+            </ul>
+        </div>
+        <div class="box">
+            <h2 style="margin-top: 0;">2. Enforcement Status</h2>
+            <ul>
+                <li><strong>Critical Wholesale Freezes:</strong> <strong>0 reseller-category accounts</strong> placed under immediate 30-day wholesale supply de-listing (12+ repeat violation days).</li>
+                <li><strong>Formal Warning Notices:</strong> <strong>279 legal warning notices (.docx)</strong> generated and queued for corporate legal counsel.</li>
+                <li><strong>Quarantine Health:</strong> 100% of telemetry feed observations audited with zero orphaned SKU mappings.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2>3. Strategic Recommendations for Next Quarter</h2>
+    <div class="box">
+        <ul class="recommendations">
+            <li><strong>Concentrated Legal Enforcement:</strong> Focus commercial counsel strictly on the top 62 Pareto offenders. Curing just these entities recovers <strong>₹169.59 Million</strong> of margin erosion with minimal disruption to authorized distributor inventory flow.</li>
+            <li><strong>Promotional Ceiling Regularization:</strong> Introduce a dynamic +2.0% promotional discount allowance during verified holiday shopping sales (e.g. Christmas, New Year). What-if simulations prove this absorbs <strong>3.8% of benign infractions</strong> without degrading long-term brand equity.</li>
+            <li><strong>Cross-Marketplace Bot Monitoring:</strong> Deploy automated scrape-matching detectors between Amazon and Flipkart to intercept algorithmic price-matching before cascading undercutting occurs.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <div>MAP Data Analysis & Compliance Engine — Executive Reporting</div>
+        <div>Confidential — For Internal C-Suite Steering Committee Only</div>
+    </div>
+</div>
+</body>
+</html>

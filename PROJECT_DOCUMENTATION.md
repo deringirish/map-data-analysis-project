@@ -349,7 +349,7 @@ All analytical visualizations are generated at 300 DPI for executive presentatio
 * **Relational Database**: MySQL 8.0 & SQLite 3 (Dual-Engine 3NF Relational Warehouse)
 * **Statistical Testing**: SciPy (Kruskal-Wallis, Mann-Whitney U, ANOVA, Distribution Moments)
 * **Interactive BI Hub**: Streamlit 1.38+, Plotly Express & Graph Objects
-* **Automated Testing Suite**: pytest (21 Unit & Schema Integrity Tests)
+* **Automated Testing Suite**: pytest (28 Unit & Schema Integrity Tests)
 * **Document Synthesis**: python-docx, oxml (Open Packaging Conventions)
 * **Visual Analytics & Reporting**: Matplotlib 3.10+, Seaborn 0.13+ (Executive Intelligence Charts)
 * **Security & Configuration**: python-dotenv (`.env` credential isolation)
