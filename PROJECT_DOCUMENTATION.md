@@ -1,8 +1,9 @@
 # MAP Data Analysis Engine: Comprehensive Architecture & Technical Blueprint
 
 **Author:** Derin Girish D G  
+**Live Production BI Portal:** [https://map-intelligence.streamlit.app](https://map-intelligence.streamlit.app)  
 **Project Domain:** E-Commerce Market Intelligence, Minimum Advertised Price (MAP) Compliance, Brand Protection & Legal Enforcement  
-**Target Environment:** Python 3.12+ (managed via `uv`), Relational 3NF Warehouse (MySQL 8.0+ / SQLite 3), Automated DOCX Document Engine, Seaborn/Matplotlib Visual Intelligence Subsystem  
+**Target Environment:** Python 3.12+ (managed via `uv`), Relational 3NF Warehouse (MySQL 8.0+ / SQLite 3), Automated DOCX Document Engine, Seaborn/Matplotlib Visual Intelligence Subsystem, scikit-learn Predictive ML Layer  
 
 ---
 
@@ -73,11 +74,37 @@ Monitored marketplaces include **Amazon**, **Flipkart**, **eBay**, and specializ
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │                           4. REPORTING & ENFORCEMENT ENGINE                            │
 │   src/reporting/generate_violation_notices.py                                          │
+│   src/enforcement/category_suspension_engine.py                                        │
 │                                                                                        │
 │   • Hierarchical Aggregation: Homologated Seller -> Product Category -> Sub-Category   │
-│   • Financial Impact Assessment: Price Discrepancy & Violation Type Analysis           │
+│   • Recidivism Classification: 253 Critical Freeze, 21 Formal, 5 Probation             │
 │   • Automated Document Synthesis: 279 Formal Legal Warning Notices (.docx)             │
-│   • Audit Lineage: Saved Doc Path populated directly into MySQL VIOLATION_TABLE        │
+│   • Audit Lineage: Saved Doc Path populated directly into MySQL/SQLite VIOLATION_TABLE │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │
+                                            ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                     5. PREDICTIVE MACHINE LEARNING RECIDIVISM ENGINE                   │
+│   src/analytics/recidivism_predictor.py                                                │
+│                                                                                        │
+│   • Temporal Problem Split: T1 (Dec 21-28) -> T2 (Dec 29-Jan 05) Forward Prediction   │
+│   • Champion Model: RandomForestClassifier (100 estimators, max_depth=4)               │
+│   • Model Performance: 5-Fold CV ROC-AUC: 0.9904 | Accuracy: 93.9% | F1: 0.8949        │
+│   • Explainability: Gini Feature Importance (Max Deficit 32.6%, Avg Deficit 29.3%)    │
+│   • Output Artifacts: recidivism_risk_cohorts.csv & recidivism_risk_corporate.csv     │
+└───────────────────────────────────────────┬────────────────────────────────────────────┘
+                                            │
+                                            ▼
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                   6. INTERACTIVE EXECUTIVE BI HUB & DECISION SUPPORT                   │
+│   src/dashboard/app.py | dashboard.py | Live: https://map-intelligence.streamlit.app   │
+│                                                                                        │
+│   • Tab 1: Executive Overview & Non-Compliance Time-Series Trajectory                  │
+│   • Tab 2: Marketplace Deficit Rigor, Kruskal-Wallis & Pareto Concentration            │
+│   • Tab 3: Reseller Ledger & Dossier Viewer (Linking 279 Warning Notices)              │
+│   • Tab 4: What-If Policy Simulator (Promotional Ceiling & Recidivism Sensitivity)     │
+│   • Tab 5: Predictive Recidivism Risk Scorecard & Corporate Parent Rollup              │
+│   • C-Suite Briefing: One-Click Automated 1-Page Executive Report (HTML & Markdown)    │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -249,6 +276,9 @@ erDiagram
 | 7 | `SELLER_TABLE` | Raw Fact Ingestion | 147,900 | `id` (Auto) | Direct daily telemetry gathered from marketplace crawlers. |
 | 8 | `PRICE_MONITORING_TABLE` | Enterprise Audit Fact | 147,900 | `id` (Auto) | Unified telemetry ledger containing all 147,900 daily observations. |
 | 9 | `VIOLATION_TABLE` | Enforcement Ledger | 15,936 | `id` (Auto) | Filtered actionable breaches with calculated discrepancy and doc path. |
+| 10 | `SUSPENDED_CATEGORIES` | Escalation Ledger | 279 | `id` (Auto) | Reseller category suspensions (Charter Obj 4: 253 Critical, 21 Formal, 5 Probation). |
+| 11 | `RECIDIVISM_RISK_COHORTS` | ML Risk Scoring Ledger | 279 | `(homologated_name, Category)` | Calibrated recidivism probabilities (0-100%), risk tiers, and operational remedies. |
+| 12 | `RECIDIVISM_RISK_CORPORATE`| Corporate Risk Dimension | 100 | `homologated_name` | Corporate parent account rollup with maximum category risk and legal remedies. |
 
 ### 5.3 Dual-Table Architecture: Audit vs Enforcement
 A central data engineering decision in this platform is separating:
@@ -260,19 +290,19 @@ A central data engineering decision in this platform is separating:
 
 ## 6. Automated Legal Violation Notice Engine
 
-### 7.1 Category-Centric Architecture
+### 6.1 Category-Centric Architecture
 Reseller organizations frequently manage diverse multi-brand departments. To ensure legal compliance notices are actionable and routed to the correct merchant team, notices are generated using a **two-tier hierarchy**:
 
 1. **Primary Partition**: `Homologated Seller` $\times$ `Product Category`
 2. **Itemized Table Structure**: Sub-categories are rendered as individual, dedicated data tables within each category notice.
 
-### 7.2 Generated Documents Summary
+### 6.2 Generated Documents Summary
 * Total Notices Generated: **279 `.docx` documents**
 * Output Destination: `data_processed/reports/notices/`
 * Filename Convention: `Notice_<HOMOLOGATED_SELLER>_<CATEGORY>.docx`
 * Example: `Notice_Apex_Retail_Group_Accessories.docx`
 
-### 7.3 Professional Notice Format Specifications
+### 6.3 Professional Notice Format Specifications
 Each notice is built with executive-level corporate document formatting:
 * **Margins**: Strict 1.0-inch geometry on all sides.
 * **Header & Identity**: Crimson header (`#B42828`), corporate compliance division subheader, formal date range, and target marketplaces audited.

@@ -9,7 +9,7 @@ on:
       app_url:
         description: 'Streamlit App URL to ping'
         required: false
-        default: 'https://map-data-analysis-project.streamlit.app'
+        default: 'https://map-intelligence.streamlit.app'
 
 jobs:
   ping:
@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Ping Streamlit App
         env:
-          APP_URL: ${{ github.event.inputs.app_url || vars.STREAMLIT_APP_URL || 'https://map-data-analysis-project.streamlit.app' }}
+          APP_URL: ${{ github.event.inputs.app_url || vars.STREAMLIT_APP_URL || 'https://map-intelligence.streamlit.app' }}
         run: |
           echo "Pinging Streamlit app at: $APP_URL"
           HTTP_STATUS=$(curl -s -L -o /dev/null -w "%{http_code}" --max-time 60 "$APP_URL" || echo "failed")

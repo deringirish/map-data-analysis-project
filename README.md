@@ -1,29 +1,32 @@
 # ⚖️ Minimum Advertised Price (MAP) Data Analysis Engine
 
 [![CI Pipeline](https://github.com/deringirish/Map-Data-Analysis-Project/actions/workflows/ci.yml/badge.svg)](https://github.com/deringirish/Map-Data-Analysis-Project/actions)
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://map-data-analysis-project.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://map-intelligence.streamlit.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Database](https://img.shields.io/badge/Database-MySQL%20%7C%20SQLite%20Dual--Engine-orange.svg?logo=sqlite&logoColor=white)](src/database/)
 [![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
-[![Test Suite](https://img.shields.io/badge/pytest-28%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
+[![Test Suite](https://img.shields.io/badge/pytest-34%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
+[![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Random%20Forest%20%7C%2099%25%20ROC--AUC-blue.svg?logo=scikitlearn&logoColor=white)](src/analytics/recidivism_predictor.py)
 [![Executive Briefing](https://img.shields.io/badge/Executive%20Briefing-HTML%20%7C%20MD-purple.svg)](data_processed/reports/EXECUTIVE_C_SUITE_BRIEFING.html)
 [![Reporting](https://img.shields.io/badge/DOCX%20Engine-279%20Legal%20Notices-red.svg)](data_processed/reports/notices/)
 [![Visual Analytics](https://img.shields.io/badge/Visual%20Analytics-6%20Charts%20(300%20DPI)-teal.svg)](data_processed/reports/figures/)
 
-An enterprise-grade, end-to-end data engineering and analytics platform for tracking, auditing, statistically analyzing, and legally enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
+An enterprise-grade, end-to-end data engineering, statistical analytics, and predictive machine learning platform for tracking, auditing, statistically analyzing, and legally enforcing **Minimum Advertised Price (MAP)** policies across multi-channel e-commerce ecosystems (**Amazon, Flipkart, eBay, Snapdeal**).
 
 ---
 
 ## 🌐 Live Interactive Executive Dashboard
 
-Experience the compliance portal live:
-👉 **[Launch MAP Compliance BI Hub](https://map-data-analysis-project.streamlit.app)** *(Hosted on Streamlit Community Cloud)*
+Experience the compliance portal live:  
+👉 **[Launch MAP Compliance BI Hub](https://map-intelligence.streamlit.app)** *(Hosted on Streamlit Community Cloud)*
 
 * **📅 Time-Series Surveillance Scrubber:** Dynamically filter violation telemetry across all 15 holiday shopping days.
 * **🏷️ Multi-Channel Market Segmentation:** Filter by marketplace (Amazon, Flipkart, Snapdeal, eBay) and category (Personal Computers, Print Hardware, Supplies).
 * **📈 Statistical Hypothesis Testing & Pareto Lorenz Curve:** Real-time Kruskal-Wallis non-parametric test results ($p = 0.0141$) and 80/20 reseller concentration curve.
 * **📁 Reseller Case File Explorer:** Instant audit lookup across 900 storefronts linking to 279 generated legal warning notices.
+* **🎛️ What-If Policy Simulator & Elasticity Engine:** Dynamic sliders modeling promotional discount allowances (+0% to +15%), recidivism escalation cutoff sensitivity, and targeted corporate partner cures.
+* **🤖 Predictive Recidivism Risk (ML Layer):** Supervised Random Forest champion (99.0% ROC-AUC, 93.9% Accuracy) and Logistic Regression baseline stratifying resellers into 🔴 High, 🟡 Moderate, and 🟢 Low risk tiers with feature importance explainability.
 * **⚡ 24/7 Always-On Reliability:** Automated keep-alive workflow prevents cloud container hibernation.
 
 ---
@@ -104,32 +107,62 @@ map-data-analysis-engine/
 │   ├── intermediate/                          # Intermediate derived matrices & FX lookups
 │   │   ├── derived_product_info.csv
 │   │   ├── lpp_data.csv
-│   │   └── promotional_skus.csv
+│   │   ├── promotion_condition.csv
+│   │   ├── promotional_skus.csv
+│   │   └── quarantine_records.csv
 │   └── reports/                               # Generated enforcement & executive outputs
 │       ├── figures/                           # 6 High-resolution charts (300 DPI .png)
 │       ├── notices/                           # 279 Formatted legal warning notices (.docx)
-│       └── category_suspensions_audit.csv     # Formal category suspension report
+│       ├── category_suspensions_audit.csv     # Formal category suspension report
+│       ├── EXECUTIVE_C_SUITE_BRIEFING.html    # Responsive 1-page executive intelligence HTML
+│       ├── EXECUTIVE_C_SUITE_BRIEFING.md      # C-Suite intelligence markdown briefing
+│       ├── recidivism_risk_cohorts.csv        # ML scored reseller cohort recidivism risk (279 rows)
+│       └── recidivism_risk_corporate.csv      # Corporate parent entity risk rollup (100 rows)
 │
 ├── src/                                       # Core implementation codebase
-│   ├── database/                              # MySQL DDL & ingestion pipeline
-│   │   ├── create_tables.sql                  # 10-table 3NF relational schema
-│   │   ├── database_population.py             # Batch chunked ingestion (10,000 rows/batch)
+│   ├── analytics/                             # Decision support & predictive machine learning
+│   │   ├── business_kpis.py                   # Macro financial risk indicators & compliance curves
+│   │   ├── statistical_tests.py               # Kruskal-Wallis, Mann-Whitney U, ANOVA battery
+│   │   ├── policy_simulator.py                # Discount elasticity & suspension what-if simulator
+│   │   └── recidivism_predictor.py            # Random Forest & Logistic Regression ML risk engine
+│   ├── config/                                # Centralized FX rates & margin config
+│   │   └── finance_config.py
+│   ├── dashboard/                             # Streamlit BI application
+│   │   └── app.py                             # 5-tab executive analytics portal (Plotly dark theme)
+│   ├── database/                              # MySQL & SQLite 3NF schemas & pipelines
+│   │   ├── create_tables.sql                  # MySQL 10-table 3NF relational schema
+│   │   ├── create_tables_sqlite.sql           # SQLite 3NF portable schema
+│   │   ├── data_guardrails.py                 # Telemetry ingestion quality auditor
+│   │   ├── database_population.py             # Batch chunked ingestion with auto-fallback
 │   │   ├── database_validator.sql             # SQL verification queries
-│   │   └── database_validation.py             # Python row count and integrity auditor
+│   │   └── database_validation.py             # Dual-engine table record count auditor
 │   ├── enforcement/                           # Escalation & category suspension engine
 │   │   └── category_suspension_engine.py      # Chronic offender classification & MySQL sync
 │   ├── notebooks/                             # Interactive analytical workflows
 │   │   ├── 01_data_ingestion_and_population.ipynb # Multi-format deserialization & 3NF export
 │   │   └── 02_price_monitoring_and_violations.ipynb # LPP auditing, FX parity & chart generation
 │   └── reporting/                             # Document synthesis & visual analytics
+│       ├── generate_executive_briefing.py     # Automated C-Suite briefing generator
 │       ├── generate_violation_notices.py      # Automated .docx warning notice engine
 │       └── generate_visualizations.py         # Publication-grade chart generation
 │
+├── tests/                                     # Automated test suite (34 passing pytest tests)
+│   ├── test_currency_conversion.py            # FX spot rate conversion tests
+│   ├── test_data_guardrails.py                # Raw feed anomaly quarantine tests
+│   ├── test_database_integrity.py             # SQLite DDL schema integrity tests
+│   ├── test_executive_briefing.py             # HTML/Markdown briefing synthesis tests
+│   ├── test_lpp_calculation.py                # LPP margin matrix derivation tests
+│   ├── test_policy_simulator.py               # Elasticity & cutoff sensitivity tests
+│   ├── test_recidivism_predictor.py           # ML temporal splits, ROC-AUC, risk tiers
+│   ├── test_statistical_tests.py              # Kruskal-Wallis & Pareto verification
+│   └── test_suspension_engine.py              # Escalation boundary tests
+│
 ├── .env.example                               # Database environment template
+├── dashboard.py                               # Root launcher (Streamlit Cloud & local execution)
 ├── main.py                                    # Central CLI orchestration entrypoint
 ├── pyproject.toml                             # uv-managed dependency definitions
 ├── uv.lock                                    # Deterministic dependency lockfile
-└── PROJECT_DOCUMENTATION.md                   # Full 350-line technical architecture specification
+└── PROJECT_DOCUMENTATION.md                   # Full technical architecture specification
 ```
 
 ---
@@ -187,14 +220,17 @@ MYSQL_DATABASE=MAP_PROJECT
 The platform includes a unified CLI orchestrator to execute specific modules or the entire end-to-end compliance lifecycle:
 
 ```powershell
-# Execute the full compliance suite (Guardrails, Suspensions, Charts, Notices & Statistical Battery)
+# Execute the full compliance suite (Guardrails, Suspensions, Charts, Notices, Briefing, ML & Stats)
 python main.py --all
 
 # Launch the interactive Streamlit BI Dashboard portal
 python main.py --dashboard    # or: python dashboard.py
 
-# Run the automated pytest testing suite (28 unit & integrity tests)
+# Run the automated pytest testing suite (34 unit, regression & ML integrity tests)
 python main.py --tests        # or: uv run pytest
+
+# Execute predictive machine learning reseller recidivism risk model (Random Forest & Logistic Regression)
+python main.py --predict
 
 # Execute inferential statistical hypothesis testing battery (Kruskal-Wallis, ANOVA)
 python main.py --stats
