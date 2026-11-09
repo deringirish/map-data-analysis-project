@@ -1,6 +1,7 @@
 """
-MAP Compliance & Brand Protection Analytics Engine - Visualization Generator
-Generates publication-quality charts and graphs for executive reporting and documentation.
+MAP Publication-Grade Visual Analytics & Figures Subsystem
+Author: Derin Girish D G
+Description: Generates publication-quality 300-DPI charts and figures for executive reporting and documentation.
 """
 
 from pathlib import Path

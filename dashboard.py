@@ -1,7 +1,8 @@
 """
 Root Dashboard Launcher
-Supports both direct Python execution (`python dashboard.py`) and
-Streamlit Community Cloud deployment (`streamlit run dashboard.py`).
+Author: Derin Girish D G
+Description: Unified entrypoint supporting direct Python execution (`python dashboard.py`)
+and Streamlit Community Cloud deployment (`streamlit run dashboard.py`).
 """
 
 import sys

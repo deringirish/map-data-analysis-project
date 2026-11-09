@@ -1,3 +1,10 @@
+"""
+Automated Legal Warning Notice Document Synthesis Engine
+Author: Derin Girish D G
+Description: Synthesizes formatted .docx warning notices for non-compliant
+reseller-category cohorts with itemized audit tables and formal escalation clauses.
+"""
+
 import os
 import re
 from pathlib import Path
