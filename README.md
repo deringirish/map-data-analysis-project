@@ -318,4 +318,4 @@ SELECT 'SUSPENDED_CATEGORIES', COUNT(*) FROM SUSPENDED_CATEGORIES;
 * **Author**: Derin Girish
 * **Role**: Lead Data Engineer / Architect
 * **License**: [MIT License](LICENSE) (Copyright © 2026 Derin Girish)
-* **Companion System**: Designed to integrate directly with **`map-market-simulation-engine`**, providing interactive price simulations, dynamic promotion scheduling, and real-time executive dashboard controls.
+* **Architecture**: Self-contained, production-grade intelligence suite incorporating ingestion guardrails, 3NF warehouse persistence, statistical hypothesis testing, legal document automation, what-if policy simulation, and predictive machine learning.
