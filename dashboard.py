@@ -12,12 +12,16 @@ root_dir = Path(__file__).resolve().parent
 if str(root_dir) not in sys.path:
     sys.path.insert(0, str(root_dir))
 
-import streamlit as st
-from src.dashboard.app import main
-
 if __name__ == "__main__":
-    # If already running inside a Streamlit runner (e.g. Streamlit Community Cloud)
-    if st.runtime.exists():
+    try:
+        import streamlit as st
+        is_streamlit = st.runtime.exists()
+    except Exception:
+        is_streamlit = False
+
+    if is_streamlit:
+        # Running inside an active Streamlit server context (e.g. Streamlit Cloud)
+        from src.dashboard.app import main
         main()
     else:
         # Launched directly via `python dashboard.py`

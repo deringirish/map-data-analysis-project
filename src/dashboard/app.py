@@ -20,16 +20,29 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Color Palette
-NAVY = "#1F4E79"
-CRIMSON = "#B42828"
-TEAL = "#0F766E"
-AMBER = "#D9822B"
-SLATE = "#475569"
+# Dark Theme High-Contrast Palette
+CYAN = "#00D2FF"
+CRIMSON = "#FF4B4B"
+TEAL = "#00E676"
+AMBER = "#FFA726"
+SLATE = "#94A3B8"
+BLUE = "#3B82F6"
+PURPLE = "#AB47BC"
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
 REPORTS_DIR = BASE_DIR / "data_processed" / "reports"
+
+
+def apply_dark_theme(fig):
+    """Applies modern dark-theme styling with transparent background to Plotly figures."""
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#FAFAFA", family="sans-serif")
+    )
+    return fig
 
 
 @st.cache_data
@@ -120,10 +133,10 @@ def main():
                 daily_trend, x="Violation_date", y="Violations",
                 title="15-Day Holiday Price Undercutting Volume",
                 labels={"Violation_date": "Surveillance Date", "Violations": "Incident Count"},
-                color_discrete_sequence=[TEAL]
+                color_discrete_sequence=[CYAN]
             )
             fig_trend.update_layout(hovermode="x unified", margin=dict(l=20, r=20, t=40, b=20))
-            st.plotly_chart(fig_trend, use_container_width=True)
+            st.plotly_chart(apply_dark_theme(fig_trend), width="stretch")
 
         with col_right:
             st.subheader("Infractions by Product Division")
@@ -135,10 +148,10 @@ def main():
             fig_pie = px.pie(
                 cat_counts, values="Count", names="Category_Name",
                 hole=0.45,
-                color_discrete_sequence=[NAVY, TEAL, AMBER]
+                color_discrete_sequence=[BLUE, CYAN, AMBER]
             )
             fig_pie.update_layout(margin=dict(l=20, r=20, t=30, b=20))
-            st.plotly_chart(fig_pie, use_container_width=True)
+            st.plotly_chart(apply_dark_theme(fig_pie), width="stretch")
 
         st.subheader("Top 10 Reseller Entities by Margin Erosion")
         top_resellers = filtered_v.groupby("homologated_name").agg(
@@ -152,7 +165,7 @@ def main():
             color="Total_Deficit", color_continuous_scale="Reds"
         )
         fig_bar.update_layout(yaxis=dict(autorange="reversed"), margin=dict(l=20, r=20, t=30, b=20))
-        st.plotly_chart(fig_bar, use_container_width=True)
+        st.plotly_chart(apply_dark_theme(fig_bar), width="stretch")
 
     # -------------------------------------------------------------
     # TAB 2: MARKETPLACE & STATISTICAL RIGOR
@@ -171,19 +184,19 @@ def main():
             fig_mkt = px.bar(
                 mkt_summary, x="Marketplace", y="Incident_Count",
                 color="Marketplace",
-                color_discrete_sequence=[NAVY, TEAL, CRIMSON, AMBER, SLATE],
+                color_discrete_sequence=[BLUE, CYAN, CRIMSON, AMBER, SLATE],
                 title="Violation Volume by Marketplace Channel"
             )
-            st.plotly_chart(fig_mkt, use_container_width=True)
+            st.plotly_chart(apply_dark_theme(fig_mkt), width="stretch")
 
         with col_m2:
             fig_def = px.bar(
                 mkt_summary, x="Marketplace", y="Total_Deficit",
                 color="Marketplace",
-                color_discrete_sequence=[NAVY, TEAL, CRIMSON, AMBER, SLATE],
+                color_discrete_sequence=[BLUE, CYAN, CRIMSON, AMBER, SLATE],
                 title="Cumulative Deficit (INR ₹) by Marketplace Channel"
             )
-            st.plotly_chart(fig_def, use_container_width=True)
+            st.plotly_chart(apply_dark_theme(fig_def), width="stretch")
 
         st.subheader("📊 Inferential Statistical Tests & Hypothesis Verification")
         st.info(
@@ -205,19 +218,19 @@ def main():
             fig_pareto = go.Figure()
             fig_pareto.add_trace(go.Scatter(x=res_df["Reseller_Pct"], y=res_df["Cumulative_Pct"], mode="lines", line=dict(color=CRIMSON, width=3), name="Deficit Concentration"))
             fig_pareto.add_trace(go.Scatter(x=[0, 100], y=[0, 100], mode="lines", line=dict(color=SLATE, dash="dash"), name="Equality Baseline"))
-            fig_pareto.add_hline(y=80, line_dash="dot", line_color=NAVY, annotation_text="80% Deficit Threshold")
+            fig_pareto.add_hline(y=80, line_dash="dot", line_color=CYAN, annotation_text="80% Deficit Threshold")
             fig_pareto.update_layout(xaxis_title="% of Reseller Accounts", yaxis_title="Cumulative % of Financial Deficit", margin=dict(l=20, r=20, t=30, b=20))
-            st.plotly_chart(fig_pareto, use_container_width=True)
+            st.plotly_chart(apply_dark_theme(fig_pareto), width="stretch")
 
         with col_p2:
             st.subheader("Price Undercutting Deficit Distribution")
             fig_hist = px.histogram(
                 filtered_v[filtered_v["Price_Difference"] < filtered_v["Price_Difference"].quantile(0.95)],
-                x="Price_Difference", nbins=40, color_discrete_sequence=[NAVY],
+                x="Price_Difference", nbins=40, color_discrete_sequence=[BLUE],
                 title="Undercut Magnitude Density (Trimmed at 95th Percentile)"
             )
             fig_hist.update_layout(xaxis_title="Price Deficit Below Floor (INR ₹)", yaxis_title="Frequency", margin=dict(l=20, r=20, t=30, b=20))
-            st.plotly_chart(fig_hist, use_container_width=True)
+            st.plotly_chart(apply_dark_theme(fig_hist), width="stretch")
 
     # -------------------------------------------------------------
     # TAB 3: RESELLER COMPLIANCE & LEGAL NOTICES
@@ -254,7 +267,7 @@ def main():
                     "Total_Infractions": "{:,}",
                     "Distinct_Violation_Dates": "{:,}"
                 }),
-                use_container_width=True,
+                width="stretch",
                 height=450
             )
 
@@ -276,7 +289,7 @@ def main():
 
             st.dataframe(
                 res_violations[["Violation_date", "Category", "Sub_category", "SKU", "Marketplace", "Advertised_price", "MAP_Price", "LPP", "Price_Difference", "Notice_Doc_Path"]].head(25),
-                use_container_width=True
+                width="stretch"
             )
 
 

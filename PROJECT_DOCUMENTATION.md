@@ -287,7 +287,7 @@ Each notice is built with executive-level corporate document formatting:
 
 ## 7. Verification & Production Audits
 
-### 8.1 Row Count Verification
+### 7.1 Row Count Verification
 Automated validation scripts (`src/database/database_validation.py` and `database_validator.sql`) verify consistency across all storage tiers:
 
 ```sql
@@ -326,7 +326,7 @@ SELECT 'SUSPENDED_CATEGORIES', COUNT(*) FROM SUSPENDED_CATEGORIES;
 * `Notice_Doc_Path` Population: 15,936 rows mapped to 279 generated documents with zero null entries.
 
 
-### 8.3 Executive Visual Analytics & Evidence Figures
+### 7.3 Executive Visual Analytics & Production Figures
 All analytical visualizations are generated at 300 DPI for executive presentations:
 * `01_violations_by_marketplace.png`: Non-compliant incident frequency and cumulative price deficit by marketplace (Amazon, Flipkart, eBay, etc.).
 * `02_top_10_violating_resellers.png`: Top corporate offender entities ranked by total under-MAP margin erosion.
@@ -335,7 +335,7 @@ All analytical visualizations are generated at 300 DPI for executive presentatio
 * `05_price_deficit_distribution.png`: Statistical density and percentile analysis (Median vs 90th percentile) of pricing gaps.
 * `06_category_suspension_status.png`: Account escalation distribution across Critical Freeze, Formal Suspension, and Probation.
 
-### 8.2 Data Quality & Integrity Checks
+### 7.2 Data Quality & Integrity Checks
 * **Referential Integrity**: Zero orphaned foreign keys across `PL`, `PRICE_LIST`, `CATEGORY_MAPPING`, and `PROMOTION`.
 * **Zero Negative Pricing**: Advertised and baseline pricing constrained to positive values ($\text{price} > 0$).
 * **Temporal Coherence**: Observation dates restricted to valid surveillance windows (`2025-12-21` to `2026-01-05`).

@@ -1,8 +1,7 @@
 """
 Centralized Financial & Pricing Configuration Module
 Author: Derin Girish D G
-Description: Houses dynamic margin calculation rules, currency conversion rates,
-and baseline floor derivation utilities.
+Description: Houses dynamic margin calculation rules, currency conversion rates, and baseline floor derivation utilities.
 """
 
 from pathlib import Path

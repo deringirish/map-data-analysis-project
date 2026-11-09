@@ -75,10 +75,9 @@ Quantifies legal enforcement escalation: 253 accounts placed under Critical 30-D
 map-data-analysis-engine/
 │
 ├── data_inputs/                               # Clean, categorized raw input assets
-│   ├── governance/                            # Charter, Data Dictionary & Session Specs
+│   ├── governance/                            # Charter & Data Dictionary Specs
 │   │   ├── DATA DICTIONARY.docx
-│   │   ├── MAP-PROJECT CHARTER.docx
-│   │   └── Project session 1 - MAP.pdf
+│   │   └── MAP-PROJECT CHARTER.docx
 │   ├── master_catalog/                        # Master product & pricing specifications
 │   │   ├── PN_SKU.xml                         # Part Number to SKU mapping (XML)
 │   │   ├── product_info.json                  # Product taxonomy & attributes (JSON)
