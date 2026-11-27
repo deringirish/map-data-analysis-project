@@ -17,7 +17,3 @@ from .policy_simulator import (
     simulate_suspension_thresholds,
     simulate_targeted_enforcement,
 )
-from .recidivism_predictor import (
-    RecidivismPredictor,
-    run_recidivism_pipeline,
-)

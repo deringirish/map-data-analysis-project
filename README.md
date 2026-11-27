@@ -6,8 +6,7 @@
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Database](https://img.shields.io/badge/Database-MySQL%20%7C%20SQLite%20Dual--Engine-orange.svg?logo=sqlite&logoColor=white)](src/database/)
 [![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
-[![Test Suite](https://img.shields.io/badge/pytest-34%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
-[![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Random%20Forest%20%7C%2099%25%20ROC--AUC-blue.svg?logo=scikitlearn&logoColor=white)](src/analytics/recidivism_predictor.py)
+[![Test Suite](https://img.shields.io/badge/pytest-29%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
 [![Executive Briefing](https://img.shields.io/badge/Executive%20Briefing-HTML%20%7C%20MD-purple.svg)](data_processed/reports/EXECUTIVE_C_SUITE_BRIEFING.html)
 [![Reporting](https://img.shields.io/badge/DOCX%20Engine-279%20Legal%20Notices-red.svg)](data_processed/reports/notices/)
 [![Visual Analytics](https://img.shields.io/badge/Visual%20Analytics-6%20Charts%20(300%20DPI)-teal.svg)](data_processed/reports/figures/)
@@ -26,7 +25,6 @@ Experience the compliance portal live:
 * **📈 Statistical Hypothesis Testing & Pareto Lorenz Curve:** Real-time Kruskal-Wallis non-parametric test results ($p = 0.0141$) and 80/20 reseller concentration curve.
 * **📁 Reseller Case File Explorer:** Instant audit lookup across 900 storefronts linking to 279 generated legal warning notices.
 * **🎛️ What-If Policy Simulator & Elasticity Engine:** Dynamic sliders modeling promotional discount allowances (+0% to +15%), recidivism escalation cutoff sensitivity, and targeted corporate partner cures.
-* **🤖 Predictive Recidivism Risk (ML Layer):** Supervised Random Forest champion (99.0% ROC-AUC, 93.9% Accuracy) and Logistic Regression baseline stratifying resellers into 🔴 High, 🟡 Moderate, and 🟢 Low risk tiers with feature importance explainability.
 * **⚡ 24/7 Always-On Reliability:** Automated keep-alive workflow prevents cloud container hibernation.
 
 ---
@@ -115,16 +113,13 @@ map-data-analysis-engine/
 │       ├── notices/                           # 279 Formatted legal warning notices (.docx)
 │       ├── category_suspensions_audit.csv     # Formal category suspension report
 │       ├── EXECUTIVE_C_SUITE_BRIEFING.html    # Responsive 1-page executive intelligence HTML
-│       ├── EXECUTIVE_C_SUITE_BRIEFING.md      # C-Suite intelligence markdown briefing
-│       ├── recidivism_risk_cohorts.csv        # ML scored reseller cohort recidivism risk (279 rows)
-│       └── recidivism_risk_corporate.csv      # Corporate parent entity risk rollup (100 rows)
+│       └── EXECUTIVE_C_SUITE_BRIEFING.md      # C-Suite intelligence markdown briefing
 │
 ├── src/                                       # Core implementation codebase
-│   ├── analytics/                             # Decision support & predictive machine learning
+│   ├── analytics/                             # Decision support & KPI analytics
 │   │   ├── business_kpis.py                   # Macro financial risk indicators & compliance curves
 │   │   ├── statistical_tests.py               # Kruskal-Wallis, Mann-Whitney U, ANOVA battery
-│   │   ├── policy_simulator.py                # Discount elasticity & suspension what-if simulator
-│   │   └── recidivism_predictor.py            # Random Forest & Logistic Regression ML risk engine
+│   │   └── policy_simulator.py                # Discount elasticity & suspension what-if simulator
 │   ├── config/                                # Centralized FX rates & margin config
 │   │   └── finance_config.py
 │   ├── dashboard/                             # Streamlit BI application
@@ -153,7 +148,6 @@ map-data-analysis-engine/
 │   ├── test_executive_briefing.py             # HTML/Markdown briefing synthesis tests
 │   ├── test_lpp_calculation.py                # LPP margin matrix derivation tests
 │   ├── test_policy_simulator.py               # Elasticity & cutoff sensitivity tests
-│   ├── test_recidivism_predictor.py           # ML temporal splits, ROC-AUC, risk tiers
 │   ├── test_statistical_tests.py              # Kruskal-Wallis & Pareto verification
 │   └── test_suspension_engine.py              # Escalation boundary tests
 │
@@ -226,11 +220,8 @@ python main.py --all
 # Launch the interactive Streamlit BI Dashboard portal
 python main.py --dashboard    # or: python dashboard.py
 
-# Run the automated pytest testing suite (34 unit, regression & ML integrity tests)
+# Run the automated pytest testing suite
 python main.py --tests        # or: uv run pytest
-
-# Execute predictive machine learning reseller recidivism risk model (Random Forest & Logistic Regression)
-python main.py --predict
 
 # Execute inferential statistical hypothesis testing battery (Kruskal-Wallis, ANOVA)
 python main.py --stats

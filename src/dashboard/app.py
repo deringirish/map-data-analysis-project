@@ -5,7 +5,6 @@ Description: Executive analytics portal for multi-channel Minimum Advertised Pri
 statistical hypothesis testing, Pareto concentration, and reseller enforcement intelligence.
 """
 
-import json
 from pathlib import Path
 import streamlit as st
 import pandas as pd
@@ -18,7 +17,6 @@ from src.analytics.policy_simulator import (
     simulate_suspension_thresholds,
     simulate_targeted_enforcement
 )
-from src.analytics.recidivism_predictor import run_recidivism_pipeline
 from src.analytics.statistical_tests import (
     perform_marketplace_kruskal_wallis,
     perform_pairwise_mann_whitney,
@@ -63,16 +61,12 @@ def apply_dark_theme(fig):
 
 @st.cache_data
 def load_data():
-    """Loads violation, price monitoring audit, suspension, and ML risk tables."""
+    """Loads violation, price monitoring audit, and suspension tables."""
     pm_path = DATA_PATH / "price_monitoring_table.csv"
     pm_df = pd.read_csv(pm_path, usecols=["Violation_date", "Category", "Marketplace", "SKU"]) if pm_path.exists() else pd.DataFrame()
     v_df = pd.read_csv(DATA_PATH / "violation_table.csv")
     susp_df = pd.read_csv(DATA_PATH / "suspended_categories_table.csv") if (DATA_PATH / "suspended_categories_table.csv").exists() else pd.DataFrame()
-    cohort_risk_df = pd.read_csv(REPORTS_DIR / "recidivism_risk_cohorts.csv") if (REPORTS_DIR / "recidivism_risk_cohorts.csv").exists() else pd.DataFrame()
-    corporate_risk_df = pd.read_csv(REPORTS_DIR / "recidivism_risk_corporate.csv") if (REPORTS_DIR / "recidivism_risk_corporate.csv").exists() else pd.DataFrame()
-    metrics_path = REPORTS_DIR / "recidivism_model_metrics.json"
-    model_metrics = json.loads(metrics_path.read_text(encoding="utf-8")) if metrics_path.exists() else {}
-    return pm_df, v_df, susp_df, cohort_risk_df, corporate_risk_df, model_metrics
+    return pm_df, v_df, susp_df
 
 
 def main():
@@ -84,7 +78,7 @@ def main():
     st.divider()
 
     try:
-        pm_df, v_df, susp_df, cohort_risk_df, corporate_risk_df, model_metrics = load_data()
+        pm_df, v_df, susp_df = load_data()
     except Exception as e:
         st.error(f"Error loading datasets: {e}")
         return
@@ -157,12 +151,11 @@ def main():
     st.write("")
 
     # Navigation Tabs
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    tab1, tab2, tab3, tab4 = st.tabs([
         "📈 Executive Overview & Time-Series",
         "📊 Marketplace & Statistical Rigor",
         "🚨 Reseller Compliance & Legal Notices",
         "🎛️ What-If Policy Simulator & Elasticity",
-        "🤖 Predictive Recidivism Risk (ML Engine)"
     ])
 
     # -------------------------------------------------------------
@@ -446,144 +439,6 @@ def main():
                 f"recovers **₹{target_res['targeted_deficit'] / 1e6:.2f} Million ({target_res['pct_deficit_recovered']:.1f}%)** of all margin erosion "
                 f"across the market, while eliminating **{target_res['targeted_violations']:,}** infractions."
             )
-
-    # -------------------------------------------------------------
-    # TAB 5: PREDICTIVE RESELLER RECIDIVISM RISK (ML ENGINE)
-    # -------------------------------------------------------------
-    with tab5:
-        st.subheader("🤖 Machine Learning Predictive Reseller Recidivism & Risk Stratification")
-        st.markdown(
-            "Temporal behavioral classification (**Random Forest Champion** vs **Regularized Logistic Regression Baseline**) "
-            "trained across surveillance splits (T1: Dec 21–28 → T2: Dec 29–Jan 05) to predict future channel recidivism, "
-            "rogue velocity, and catastrophic margin erosion."
-        )
-
-        if cohort_risk_df.empty or corporate_risk_df.empty or not model_metrics:
-            st.warning("⚠️ Recidivism risk model artifacts not found. Generating predictions now...")
-            with st.spinner("Training Random Forest & Logistic Regression risk models..."):
-                pred_obj, cohort_risk_df, corporate_risk_df = run_recidivism_pipeline()
-                model_metrics = pred_obj.model_metrics
-            st.success("✅ Machine Learning Risk Models successfully trained and calibrated!")
-
-        # High-level ML Metric Cards
-        total_cohorts = len(cohort_risk_df)
-        high_risk_count = int((cohort_risk_df["Risk_Tier"] == "🔴 High Risk").sum())
-        mod_risk_count = int((cohort_risk_df["Risk_Tier"] == "🟡 Moderate Risk").sum())
-        low_risk_count = int((cohort_risk_df["Risk_Tier"] == "🟢 Low Risk").sum())
-        high_risk_deficit = float(cohort_risk_df[cohort_risk_df["Risk_Tier"] == "🔴 High Risk"]["Total_Price_Deficit"].sum())
-
-        rf_m = model_metrics.get("random_forest", {})
-        roc_auc_pct = rf_m.get("roc_auc", 0.0) * 100.0
-        acc_pct = rf_m.get("accuracy", 0.0) * 100.0
-
-        m1, m2, m3, m4, m5 = st.columns(5)
-        m1.metric("Model ROC-AUC", f"{roc_auc_pct:.1f}%", help="5-Fold Stratified Cross-Validation ROC-AUC of Champion Random Forest")
-        m2.metric("Cross-Val Accuracy", f"{acc_pct:.1f}%", help="5-Fold Stratified Cross-Validation Accuracy")
-        m3.metric("🔴 High Risk Cohorts", f"{high_risk_count} ({high_risk_count/total_cohorts*100:.1f}%)")
-        m4.metric("🟡 Moderate Risk", f"{mod_risk_count} ({mod_risk_count/total_cohorts*100:.1f}%)")
-        m5.metric("High-Risk Margin at Stake", f"₹{high_risk_deficit/1e6:.2f}M")
-
-        st.write("")
-
-        # Two Column Deep Dive: Feature Importance & Risk Distribution
-        c_left, c_right = st.columns([1, 1])
-
-        with c_left:
-            st.markdown("#### 1. Behavioral Feature Importance (Drivers of Recidivism)")
-            feat_label_map = {
-                "max_deficit": "Max Single Deficit (₹)",
-                "avg_deficit": "Average Price Deficit (₹)",
-                "major_rate": "Major Deficit Rate (>₹5K)",
-                "violations": "Total Violation Volume",
-                "velocity": "Violation Velocity (Per Day)",
-                "max_discount_pct": "Max Discount Depth (%)",
-                "avg_discount_pct": "Average Discount (%)",
-                "distinct_skus": "SKU Catalog Spread",
-                "active_days": "Active Surveillance Days",
-                "marketplaces": "Marketplace Omnichannel Count",
-            }
-            raw_importances = model_metrics.get("feature_importances", {})
-            feat_data = pd.DataFrame([
-                {"Feature": feat_label_map.get(k, k), "Importance": round(v * 100.0, 2)}
-                for k, v in raw_importances.items()
-            ]).sort_values("Importance", ascending=True)
-
-            fig_feat = px.bar(
-                feat_data, x="Importance", y="Feature", orientation="h",
-                labels={"Importance": "Gini Feature Importance (%)", "Feature": "Behavioral Predictor"},
-                color="Importance", color_continuous_scale="Tealgrn"
-            )
-            fig_feat.update_layout(margin=dict(l=20, r=20, t=30, b=20))
-            st.plotly_chart(apply_dark_theme(fig_feat), width="stretch")
-
-        with c_right:
-            st.markdown("#### 2. Calibrated Recidivism Probability by Division")
-            fig_dist = px.box(
-                cohort_risk_df, x="Category", y="Recidivism_Risk_Score",
-                color="Category",
-                labels={"Category": "Product Division", "Recidivism_Risk_Score": "Predicted Risk Probability (0.0 - 1.0)"},
-                color_discrete_sequence=[CYAN, BLUE, AMBER],
-                points="all"
-            )
-            fig_dist.update_layout(margin=dict(l=20, r=20, t=30, b=20))
-            st.plotly_chart(apply_dark_theme(fig_dist), width="stretch")
-
-        st.divider()
-
-        # Reseller Cohort Predictive Risk Scorecard
-        st.markdown("#### 3. Interactive Reseller Cohort Predictive Risk Scorecard")
-        st.markdown("Inspect calibrated risk scores, operational telemetry, and automated legal escalation recommendations.")
-
-        f_col1, f_col2, f_col3 = st.columns([1, 1, 2])
-        with f_col1:
-            tier_filter = st.selectbox("Filter Risk Tier", ["All", "🔴 High Risk", "🟡 Moderate Risk", "🟢 Low Risk"])
-        with f_col2:
-            cat_filter = st.selectbox("Filter Category", ["All"] + sorted(cohort_risk_df["Category"].dropna().unique()))
-        with f_col3:
-            search_query = st.text_input("Search Corporate Reseller", placeholder="e.g. Big Lots, Walmart, Target...")
-
-        filtered_cohorts = cohort_risk_df.copy()
-        if tier_filter != "All":
-            filtered_cohorts = filtered_cohorts[filtered_cohorts["Risk_Tier"] == tier_filter]
-        if cat_filter != "All":
-            filtered_cohorts = filtered_cohorts[filtered_cohorts["Category"] == cat_filter]
-        if search_query:
-            filtered_cohorts = filtered_cohorts[filtered_cohorts["homologated_name"].str.contains(search_query, case=False, na=False)]
-
-        st.dataframe(
-            filtered_cohorts[[
-                "homologated_name", "Category", "Risk_Tier", "Risk_Score_Pct",
-                "Total_Price_Deficit", "Avg_Price_Deficit", "Max_Price_Deficit",
-                "Total_Violations", "Active_Violation_Days", "Violation_Velocity",
-                "Recommended_Action"
-            ]],
-            width="stretch"
-        )
-
-        st.download_button(
-            label="📥 Download Filtered Scorecard (CSV)",
-            data=filtered_cohorts.to_csv(index=False).encode("utf-8"),
-            file_name="recidivism_risk_scorecard.csv",
-            mime="text/csv"
-        )
-
-        st.divider()
-
-        # Corporate Parent Entity Rollup
-        st.markdown("#### 4. Corporate Parent Entity Cross-Category Risk Rollup (100 Accounts)")
-        st.markdown(
-            "Account-level risk profile aggregating omnichannel retail exposure across Personal Computers, "
-            "Print Hardware, and Supplies."
-        )
-
-        st.dataframe(
-            corporate_risk_df[[
-                "homologated_name", "Overall_Corporate_Tier", "Max_Risk_Score",
-                "Mean_Risk_Score", "Total_Corporate_Deficit", "Total_Corporate_Violations",
-                "Categories_Audited", "Primary_Risk_Category", "Corporate_Legal_Remedy"
-            ]],
-            width="stretch"
-        )
 
 
 if __name__ == "__main__":
