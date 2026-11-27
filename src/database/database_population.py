@@ -1,13 +1,11 @@
 """
-MAP Relational Database Population Subsystem (Dual-Engine: MySQL 8.0 & SQLite 3)
+MAP Relational Database Population Subsystem (MySQL 8.0)
 Author: Derin Girish D G
-Description: Automated batch ingestion into 3NF relational warehouse with zero-downtime
-automatic fallback to local SQLite when MySQL server is unreachable.
+Description: Automated batch ingestion into the 3NF MySQL relational warehouse.
 """
 
 import os
 import sys
-import argparse
 from pathlib import Path
 from typing import List, Tuple
 import pandas as pd
@@ -22,7 +20,6 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
-SQLITE_DB_PATH = DATA_PATH / "map_project.db"
 
 load_dotenv(dotenv_path=BASE_DIR / ".env")
 
@@ -71,8 +68,8 @@ def _insert_dataframe_in_batches(
     return total
 
 
-def _populate_all_tables(cursor, conn, placeholder: str) -> None:
-    """Shared 10-table 3NF ingestion pipeline for both SQLite and MySQL."""
+def _populate_all_tables(cursor, conn, placeholder: str = "%s") -> None:
+    """Shared 10-table 3NF ingestion pipeline for MySQL."""
     specs: List[Tuple[str, str, List[str], List[str]]] = [
         ("SKU", "sku_table.csv", ["PN", "SKU"], ["PN", "SKU"]),
         ("PL", "pl_table.csv", ["PL", "SKU", "SUB_CATEGORY"], ["PL", "SKU", "SUB_CATEGORY"]),
@@ -137,34 +134,6 @@ def _print_summary(cursor, engine_label: str) -> None:
     print("=========================================================")
 
 
-def populate_sqlite(db_path: Path) -> None:
-    """Populates 3NF schema and all datasets into a local SQLite database."""
-    import sqlite3
-
-    print("\n=========================================================")
-    print(f" [ENGINE: SQLITE] POPULATING 3NF WAREHOUSE: {db_path.name}")
-    print("=========================================================")
-
-    conn = sqlite3.connect(str(db_path))
-    cursor = conn.cursor()
-    cursor.execute("PRAGMA foreign_keys = OFF;")
-
-    ddl_file = Path(__file__).resolve().parent / "create_tables_sqlite.sql"
-    if ddl_file.exists():
-        cursor.executescript(ddl_file.read_text(encoding="utf-8"))
-
-    for tbl in TABLES_CLEAR_ORDER:
-        cursor.execute(f"DELETE FROM {tbl};")
-    conn.commit()
-    print("Cleared existing tables for fresh batch population.\n")
-
-    _populate_all_tables(cursor, conn, placeholder="?")
-    _print_summary(cursor, "SQLITE")
-    print(f" All 10 tables successfully populated into SQLite ({db_path.name}).")
-    cursor.close()
-    conn.close()
-
-
 def populate_mysql() -> None:
     """Populates 3NF schema and all datasets into MySQL server."""
     import mysql.connector
@@ -221,31 +190,11 @@ def populate_mysql() -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="3NF Database Population Engine")
-    parser.add_argument(
-        "--engine",
-        choices=["auto", "mysql", "sqlite"],
-        default=None,
-        help="Database engine (defaults to DB_ENGINE in .env or 'auto')",
-    )
-    args = parser.parse_args()
-
-    engine = args.engine or os.getenv("DB_ENGINE", "auto").lower()
-
-    if engine == "sqlite":
-        populate_sqlite(SQLITE_DB_PATH)
-        return
-
     try:
         populate_mysql()
     except Exception as e:
-        if engine == "mysql":
-            print(f"[ERROR] MySQL population failed: {e}")
-            sys.exit(1)
-        else:
-            print(f"\n[WARN] MySQL server unavailable: {e}")
-            print("[INFO] Seamlessly falling back to local SQLite relational database...")
-            populate_sqlite(SQLITE_DB_PATH)
+        print(f"[ERROR] MySQL population failed: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

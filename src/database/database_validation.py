@@ -1,13 +1,11 @@
 """
-MAP Database Validation & Table Record Auditor (Dual-Engine: MySQL & SQLite)
+MAP Database Validation & Table Record Auditor (MySQL 8.0)
 Author: Derin Girish D G
-Description: Verifies live table row counts and structural integrity across either
-MySQL 8.0 or the local SQLite relational database.
+Description: Verifies live table row counts and structural integrity in MySQL 8.0.
 """
 
 import os
 import sys
-import argparse
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -19,9 +17,6 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
         pass
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
-SQLITE_DB_PATH = DATA_PATH / "map_project.db"
-
 load_dotenv(dotenv_path=BASE_DIR / ".env")
 
 TABLES = [
@@ -36,38 +31,6 @@ TABLES = [
     "VIOLATION_TABLE",
     "SUSPENDED_CATEGORIES"
 ]
-
-
-def validate_sqlite(db_path: Path):
-    import sqlite3
-    if not db_path.exists():
-        print(f"[ERROR] SQLite database file not found at: {db_path}")
-        print("[INFO] Run `python main.py --populate-db --engine sqlite` to initialize.")
-        sys.exit(1)
-
-    conn = sqlite3.connect(str(db_path))
-    cursor = conn.cursor()
-
-    print("=========================================================")
-    print(f"       MAP_PROJECT TABLE RECORD AUDIT (SQLITE)          ")
-    print(f"       Database: {db_path.name}                         ")
-    print("=========================================================")
-    total_records = 0
-    for tbl in TABLES:
-        try:
-            cursor.execute(f"SELECT COUNT(*) FROM {tbl};")
-            count = cursor.fetchone()[0]
-            total_records += count
-            print(f"- {tbl:<25} {count:>10,} rows")
-        except sqlite3.Error as e:
-            print(f"- {tbl:<25} ERROR: {e}")
-
-    print("=========================================================")
-    print(f"Total Database Rows Audited: {total_records:,}")
-    print("=========================================================")
-    cursor.close()
-    conn.close()
-    print("Validation completed successfully.")
 
 
 def validate_mysql():
@@ -114,27 +77,11 @@ def validate_mysql():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="3NF Database Validation Auditor")
-    parser.add_argument("--engine", choices=["auto", "mysql", "sqlite"], default=None,
-                        help="Target database engine (defaults to DB_ENGINE in .env or 'auto')")
-    args = parser.parse_args()
-
-    engine = args.engine or os.getenv("DB_ENGINE", "auto").lower()
-
-    if engine == "sqlite":
-        validate_sqlite(SQLITE_DB_PATH)
-        return
-
     try:
         validate_mysql()
     except Exception as e:
-        if engine == "mysql":
-            print(f"[ERROR] MySQL validation failed: {e}")
-            sys.exit(1)
-        else:
-            print(f"[WARN] MySQL server unavailable: {e}")
-            print("[INFO] Checking local SQLite database warehouse instead...\n")
-            validate_sqlite(SQLITE_DB_PATH)
+        print(f"[ERROR] MySQL validation failed: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

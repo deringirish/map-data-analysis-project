@@ -6,6 +6,7 @@ surveillance cycles and formally suspends categories for chronic non-compliant p
 """
 
 import os
+import sys
 from pathlib import Path
 from datetime import datetime, timedelta
 import pandas as pd
@@ -14,10 +15,13 @@ import matplotlib.ticker as ticker
 import seaborn as sns
 from dotenv import load_dotenv
 
+BASE_DIR = Path(__file__).resolve().parents[2]
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from src.config.finance_config import STATUS_CRITICAL, STATUS_FORMAL, STATUS_PROBATION
 
 # Path configuration
-BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
 REPORTS_DIR = BASE_DIR / "data_processed" / "reports"
 FIGURES_DIR = REPORTS_DIR / "figures"
@@ -127,7 +131,7 @@ def plot_suspension_overview(agg_df: pd.DataFrame):
 
     bars = ax1.bar(status_counts.index, status_counts.values, color=colors[:len(status_counts)], width=0.5)
     ax1.set_ylabel("Category Accounts Affected", fontsize=11, fontweight="bold")
-    ax1.set_title("Reseller Category Suspension Breakdown (N=279)", fontsize=12, fontweight="bold")
+    ax1.set_title(f"Reseller Category Suspension Breakdown (N={len(agg_df):,})", fontsize=12, fontweight="bold")
     ax1.grid(axis="y", linestyle="--", alpha=0.5)
 
     for bar in bars:
@@ -162,7 +166,7 @@ def plot_suspension_overview(agg_df: pd.DataFrame):
 
 
 def sync_suspensions_to_mysql(agg_df: pd.DataFrame):
-    """Syncs the suspension ledger to MySQL or SQLite depending on available engine."""
+    """Syncs the suspension ledger to MySQL."""
     records = []
     for _, r in agg_df.iterrows():
         records.append((
@@ -189,7 +193,6 @@ def sync_suspensions_to_mysql(agg_df: pd.DataFrame):
     mysql_password = os.getenv("MYSQL_PASSWORD", "")
     mysql_database = os.getenv("MYSQL_DATABASE", "MAP_PROJECT")
 
-    mysql_synced = False
     if mysql_password:
         try:
             import mysql.connector
@@ -239,54 +242,9 @@ def sync_suspensions_to_mysql(agg_df: pd.DataFrame):
             conn.commit()
             cur.close()
             conn.close()
-            mysql_synced = True
             print(f" Successfully loaded {len(records):,} category suspension records into MySQL `SUSPENDED_CATEGORIES` table.")
         except Exception as e:
             print(f" MySQL synchronization notice: {e}")
-
-    # Fallback or complement to local SQLite
-    sqlite_db = DATA_PATH / "map_project.db"
-    if not mysql_synced or sqlite_db.exists():
-        try:
-            import sqlite3
-            s_conn = sqlite3.connect(str(sqlite_db))
-            s_cur = s_conn.cursor()
-            s_cur.execute("DROP TABLE IF EXISTS SUSPENDED_CATEGORIES;")
-            s_cur.execute("""
-            CREATE TABLE SUSPENDED_CATEGORIES (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                homologated_name TEXT,
-                Category TEXT,
-                Total_Infractions INTEGER,
-                Distinct_Violation_Dates INTEGER,
-                Distinct_SKUs_Violated INTEGER,
-                Marketplaces_Audited TEXT,
-                Earliest_Violation DATE,
-                Latest_Violation DATE,
-                Max_Single_Deficit REAL,
-                Total_Price_Deficit REAL,
-                Enforcement_Status TEXT,
-                Legal_Remedy TEXT,
-                Suspension_Duration_Days INTEGER,
-                Suspension_Effective_Date DATE,
-                Suspension_Expiry_Date TEXT
-            );
-            """)
-            s_insert = """
-            INSERT INTO SUSPENDED_CATEGORIES (
-                homologated_name, Category, Total_Infractions, Distinct_Violation_Dates,
-                Distinct_SKUs_Violated, Marketplaces_Audited, Earliest_Violation, Latest_Violation,
-                Max_Single_Deficit, Total_Price_Deficit, Enforcement_Status, Legal_Remedy,
-                Suspension_Duration_Days, Suspension_Effective_Date, Suspension_Expiry_Date
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-            """
-            s_cur.executemany(s_insert, records)
-            s_conn.commit()
-            s_cur.close()
-            s_conn.close()
-            print(f" Successfully synced {len(records):,} category suspension records into SQLite `SUSPENDED_CATEGORIES` ({sqlite_db.name}).")
-        except Exception as se:
-            print(f" SQLite synchronization notice: {se}")
 
 
 def main():

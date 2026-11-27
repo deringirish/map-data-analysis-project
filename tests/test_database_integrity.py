@@ -1,32 +1,27 @@
 """
-Unit Tests for Database Schemas & Table Integrity
+Unit Tests for MySQL Database Schema & Table Integrity
 """
 
-import pytest
-import sqlite3
+import re
 from pathlib import Path
-import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-SQLITE_DDL = BASE_DIR / "src" / "database" / "create_tables_sqlite.sql"
+MYSQL_DDL = BASE_DIR / "src" / "database" / "create_tables.sql"
 
 
-def test_sqlite_ddl_execution():
-    assert SQLITE_DDL.exists()
-    conn = sqlite3.connect(":memory:")
-    cursor = conn.cursor()
-    cursor.executescript(SQLITE_DDL.read_text(encoding="utf-8"))
+def test_mysql_ddl_schema():
+    assert MYSQL_DDL.exists(), f"MySQL DDL missing at {MYSQL_DDL}"
+    ddl_text = MYSQL_DDL.read_text(encoding="utf-8")
 
-    # Verify all 10 tables exist in SQLite master
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    tables = [row[0] for row in cursor.fetchall()]
-
-    expected = [
+    expected_tables = [
         "SKU", "PL", "PRICE_LIST", "SELLER_MAPPING", "CATEGORY_MAPPING",
         "PROMOTION", "SELLER_TABLE", "PRICE_MONITORING_TABLE",
-        "VIOLATION_TABLE", "SUSPENDED_CATEGORIES"
+        "VIOLATION_TABLE", "SUSPENDED_CATEGORIES",
     ]
-    for exp in expected:
-        assert exp in tables, f"Table {exp} was not created."
+    for tbl in expected_tables:
+        assert re.search(rf"CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?{tbl}\b", ddl_text, re.IGNORECASE), (
+            f"Table {tbl} missing from MySQL DDL."
+        )
 
-    conn.close()
+    assert "PRIMARY KEY" in ddl_text.upper()
+    assert "FOREIGN KEY" in ddl_text.upper()

@@ -61,11 +61,7 @@ jobs:
 
       - name: Execute Full End-to-End Compliance Pipeline (MySQL)
         run: |
-          uv run python main.py --all --populate-db --validate --engine mysql
-
-      - name: Execute SQLite Dual-Engine Ingestion & Validation
-        run: |
-          uv run python main.py --populate-db --validate --engine sqlite
+          uv run python main.py --all --populate-db --validate
 
       - name: Verify Generated Analytics Assets
         run: |

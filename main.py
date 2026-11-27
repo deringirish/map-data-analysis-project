@@ -57,28 +57,22 @@ def run_briefing_pipeline():
     generate_executive_briefing()
 
 
-def run_database_population(engine: str = None):
+def run_database_population():
     print("\n" + "=" * 65)
-    print(" [DATABASE] INGESTING 3NF RELATIONAL WAREHOUSE")
+    print(" [DATABASE] INGESTING 3NF RELATIONAL WAREHOUSE (MYSQL)")
     print("=" * 65)
     import subprocess
     script = BASE_DIR / "src" / "database" / "database_population.py"
-    cmd = [sys.executable, str(script)]
-    if engine:
-        cmd.extend(["--engine", engine])
-    subprocess.run(cmd, check=True)
+    subprocess.run([sys.executable, str(script)], check=True)
 
 
-def run_database_validation(engine: str = None):
+def run_database_validation():
     print("\n" + "=" * 65)
-    print(" [VALIDATION] RUNNING PRODUCTION RECORD COUNT AUDIT")
+    print(" [VALIDATION] RUNNING PRODUCTION RECORD COUNT AUDIT (MYSQL)")
     print("=" * 65)
     import subprocess
     script = BASE_DIR / "src" / "database" / "database_validation.py"
-    cmd = [sys.executable, str(script)]
-    if engine:
-        cmd.extend(["--engine", engine])
-    subprocess.run(cmd, check=True)
+    subprocess.run([sys.executable, str(script)], check=True)
 
 
 def run_guardrails_pipeline():
@@ -161,10 +155,6 @@ def main():
         help="Launch interactive Streamlit BI application"
     )
     parser.add_argument(
-        "--engine", choices=["auto", "mysql", "sqlite"], default=None,
-        help="Target database engine: 'mysql', 'sqlite', or 'auto' (default: auto-fallback to SQLite)"
-    )
-    parser.add_argument(
         "--as-of-date", type=str, default=None,
         help="Audit reference date for category suspensions (YYYY-MM-DD). Defaults to latest date + 1 day."
     )
@@ -189,7 +179,7 @@ def main():
         run_guardrails_pipeline()
 
     if args.populate_db:
-        run_database_population(engine=args.engine)
+        run_database_population()
 
     if args.all or args.suspend:
         run_suspension_pipeline(as_of_date=args.as_of_date)
@@ -207,7 +197,7 @@ def main():
         run_stats_pipeline()
 
     if args.validate:
-        run_database_validation(engine=args.engine)
+        run_database_validation()
 
     if args.dashboard:
         run_dashboard()

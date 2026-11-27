@@ -4,7 +4,7 @@
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://map-intelligence.streamlit.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![Database](https://img.shields.io/badge/Database-MySQL%20%7C%20SQLite%20Dual--Engine-orange.svg?logo=sqlite&logoColor=white)](src/database/)
+[![Database](https://img.shields.io/badge/Database-MySQL%208.0-orange.svg?logo=mysql&logoColor=white)](src/database/)
 [![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
 [![Test Suite](https://img.shields.io/badge/pytest-29%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
 [![Executive Briefing](https://img.shields.io/badge/Executive%20Briefing-HTML%20%7C%20MD-purple.svg)](data_processed/reports/EXECUTIVE_C_SUITE_BRIEFING.html)
@@ -124,13 +124,12 @@ map-data-analysis-engine/
 │   │   └── finance_config.py
 │   ├── dashboard/                             # Streamlit BI application
 │   │   └── app.py                             # 5-tab executive analytics portal (Plotly dark theme)
-│   ├── database/                              # MySQL & SQLite 3NF schemas & pipelines
+│   ├── database/                              # MySQL 3NF schemas & pipelines
 │   │   ├── create_tables.sql                  # MySQL 10-table 3NF relational schema
-│   │   ├── create_tables_sqlite.sql           # SQLite 3NF portable schema
 │   │   ├── data_guardrails.py                 # Telemetry ingestion quality auditor
-│   │   ├── database_population.py             # Batch chunked ingestion with auto-fallback
+│   │   ├── database_population.py             # Batch chunked MySQL ingestion
 │   │   ├── database_validator.sql             # SQL verification queries
-│   │   └── database_validation.py             # Dual-engine table record count auditor
+│   │   └── database_validation.py             # MySQL table record count auditor
 │   ├── enforcement/                           # Escalation & category suspension engine
 │   │   └── category_suspension_engine.py      # Chronic offender classification & MySQL sync
 │   ├── notebooks/                             # Interactive analytical workflows
@@ -144,7 +143,7 @@ map-data-analysis-engine/
 ├── tests/                                     # Automated test suite (34 passing pytest tests)
 │   ├── test_currency_conversion.py            # FX spot rate conversion tests
 │   ├── test_data_guardrails.py                # Raw feed anomaly quarantine tests
-│   ├── test_database_integrity.py             # SQLite DDL schema integrity tests
+│   ├── test_database_integrity.py             # MySQL DDL schema integrity tests
 │   ├── test_executive_briefing.py             # HTML/Markdown briefing synthesis tests
 │   ├── test_lpp_calculation.py                # LPP margin matrix derivation tests
 │   ├── test_policy_simulator.py               # Elasticity & cutoff sensitivity tests
@@ -184,7 +183,7 @@ The system deploys a strictly normalized **3NF Relational Warehouse** across 10 
 
 ### 1. Prerequisites
 * **Python 3.12+** (managed via [`uv`](https://github.com/astral-sh/uv))
-* **MySQL 8.0+** or **SQLite 3** (zero-configuration local fallback included via `map_project.db`)
+* **MySQL 8.0+**
 
 ### 2. Environment Setup
 Clone the repository and synchronize virtual environment dependencies:
@@ -241,10 +240,10 @@ python main.py --charts
 # Generate all 279 category-segmented .docx legal warning notices
 python main.py --notices
 
-# Populate the 3NF warehouse (supports auto-fallback or explicit --engine sqlite/mysql)
-python main.py --populate-db --engine sqlite
+# Populate the 3NF MySQL warehouse
+python main.py --populate-db
 
-# Validate live table counts and integrity in MySQL or SQLite
+# Validate live table counts and integrity in MySQL
 python main.py --validate
 ```
 
