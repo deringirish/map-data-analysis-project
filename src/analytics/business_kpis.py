@@ -17,12 +17,13 @@ from typing import Dict, Any, Tuple
 import pandas as pd
 import numpy as np
 
+BASE_DIR = Path(__file__).resolve().parents[2]
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from src.config.finance_config import STATUS_CRITICAL, STATUS_FORMAL, STATUS_PROBATION
 
-BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
-REPORTS_DIR = BASE_DIR / "data_processed" / "reports"
-REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def calculate_compliance_rate_trajectory() -> pd.DataFrame:
@@ -60,17 +61,26 @@ def calculate_pareto_concentration() -> Tuple[pd.DataFrame, Dict[str, Any]]:
 
     seller_deficit = v_df.groupby("homologated_name")["Price_Difference"].sum().sort_values(ascending=False).reset_index()
     total_deficit = seller_deficit["Price_Difference"].sum()
-    seller_deficit["Share_Pct"] = (seller_deficit["Price_Difference"] / total_deficit) * 100.0
-    seller_deficit["Cumulative_Deficit"] = seller_deficit["Price_Difference"].cumsum()
-    seller_deficit["Cumulative_Pct"] = (seller_deficit["Cumulative_Deficit"] / total_deficit) * 100.0
-    seller_deficit["Rank"] = range(1, len(seller_deficit) + 1)
-    seller_deficit["Reseller_Percentile"] = (seller_deficit["Rank"] / len(seller_deficit)) * 100.0
-
-    # Find 80% cutoff
-    pareto_80_sellers = seller_deficit[seller_deficit["Cumulative_Pct"] <= 80.0]
-    cutoff_count = len(pareto_80_sellers) + 1
     total_sellers = len(seller_deficit)
-    pct_sellers_for_80_deficit = (cutoff_count / total_sellers) * 100.0
+
+    if total_deficit > 0 and total_sellers > 0:
+        seller_deficit["Share_Pct"] = (seller_deficit["Price_Difference"] / total_deficit) * 100.0
+        seller_deficit["Cumulative_Deficit"] = seller_deficit["Price_Difference"].cumsum()
+        seller_deficit["Cumulative_Pct"] = (seller_deficit["Cumulative_Deficit"] / total_deficit) * 100.0
+        seller_deficit["Rank"] = range(1, total_sellers + 1)
+        seller_deficit["Reseller_Percentile"] = (seller_deficit["Rank"] / total_sellers) * 100.0
+
+        pareto_80_sellers = seller_deficit[seller_deficit["Cumulative_Pct"] <= 80.0]
+        cutoff_count = min(len(pareto_80_sellers) + 1, total_sellers)
+        pct_sellers_for_80_deficit = (cutoff_count / total_sellers) * 100.0
+    else:
+        seller_deficit["Share_Pct"] = 0.0
+        seller_deficit["Cumulative_Deficit"] = 0.0
+        seller_deficit["Cumulative_Pct"] = 0.0
+        seller_deficit["Rank"] = range(1, total_sellers + 1)
+        seller_deficit["Reseller_Percentile"] = 0.0
+        cutoff_count = 0
+        pct_sellers_for_80_deficit = 0.0
 
     stats = {
         "total_resellers": total_sellers,
@@ -90,7 +100,7 @@ def compute_channel_conflict_index() -> pd.DataFrame:
     3. Average margin undercut per non-compliant listing
     """
     v_path = DATA_PATH / "violation_table.csv"
-    v_df = pd.read_csv(v_path)
+    v_df = pd.read_csv(v_path, usecols=["Marketplace", "SKU", "Price_Difference"])
 
     channel_summary = v_df.groupby("Marketplace").agg(
         Total_Infractions=("SKU", "count"),
@@ -126,7 +136,7 @@ def generate_executive_kpi_summary() -> Dict[str, Any]:
 
     total_violations = len(v_df)
     total_deficit = float(v_df["Price_Difference"].sum())
-    overall_compliance_rate = ((total_audits - total_violations) / total_audits) * 100.0
+    overall_compliance_rate = ((total_audits - total_violations) / total_audits) * 100.0 if total_audits > 0 else 0.0
 
     _, pareto_stats = calculate_pareto_concentration()
 
