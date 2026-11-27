@@ -120,30 +120,40 @@ map-data-analysis-engine/
 │   │   └── policy_simulator.py                # Discount elasticity & suspension what-if simulator
 │   ├── config/                                # Centralized FX rates & margin config
 │   │   └── finance_config.py
-│   ├── dashboard/                             # Streamlit BI application
-│   │   └── app.py                             # 4-tab executive analytics portal (Plotly dark theme)
-│   ├── database/                              # MySQL 3NF schemas & pipelines
+│   ├── dashboard/                             # Streamlit BI application (modular tabs)
+│   │   ├── app.py                             # Main 4-tab Streamlit shell & KPIs
+│   │   ├── theme.py                           # Shared dark-theme Plotly styling
+│   │   ├── tab_overview.py                    # Tab 1: Executive Overview & Time-Series
+│   │   ├── tab_marketplace.py                 # Tab 2: Marketplace & Pareto Concentration
+│   │   ├── tab_compliance.py                  # Tab 3: Suspensions & Notice Explorer
+│   │   └── tab_simulator.py                   # Tab 4: What-If Policy Simulator
+│   ├── database/                              # MySQL 3NF schemas, guardrails & SQL
 │   │   ├── create_tables.sql                  # MySQL 10-table 3NF relational schema
+│   │   ├── analytics_queries.sql              # MySQL 8.0 analytical queries (CTEs & windows)
 │   │   ├── data_guardrails.py                 # Telemetry ingestion quality auditor
 │   │   └── database_population.py             # Batch chunked MySQL ingestion & validation
 │   ├── enforcement/                           # Escalation & category suspension engine
-│   │   └── category_suspension_engine.py      # Chronic offender classification & MySQL sync
+│   │   └── category_suspension_engine.py      # Chronic offender classification & Chart 6
+│   ├── etl/                                   # Reproducible raw-to-processed ETL
+│   │   ├── ingest.py                          # Stage 1: Multi-format catalog & feed ingestion
+│   │   ├── monitor.py                         # Stage 2: FX parity, LPP & violation audit
+│   │   └── pipeline.py                        # End-to-end ETL orchestrator
 │   ├── notebooks/                             # Interactive analytical workflows
 │   │   ├── 01_data_ingestion_and_population.ipynb # Multi-format deserialization & 3NF export
-│   │   └── 02_price_monitoring_and_violations.ipynb # LPP auditing, FX parity & chart generation
+│   │   └── 02_price_monitoring_and_violations.ipynb # LPP auditing, FX parity & insights
 │   └── reporting/                             # Document synthesis & visual analytics
+│       ├── briefing_template.html             # Responsive C-Suite briefing HTML template
 │       ├── generate_executive_briefing.py     # Automated C-Suite briefing generator
 │       ├── generate_violation_notices.py      # Automated .docx warning notice engine
 │       └── generate_visualizations.py         # Publication-grade chart generation
 │
-├── tests/                                     # Automated test suite (34 passing pytest tests)
-│   ├── test_currency_conversion.py            # FX spot rate conversion tests
+├── tests/                                     # Automated test suite (16 passing pytest tests)
+│   ├── test_business_kpis.py                  # Compliance, Pareto & channel conflict tests
 │   ├── test_data_guardrails.py                # Raw feed anomaly quarantine tests
 │   ├── test_database_integrity.py             # MySQL DDL schema integrity tests
+│   ├── test_etl_pipeline.py                   # End-to-end ETL ingestion & monitoring tests
 │   ├── test_executive_briefing.py             # HTML/Markdown briefing synthesis tests
-│   ├── test_lpp_calculation.py                # LPP margin matrix derivation tests
 │   ├── test_policy_simulator.py               # Elasticity & cutoff sensitivity tests
-│   ├── test_business_kpis.py                  # Compliance, Pareto & channel conflict tests
 │   └── test_suspension_engine.py              # Escalation boundary tests
 │
 ├── .env.example                               # Database environment template
