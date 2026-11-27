@@ -17,11 +17,6 @@ from src.analytics.policy_simulator import (
     simulate_suspension_thresholds,
     simulate_targeted_enforcement
 )
-from src.analytics.statistical_tests import (
-    perform_marketplace_kruskal_wallis,
-    perform_pairwise_mann_whitney,
-    perform_category_anova,
-)
 
 # Configure page
 try:
@@ -153,7 +148,7 @@ def main():
     # Navigation Tabs
     tab1, tab2, tab3, tab4 = st.tabs([
         "📈 Executive Overview & Time-Series",
-        "📊 Marketplace & Statistical Rigor",
+        "📊 Marketplace & Deficit Concentration",
         "🚨 Reseller Compliance & Legal Notices",
         "🎛️ What-If Policy Simulator & Elasticity",
     ])
@@ -239,27 +234,6 @@ def main():
                 title="Cumulative Deficit (INR ₹) by Marketplace Channel"
             )
             st.plotly_chart(apply_dark_theme(fig_def), width="stretch")
-
-        st.subheader("📊 Inferential Statistical Tests & Hypothesis Verification")
-        kw_res = perform_marketplace_kruskal_wallis(filtered_v)
-        mw_res = perform_pairwise_mann_whitney("Amazon", "Flipkart", filtered_v)
-        anova_res = perform_category_anova(filtered_v)
-
-        kw_line = (
-            f"**Kruskal-Wallis Test across Marketplaces:** H = {kw_res['h_statistic']} (p = {kw_res['p_value']:.4g})  \n"
-            f"*Interpretation:* {kw_res['interpretation']}  \n"
-            if "error" not in kw_res else f"**Kruskal-Wallis Test:** {kw_res['error']}  \n"
-        )
-        mw_line = (
-            f"**Pairwise Mann-Whitney Test (Amazon vs Flipkart):** p = {mw_res['p_value']:.4g} "
-            f"(Flipkart Median Deficit: ₹{mw_res['median_b']:,.2f} vs Amazon: ₹{mw_res['median_a']:,.2f}).  \n"
-            if "error" not in mw_res else f"**Pairwise Mann-Whitney Test:** {mw_res['error']}  \n"
-        )
-        anova_line = (
-            f"**One-Way ANOVA across Product Categories:** F = {anova_res['f_statistic']} (p = {anova_res['p_value']:.4g})."
-            if "error" not in anova_res else f"**One-Way ANOVA:** {anova_res['error']}"
-        )
-        st.info(kw_line + mw_line + anova_line)
 
         col_p1, col_p2 = st.columns(2)
         with col_p1:

@@ -6,13 +6,13 @@ Description: Houses dynamic margin calculation rules, currency conversion rates,
 
 from typing import Dict
 
-# Standard Base-to-INR Foreign Exchange Spot Conversion Rates
+# Canonical Base-to-INR Foreign Exchange Spot Conversion Rates
 FX_RATES: Dict[str, float] = {
     "IND": 1.00,      # Base Currency: Indian Rupee (INR)
-    "USA": 83.25,     # USD to INR
-    "UK": 105.50,     # GBP to INR
-    "CAN": 61.40,     # CAD to INR
-    "UAE": 22.65      # AED to INR
+    "USA": 83.50,     # USD to INR
+    "UK": 105.00,     # GBP to INR
+    "CAN": 61.50,     # CAD to INR
+    "UAE": 22.70      # AED to INR
 }
 
 # Canonical Enforcement Status Constants (shared across enforcement, briefing, and KPIs)

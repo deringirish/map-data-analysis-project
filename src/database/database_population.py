@@ -189,11 +189,53 @@ def populate_mysql() -> None:
         connection.close()
 
 
+def validate_mysql() -> None:
+    """Verifies live table row counts across all 10 tables in MySQL 8.0."""
+    import mysql.connector
+
+    mysql_host = os.getenv("MYSQL_HOST", "localhost")
+    mysql_port = int(os.getenv("MYSQL_PORT", 3306))
+    mysql_user = os.getenv("MYSQL_USER", "root")
+    mysql_password = os.getenv("MYSQL_PASSWORD", "")
+    mysql_database = os.getenv("MYSQL_DATABASE", "MAP_PROJECT")
+
+    connection = mysql.connector.connect(
+        host=mysql_host,
+        port=mysql_port,
+        user=mysql_user,
+        password=mysql_password,
+        database=mysql_database,
+    )
+    cursor = connection.cursor()
+    print("\n=========================================================")
+    print("       MAP_PROJECT TABLE RECORD AUDIT (MYSQL)            ")
+    print("=========================================================")
+    total_records = 0
+    for tbl in reversed(TABLES_CLEAR_ORDER):
+        cursor.execute(f"SELECT COUNT(*) FROM {tbl};")
+        count = cursor.fetchone()[0]
+        total_records += count
+        print(f"- {tbl:<25} {count:>10,} rows")
+    print("=========================================================")
+    print(f"Total Database Rows Audited: {total_records:,}")
+    print("=========================================================")
+    cursor.close()
+    connection.close()
+
+
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="3NF MySQL Database Population & Validation")
+    parser.add_argument("--validate", action="store_true", help="Run MySQL row count validation audit only")
+    args = parser.parse_args()
+
     try:
-        populate_mysql()
+        if args.validate:
+            validate_mysql()
+        else:
+            populate_mysql()
     except Exception as e:
-        print(f"[ERROR] MySQL population failed: {e}")
+        print(f"[ERROR] MySQL operation failed: {e}")
         sys.exit(1)
 
 

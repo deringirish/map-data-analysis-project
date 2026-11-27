@@ -151,7 +151,8 @@ def plot_category_infraction_breakdown(df: pd.DataFrame):
         "PS": "Print Supplies (PS)"
     }
     labels = [category_labels.get(c, c) for c in cat_counts.index]
-    colors = [NAVY, TEAL, AMBER]
+    colors = [NAVY, TEAL, AMBER, SLATE, CRIMSON][:len(cat_counts)]
+    explode = (0.04,) * len(cat_counts)
 
     fig, ax = plt.subplots(figsize=(7, 6))
     wedges, texts, autotexts = ax.pie(
@@ -160,7 +161,7 @@ def plot_category_infraction_breakdown(df: pd.DataFrame):
         autopct="%1.1f%%",
         startangle=140,
         colors=colors,
-        explode=(0.04, 0.04, 0.04),
+        explode=explode,
         textprops=dict(fontsize=10.5, fontweight="bold"),
         wedgeprops=dict(width=0.6, edgecolor="white", linewidth=2)
     )

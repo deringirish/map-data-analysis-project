@@ -5,14 +5,18 @@ Description: Generates an executive decision-maker one-pager (HTML and Markdown)
 summarizing the holiday surveillance cycle, financial margin erosion, and strategic roadmap.
 """
 
+import sys
 from pathlib import Path
 from typing import Dict, Any
 import pandas as pd
 
+BASE_DIR = Path(__file__).resolve().parents[2]
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from src.analytics.business_kpis import calculate_pareto_concentration
 from src.config.finance_config import STATUS_CRITICAL, STATUS_FORMAL, STATUS_PROBATION
 
-BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
 REPORTS_DIR = BASE_DIR / "data_processed" / "reports"
 

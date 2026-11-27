@@ -6,7 +6,7 @@
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Database](https://img.shields.io/badge/Database-MySQL%208.0-orange.svg?logo=mysql&logoColor=white)](src/database/)
 [![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
-[![Test Suite](https://img.shields.io/badge/pytest-29%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
+[![Test Suite](https://img.shields.io/badge/pytest-16%20Passed-brightgreen.svg?logo=pytest&logoColor=white)](tests/)
 [![Executive Briefing](https://img.shields.io/badge/Executive%20Briefing-HTML%20%7C%20MD-purple.svg)](data_processed/reports/EXECUTIVE_C_SUITE_BRIEFING.html)
 [![Reporting](https://img.shields.io/badge/DOCX%20Engine-279%20Legal%20Notices-red.svg)](data_processed/reports/notices/)
 [![Visual Analytics](https://img.shields.io/badge/Visual%20Analytics-6%20Charts%20(300%20DPI)-teal.svg)](data_processed/reports/figures/)
@@ -22,10 +22,9 @@ Experience the compliance portal live:
 
 * **📅 Time-Series Surveillance Scrubber:** Dynamically filter violation telemetry across all 15 holiday shopping days.
 * **🏷️ Multi-Channel Market Segmentation:** Filter by marketplace (Amazon, Flipkart, Snapdeal, eBay) and category (Personal Computers, Print Hardware, Supplies).
-* **📈 Statistical Hypothesis Testing & Pareto Lorenz Curve:** Real-time Kruskal-Wallis non-parametric test results ($p = 0.0141$) and 80/20 reseller concentration curve.
+* **📈 Pareto Concentration & Channel Conflict:** 80/20 reseller concentration curve and marketplace deficit breakdown.
 * **📁 Reseller Case File Explorer:** Instant audit lookup across 900 storefronts linking to 279 generated legal warning notices.
 * **🎛️ What-If Policy Simulator & Elasticity Engine:** Dynamic sliders modeling promotional discount allowances (+0% to +15%), recidivism escalation cutoff sensitivity, and targeted corporate partner cures.
-* **⚡ 24/7 Always-On Reliability:** Automated keep-alive workflow prevents cloud container hibernation.
 
 ---
 
@@ -118,18 +117,15 @@ map-data-analysis-engine/
 ├── src/                                       # Core implementation codebase
 │   ├── analytics/                             # Decision support & KPI analytics
 │   │   ├── business_kpis.py                   # Macro financial risk indicators & compliance curves
-│   │   ├── statistical_tests.py               # Kruskal-Wallis, Mann-Whitney U, ANOVA battery
 │   │   └── policy_simulator.py                # Discount elasticity & suspension what-if simulator
 │   ├── config/                                # Centralized FX rates & margin config
 │   │   └── finance_config.py
 │   ├── dashboard/                             # Streamlit BI application
-│   │   └── app.py                             # 5-tab executive analytics portal (Plotly dark theme)
+│   │   └── app.py                             # 4-tab executive analytics portal (Plotly dark theme)
 │   ├── database/                              # MySQL 3NF schemas & pipelines
 │   │   ├── create_tables.sql                  # MySQL 10-table 3NF relational schema
 │   │   ├── data_guardrails.py                 # Telemetry ingestion quality auditor
-│   │   ├── database_population.py             # Batch chunked MySQL ingestion
-│   │   ├── database_validator.sql             # SQL verification queries
-│   │   └── database_validation.py             # MySQL table record count auditor
+│   │   └── database_population.py             # Batch chunked MySQL ingestion & validation
 │   ├── enforcement/                           # Escalation & category suspension engine
 │   │   └── category_suspension_engine.py      # Chronic offender classification & MySQL sync
 │   ├── notebooks/                             # Interactive analytical workflows
@@ -147,15 +143,14 @@ map-data-analysis-engine/
 │   ├── test_executive_briefing.py             # HTML/Markdown briefing synthesis tests
 │   ├── test_lpp_calculation.py                # LPP margin matrix derivation tests
 │   ├── test_policy_simulator.py               # Elasticity & cutoff sensitivity tests
-│   ├── test_statistical_tests.py              # Kruskal-Wallis & Pareto verification
+│   ├── test_business_kpis.py                  # Compliance, Pareto & channel conflict tests
 │   └── test_suspension_engine.py              # Escalation boundary tests
 │
 ├── .env.example                               # Database environment template
 ├── dashboard.py                               # Root launcher (Streamlit Cloud & local execution)
 ├── main.py                                    # Central CLI orchestration entrypoint
 ├── pyproject.toml                             # uv-managed dependency definitions
-├── uv.lock                                    # Deterministic dependency lockfile
-└── PROJECT_DOCUMENTATION.md                   # Full technical architecture specification
+└── uv.lock                                    # Deterministic dependency lockfile
 ```
 
 ---
@@ -213,7 +208,7 @@ MYSQL_DATABASE=MAP_PROJECT
 The platform includes a unified CLI orchestrator to execute specific modules or the entire end-to-end compliance lifecycle:
 
 ```powershell
-# Execute the full compliance suite (Guardrails, Suspensions, Charts, Notices, Briefing, ML & Stats)
+# Execute the full compliance suite (Guardrails, Suspensions, Charts, Notices, Briefing)
 python main.py --all
 
 # Launch the interactive Streamlit BI Dashboard portal
@@ -221,9 +216,6 @@ python main.py --dashboard    # or: python dashboard.py
 
 # Run the automated pytest testing suite
 python main.py --tests        # or: uv run pytest
-
-# Execute inferential statistical hypothesis testing battery (Kruskal-Wallis, ANOVA)
-python main.py --stats
 
 # Generate automated Executive C-Suite 1-Page Intelligence Briefing (HTML & Markdown)
 python main.py --briefing

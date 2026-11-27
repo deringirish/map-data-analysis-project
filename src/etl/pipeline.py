@@ -5,6 +5,7 @@ Description: Extracts and normalizes raw master catalogs (XML, JSON, YAML, Excel
 and daily marketplace CSV feeds into 3NF database tables and compliance audit ledgers.
 """
 
+import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Dict, Tuple
@@ -13,21 +14,18 @@ import numpy as np
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parents[2]
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
+from src.config.finance_config import FX_RATES
+
 DATA_INPUTS_DIR = BASE_DIR / "data_inputs"
 DATA_PROCESSED_DIR = BASE_DIR / "data_processed"
 DB_TABLES_DIR = DATA_PROCESSED_DIR / "database_tables"
 INTERMEDIATE_DIR = DATA_PROCESSED_DIR / "intermediate"
 
 ACTIVE_SEASON = "Q4"
-
-# Canonical Spot FX Rates used for cross-border monitoring parity (Local -> INR)
-MONITORING_FX_RATES: Dict[str, float] = {
-    "IND": 1.0,
-    "USA": 83.50,
-    "CAN": 61.50,
-    "UK": 105.00,
-    "UAE": 22.70,
-}
+MONITORING_FX_RATES: Dict[str, float] = FX_RATES
 
 SUB_CATEGORY_MAP = {
     "TON": "Toner",

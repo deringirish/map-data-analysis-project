@@ -8,7 +8,6 @@ Flags anomalous or non-conforming telemetry and quarantines corrupt records.
 from pathlib import Path
 from typing import Tuple, Dict, Any
 import pandas as pd
-from datetime import datetime
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
@@ -33,7 +32,6 @@ def validate_marketplace_feed(feed_df: pd.DataFrame = None) -> Tuple[bool, Dict[
         feed_df = pd.read_csv(feed_csv)
 
     total_records = len(feed_df)
-    anomalies = []
 
     # 1. Price constraint: Advertised_price > 0
     price_col = "Advertised_price"

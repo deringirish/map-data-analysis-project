@@ -13,7 +13,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.append(str(BASE_DIR))
 
-from src.enforcement.category_suspension_engine import evaluate_category_suspensions, plot_suspension_overview, sync_suspensions_to_mysql
+from src.enforcement.category_suspension_engine import evaluate_category_suspensions, plot_suspension_overview
 from src.reporting.generate_visualizations import generate_all_figures
 from src.reporting.generate_violation_notices import generate_all_notices_and_update_tables
 from src.reporting.generate_executive_briefing import main as generate_executive_briefing
@@ -33,7 +33,6 @@ def run_suspension_pipeline(as_of_date: str = None):
     print("=" * 65)
     df = evaluate_category_suspensions(as_of_date=as_of_date)
     plot_suspension_overview(df)
-    sync_suspensions_to_mysql(df)
 
 
 def run_visualization_pipeline():
@@ -71,18 +70,13 @@ def run_database_validation():
     print(" [VALIDATION] RUNNING PRODUCTION RECORD COUNT AUDIT (MYSQL)")
     print("=" * 65)
     import subprocess
-    script = BASE_DIR / "src" / "database" / "database_validation.py"
-    subprocess.run([sys.executable, str(script)], check=True)
+    script = BASE_DIR / "src" / "database" / "database_population.py"
+    subprocess.run([sys.executable, str(script), "--validate"], check=True)
 
 
 def run_guardrails_pipeline():
     from src.database.data_guardrails import run_data_guardrails
     run_data_guardrails()
-
-
-def run_stats_pipeline():
-    from src.analytics.statistical_tests import run_full_statistical_battery
-    run_full_statistical_battery()
 
 
 def run_test_suite():
@@ -143,10 +137,6 @@ def main():
         help="Execute ingestion data quality and schema conformance guardrails audit"
     )
     parser.add_argument(
-        "--stats", action="store_true",
-        help="Execute inferential statistical hypothesis testing battery (Kruskal-Wallis, ANOVA)"
-    )
-    parser.add_argument(
         "--tests", action="store_true",
         help="Execute pytest automated unit & integrity test suite"
     )
@@ -162,7 +152,7 @@ def main():
     args = parser.parse_args()
 
     # Default to running all reporting/enforcement stages if no specific flag passed
-    if not any([args.ingest, args.all, args.suspend, args.charts, args.notices, args.briefing, args.populate_db, args.validate, args.guardrails, args.stats, args.tests, args.dashboard]):
+    if not any([args.ingest, args.all, args.suspend, args.charts, args.notices, args.briefing, args.populate_db, args.validate, args.guardrails, args.tests, args.dashboard]):
         args.all = True
 
     print("=" * 65)
@@ -192,9 +182,6 @@ def main():
 
     if args.all or args.briefing:
         run_briefing_pipeline()
-
-    if args.stats or args.all:
-        run_stats_pipeline()
 
     if args.validate:
         run_database_validation()

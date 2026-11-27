@@ -72,6 +72,10 @@ Desktop.ini
 *.sqlite
 *.sqlite3
 
+# Generated pipeline artifacts (rebuilt via main.py --ingest / --notices)
+data_processed/reports/notices/
+data_processed/intermediate/
+
 # Pytest & test coverage
 .coverage
 htmlcov/
