@@ -13,7 +13,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
         pass
 
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 import pandas as pd
 import numpy as np
 from scipy import stats
@@ -41,7 +41,7 @@ def compute_distribution_moments(series: pd.Series) -> Dict[str, float]:
     }
 
 
-def perform_marketplace_kruskal_wallis() -> Dict[str, Any]:
+def perform_marketplace_kruskal_wallis(v_df: Optional[pd.DataFrame] = None) -> Dict[str, Any]:
     """
     Kruskal-Wallis H-Test:
     Evaluates whether the distributions of price undercutting deficits differ
@@ -49,10 +49,13 @@ def perform_marketplace_kruskal_wallis() -> Dict[str, Any]:
     H0: Price deficits across all marketplaces share identical population medians.
     H1: At least one marketplace exhibits a statistically distinct undercutting distribution.
     """
-    v_path = DATA_PATH / "violation_table.csv"
-    v_df = pd.read_csv(v_path, usecols=["Marketplace", "Price_Difference"])
+    if v_df is None:
+        v_path = DATA_PATH / "violation_table.csv"
+        v_df = pd.read_csv(v_path, usecols=["Marketplace", "Price_Difference"])
 
-    groups = [group["Price_Difference"].values for _, group in v_df.groupby("Marketplace")]
+    groups = [group["Price_Difference"].dropna().values for _, group in v_df.groupby("Marketplace") if len(group["Price_Difference"].dropna()) > 0]
+    if len(groups) < 2:
+        return {"error": "At least 2 marketplace groups are required for Kruskal-Wallis.", "h_statistic": 0.0, "p_value": 1.0, "is_significant_at_alpha_0_05": False, "interpretation": "Insufficient groups for comparison."}
     h_stat, p_val = stats.kruskal(*groups)
 
     is_significant = bool(p_val < 0.05)
@@ -72,13 +75,14 @@ def perform_marketplace_kruskal_wallis() -> Dict[str, Any]:
     }
 
 
-def perform_pairwise_mann_whitney(market_a: str = "Amazon", market_b: str = "Flipkart") -> Dict[str, Any]:
+def perform_pairwise_mann_whitney(market_a: str = "Amazon", market_b: str = "Flipkart", v_df: Optional[pd.DataFrame] = None) -> Dict[str, Any]:
     """
     Mann-Whitney U Test:
     Pairwise comparison testing whether Market A exhibits greater under-MAP severity than Market B.
     """
-    v_path = DATA_PATH / "violation_table.csv"
-    v_df = pd.read_csv(v_path, usecols=["Marketplace", "Price_Difference"])
+    if v_df is None:
+        v_path = DATA_PATH / "violation_table.csv"
+        v_df = pd.read_csv(v_path, usecols=["Marketplace", "Price_Difference"])
 
     vals_a = v_df[v_df["Marketplace"].str.contains(market_a, case=False, na=False)]["Price_Difference"].dropna()
     vals_b = v_df[v_df["Marketplace"].str.contains(market_b, case=False, na=False)]["Price_Difference"].dropna()
@@ -100,15 +104,18 @@ def perform_pairwise_mann_whitney(market_a: str = "Amazon", market_b: str = "Fli
     }
 
 
-def perform_category_anova() -> Dict[str, Any]:
+def perform_category_anova(v_df: Optional[pd.DataFrame] = None) -> Dict[str, Any]:
     """
     One-Way ANOVA:
     Tests whether mean price deficits differ significantly across product divisions (PC, PH, PS).
     """
-    v_path = DATA_PATH / "violation_table.csv"
-    v_df = pd.read_csv(v_path, usecols=["Category", "Price_Difference"])
+    if v_df is None:
+        v_path = DATA_PATH / "violation_table.csv"
+        v_df = pd.read_csv(v_path, usecols=["Category", "Price_Difference"])
 
-    groups = [group["Price_Difference"].values for _, group in v_df.groupby("Category")]
+    groups = [group["Price_Difference"].dropna().values for _, group in v_df.groupby("Category") if len(group["Price_Difference"].dropna()) > 0]
+    if len(groups) < 2:
+        return {"error": "At least 2 category groups are required for ANOVA.", "f_statistic": 0.0, "p_value": 1.0, "is_significant": False}
     f_stat, p_val = stats.f_oneway(*groups)
 
     return {

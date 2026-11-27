@@ -17,6 +17,8 @@ from typing import Dict, Any, Tuple
 import pandas as pd
 import numpy as np
 
+from src.config.finance_config import STATUS_CRITICAL, STATUS_FORMAL, STATUS_PROBATION
+
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
 REPORTS_DIR = BASE_DIR / "data_processed" / "reports"
@@ -135,9 +137,9 @@ def generate_executive_kpi_summary() -> Dict[str, Any]:
         "total_financial_deficit_inr": round(total_deficit, 2),
         "distinct_resellers_violating": int(v_df["homologated_name"].nunique()),
         "distinct_skus_violated": int(v_df["SKU"].nunique()),
-        "critical_suspensions": int((susp_df["Enforcement_Status"] == "CRITICAL_SUSPENSION").sum()) if not susp_df.empty else 0,
-        "formal_suspensions": int((susp_df["Enforcement_Status"] == "FORMAL_SUSPENSION").sum()) if not susp_df.empty else 0,
-        "conditional_probations": int((susp_df["Enforcement_Status"] == "CONDITIONAL_PROBATION").sum()) if not susp_df.empty else 0,
+        "critical_suspensions": int((susp_df["Enforcement_Status"] == STATUS_CRITICAL).sum()) if not susp_df.empty else 0,
+        "formal_suspensions": int((susp_df["Enforcement_Status"] == STATUS_FORMAL).sum()) if not susp_df.empty else 0,
+        "conditional_probations": int((susp_df["Enforcement_Status"] == STATUS_PROBATION).sum()) if not susp_df.empty else 0,
         "pareto_summary": pareto_stats
     }
 

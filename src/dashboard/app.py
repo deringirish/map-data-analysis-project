@@ -5,6 +5,7 @@ Description: Executive analytics portal for multi-channel Minimum Advertised Pri
 statistical hypothesis testing, Pareto concentration, and reseller enforcement intelligence.
 """
 
+import json
 from pathlib import Path
 import streamlit as st
 import pandas as pd
@@ -18,6 +19,11 @@ from src.analytics.policy_simulator import (
     simulate_targeted_enforcement
 )
 from src.analytics.recidivism_predictor import run_recidivism_pipeline
+from src.analytics.statistical_tests import (
+    perform_marketplace_kruskal_wallis,
+    perform_pairwise_mann_whitney,
+    perform_category_anova,
+)
 
 # Configure page
 try:
@@ -57,12 +63,16 @@ def apply_dark_theme(fig):
 
 @st.cache_data
 def load_data():
-    """Loads violation, suspension, price monitoring, and ML risk tables."""
+    """Loads violation, price monitoring audit, suspension, and ML risk tables."""
+    pm_path = DATA_PATH / "price_monitoring_table.csv"
+    pm_df = pd.read_csv(pm_path, usecols=["Violation_date", "Category", "Marketplace", "SKU"]) if pm_path.exists() else pd.DataFrame()
     v_df = pd.read_csv(DATA_PATH / "violation_table.csv")
     susp_df = pd.read_csv(DATA_PATH / "suspended_categories_table.csv") if (DATA_PATH / "suspended_categories_table.csv").exists() else pd.DataFrame()
     cohort_risk_df = pd.read_csv(REPORTS_DIR / "recidivism_risk_cohorts.csv") if (REPORTS_DIR / "recidivism_risk_cohorts.csv").exists() else pd.DataFrame()
     corporate_risk_df = pd.read_csv(REPORTS_DIR / "recidivism_risk_corporate.csv") if (REPORTS_DIR / "recidivism_risk_corporate.csv").exists() else pd.DataFrame()
-    return v_df, susp_df, cohort_risk_df, corporate_risk_df
+    metrics_path = REPORTS_DIR / "recidivism_model_metrics.json"
+    model_metrics = json.loads(metrics_path.read_text(encoding="utf-8")) if metrics_path.exists() else {}
+    return pm_df, v_df, susp_df, cohort_risk_df, corporate_risk_df, model_metrics
 
 
 def main():
@@ -74,7 +84,7 @@ def main():
     st.divider()
 
     try:
-        v_df, susp_df, cohort_risk_df, corporate_risk_df = load_data()
+        pm_df, v_df, susp_df, cohort_risk_df, corporate_risk_df, model_metrics = load_data()
     except Exception as e:
         st.error(f"Error loading datasets: {e}")
         return
@@ -120,10 +130,20 @@ def main():
         (v_df["Violation_date"] <= end_d)
     ].copy()
 
+    if not pm_df.empty:
+        filtered_pm = pm_df[
+            (pm_df["Category"].isin(selected_categories)) &
+            (pm_df["Marketplace"].isin(selected_markets)) &
+            (pm_df["Violation_date"] >= start_d) &
+            (pm_df["Violation_date"] <= end_d)
+        ]
+        total_audits = len(filtered_pm)
+    else:
+        total_audits = len(filtered_v)
+
     # Executive KPI Cards
-    total_audits = 147900  # Total observations across 15 daily feeds
     total_violations = len(filtered_v)
-    compliance_rate = ((total_audits - total_violations) / total_audits) * 100.0
+    compliance_rate = ((total_audits - total_violations) / total_audits) * 100.0 if total_audits > 0 else 0.0
     total_deficit = filtered_v["Price_Difference"].sum()
     active_suspensions = len(susp_df)
 
@@ -228,12 +248,25 @@ def main():
             st.plotly_chart(apply_dark_theme(fig_def), width="stretch")
 
         st.subheader("📊 Inferential Statistical Tests & Hypothesis Verification")
-        st.info(
-            "**Kruskal-Wallis Test across Marketplaces:** H = 10.6029 (p = 0.0141)  \n"
-            "*Interpretation:* Statistically significant difference in undercutting depth across platforms (p < 0.05).  \n"
-            "**Pairwise Mann-Whitney Test (Amazon vs Flipkart):** p = 0.00257 (Flipkart Median Deficit: ₹3,049.72 vs Amazon: ₹2,459.68).  \n"
-            "**One-Way ANOVA across Product Categories:** F = 1157.03 (p < 0.0001)."
+        kw_res = perform_marketplace_kruskal_wallis(filtered_v)
+        mw_res = perform_pairwise_mann_whitney("Amazon", "Flipkart", filtered_v)
+        anova_res = perform_category_anova(filtered_v)
+
+        kw_line = (
+            f"**Kruskal-Wallis Test across Marketplaces:** H = {kw_res['h_statistic']} (p = {kw_res['p_value']:.4g})  \n"
+            f"*Interpretation:* {kw_res['interpretation']}  \n"
+            if "error" not in kw_res else f"**Kruskal-Wallis Test:** {kw_res['error']}  \n"
         )
+        mw_line = (
+            f"**Pairwise Mann-Whitney Test (Amazon vs Flipkart):** p = {mw_res['p_value']:.4g} "
+            f"(Flipkart Median Deficit: ₹{mw_res['median_b']:,.2f} vs Amazon: ₹{mw_res['median_a']:,.2f}).  \n"
+            if "error" not in mw_res else f"**Pairwise Mann-Whitney Test:** {mw_res['error']}  \n"
+        )
+        anova_line = (
+            f"**One-Way ANOVA across Product Categories:** F = {anova_res['f_statistic']} (p = {anova_res['p_value']:.4g})."
+            if "error" not in anova_res else f"**One-Way ANOVA:** {anova_res['error']}"
+        )
+        st.info(kw_line + mw_line + anova_line)
 
         col_p1, col_p2 = st.columns(2)
         with col_p1:
@@ -425,10 +458,11 @@ def main():
             "rogue velocity, and catastrophic margin erosion."
         )
 
-        if cohort_risk_df.empty or corporate_risk_df.empty:
+        if cohort_risk_df.empty or corporate_risk_df.empty or not model_metrics:
             st.warning("⚠️ Recidivism risk model artifacts not found. Generating predictions now...")
             with st.spinner("Training Random Forest & Logistic Regression risk models..."):
-                _, cohort_risk_df, corporate_risk_df = run_recidivism_pipeline()
+                pred_obj, cohort_risk_df, corporate_risk_df = run_recidivism_pipeline()
+                model_metrics = pred_obj.model_metrics
             st.success("✅ Machine Learning Risk Models successfully trained and calibrated!")
 
         # High-level ML Metric Cards
@@ -438,9 +472,13 @@ def main():
         low_risk_count = int((cohort_risk_df["Risk_Tier"] == "🟢 Low Risk").sum())
         high_risk_deficit = float(cohort_risk_df[cohort_risk_df["Risk_Tier"] == "🔴 High Risk"]["Total_Price_Deficit"].sum())
 
+        rf_m = model_metrics.get("random_forest", {})
+        roc_auc_pct = rf_m.get("roc_auc", 0.0) * 100.0
+        acc_pct = rf_m.get("accuracy", 0.0) * 100.0
+
         m1, m2, m3, m4, m5 = st.columns(5)
-        m1.metric("Model ROC-AUC", "99.0%", help="5-Fold Stratified Cross-Validation ROC-AUC of Champion Random Forest")
-        m2.metric("Cross-Val Accuracy", "93.9%", help="5-Fold Stratified Cross-Validation Accuracy")
+        m1.metric("Model ROC-AUC", f"{roc_auc_pct:.1f}%", help="5-Fold Stratified Cross-Validation ROC-AUC of Champion Random Forest")
+        m2.metric("Cross-Val Accuracy", f"{acc_pct:.1f}%", help="5-Fold Stratified Cross-Validation Accuracy")
         m3.metric("🔴 High Risk Cohorts", f"{high_risk_count} ({high_risk_count/total_cohorts*100:.1f}%)")
         m4.metric("🟡 Moderate Risk", f"{mod_risk_count} ({mod_risk_count/total_cohorts*100:.1f}%)")
         m5.metric("High-Risk Margin at Stake", f"₹{high_risk_deficit/1e6:.2f}M")
@@ -452,21 +490,23 @@ def main():
 
         with c_left:
             st.markdown("#### 1. Behavioral Feature Importance (Drivers of Recidivism)")
-            feat_data = pd.DataFrame({
-                "Feature": [
-                    "Max Single Deficit (₹)",
-                    "Average Price Deficit (₹)",
-                    "Major Deficit Rate (>₹5K)",
-                    "Total Violation Volume",
-                    "Violation Velocity (Per Day)",
-                    "Max Discount Depth (%)",
-                    "Average Discount (%)",
-                    "SKU Catalog Spread",
-                    "Active Surveillance Days",
-                    "Marketplace Omnichannel Count"
-                ],
-                "Importance": [32.64, 29.27, 15.92, 5.21, 4.61, 4.19, 2.51, 2.42, 2.14, 1.44]
-            }).sort_values("Importance", ascending=True)
+            feat_label_map = {
+                "max_deficit": "Max Single Deficit (₹)",
+                "avg_deficit": "Average Price Deficit (₹)",
+                "major_rate": "Major Deficit Rate (>₹5K)",
+                "violations": "Total Violation Volume",
+                "velocity": "Violation Velocity (Per Day)",
+                "max_discount_pct": "Max Discount Depth (%)",
+                "avg_discount_pct": "Average Discount (%)",
+                "distinct_skus": "SKU Catalog Spread",
+                "active_days": "Active Surveillance Days",
+                "marketplaces": "Marketplace Omnichannel Count",
+            }
+            raw_importances = model_metrics.get("feature_importances", {})
+            feat_data = pd.DataFrame([
+                {"Feature": feat_label_map.get(k, k), "Importance": round(v * 100.0, 2)}
+                for k, v in raw_importances.items()
+            ]).sort_values("Importance", ascending=True)
 
             fig_feat = px.bar(
                 feat_data, x="Importance", y="Feature", orientation="h",

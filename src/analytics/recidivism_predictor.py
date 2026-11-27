@@ -8,6 +8,7 @@ and chronic margin erosion across retail partner cohorts.
 
 from pathlib import Path
 from typing import Dict, Any, Tuple, Optional
+import json
 import sys
 import numpy as np
 import pandas as pd
@@ -158,7 +159,7 @@ class RecidivismPredictor:
             ("classifier", LogisticRegression(random_state=self.random_state, max_iter=1000))
         ])
 
-        scoring = ["roc_auc", "accuracy", "precision", "recall", "f1"]
+        scoring = ["roc_auc", "average_precision", "accuracy", "precision", "recall", "f1"]
         cv_rf = cross_validate(rf, X, y, cv=5, scoring=scoring)
         cv_lr = cross_validate(lr, X, y, cv=5, scoring=scoring)
 
@@ -176,6 +177,8 @@ class RecidivismPredictor:
             "random_forest": {
                 "roc_auc": float(cv_rf["test_roc_auc"].mean()),
                 "roc_auc_std": float(cv_rf["test_roc_auc"].std()),
+                "pr_auc": float(cv_rf["test_average_precision"].mean()),
+                "pr_auc_std": float(cv_rf["test_average_precision"].std()),
                 "accuracy": float(cv_rf["test_accuracy"].mean()),
                 "accuracy_std": float(cv_rf["test_accuracy"].std()),
                 "precision": float(cv_rf["test_precision"].mean()),
@@ -188,6 +191,8 @@ class RecidivismPredictor:
             "logistic_regression": {
                 "roc_auc": float(cv_lr["test_roc_auc"].mean()),
                 "roc_auc_std": float(cv_lr["test_roc_auc"].std()),
+                "pr_auc": float(cv_lr["test_average_precision"].mean()),
+                "pr_auc_std": float(cv_lr["test_average_precision"].std()),
                 "accuracy": float(cv_lr["test_accuracy"].mean()),
                 "accuracy_std": float(cv_lr["test_accuracy"].std()),
                 "precision": float(cv_lr["test_precision"].mean()),
@@ -325,6 +330,10 @@ class RecidivismPredictor:
 
         cohort_df.to_csv(cohort_csv, index=False)
         corporate_df.to_csv(corporate_csv, index=False)
+        if self.model_metrics:
+            metrics_json = output_dir / "recidivism_model_metrics.json"
+            with open(metrics_json, "w", encoding="utf-8") as mf:
+                json.dump(self.model_metrics, mf, indent=2)
         print(f"[SUCCESS] Scored cohort risk saved to: {cohort_csv}")
         print(f"[SUCCESS] Corporate risk rollup saved to: {corporate_csv}")
 

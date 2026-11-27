@@ -9,6 +9,9 @@ from pathlib import Path
 from typing import Dict, Any
 import pandas as pd
 
+from src.analytics.business_kpis import calculate_pareto_concentration
+from src.config.finance_config import STATUS_CRITICAL, STATUS_FORMAL, STATUS_PROBATION
+
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
 REPORTS_DIR = BASE_DIR / "data_processed" / "reports"
@@ -16,24 +19,24 @@ REPORTS_DIR = BASE_DIR / "data_processed" / "reports"
 
 def compile_executive_metrics() -> Dict[str, Any]:
     """Compiles macro KPIs and statistical highlights for the C-Suite briefing."""
+    pm_path = DATA_PATH / "price_monitoring_table.csv"
     v_df = pd.read_csv(DATA_PATH / "violation_table.csv")
     susp_df = pd.read_csv(DATA_PATH / "suspended_categories_table.csv") if (DATA_PATH / "suspended_categories_table.csv").exists() else pd.DataFrame()
-    
-    total_audits = 147900
+
+    total_audits = len(pd.read_csv(pm_path, usecols=["SKU"])) if pm_path.exists() else len(v_df)
     violations_count = len(v_df)
-    compliance_rate = ((total_audits - violations_count) / total_audits) * 100.0
+    compliance_rate = ((total_audits - violations_count) / total_audits) * 100.0 if total_audits > 0 else 0.0
     total_deficit = float(v_df["Price_Difference"].sum())
-    
-    # Pareto concentration calculation
-    reseller_deficit = v_df.groupby("homologated_name")["Price_Difference"].sum().sort_values(ascending=False)
-    cum_pct = (reseller_deficit.cumsum() / total_deficit) * 100.0
-    sellers_80_pct = int((cum_pct <= 80.0).sum()) + 1
-    total_sellers = len(reseller_deficit)
-    
-    # Suspension breakdown
-    crit_count = int((susp_df["Enforcement_Status"] == "Critical Suspension (30-Day Freeze)").sum()) if not susp_df.empty else 0
-    formal_count = int((susp_df["Enforcement_Status"] == "Formal Suspension (30-Day Category Freeze)").sum()) if not susp_df.empty else 0
-    prob_count = int((susp_df["Enforcement_Status"] == "Conditional Probation (48-Hr Cure)").sum()) if not susp_df.empty else 0
+
+    # Reuse centralized Pareto concentration calculation
+    _, pareto_stats = calculate_pareto_concentration()
+    sellers_80_pct = pareto_stats["resellers_for_80pct_deficit"]
+    total_sellers = pareto_stats["total_resellers"]
+
+    # Suspension breakdown using canonical status constants
+    crit_count = int((susp_df["Enforcement_Status"] == STATUS_CRITICAL).sum()) if not susp_df.empty else 0
+    formal_count = int((susp_df["Enforcement_Status"] == STATUS_FORMAL).sum()) if not susp_df.empty else 0
+    prob_count = int((susp_df["Enforcement_Status"] == STATUS_PROBATION).sum()) if not susp_df.empty else 0
     
     # Marketplace rankings
     mkt_summary = v_df.groupby("Marketplace").agg(

@@ -14,6 +14,8 @@ import matplotlib.ticker as ticker
 import seaborn as sns
 from dotenv import load_dotenv
 
+from src.config.finance_config import STATUS_CRITICAL, STATUS_FORMAL, STATUS_PROBATION
+
 # Path configuration
 BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = BASE_DIR / "data_processed" / "database_tables"
@@ -57,19 +59,19 @@ def evaluate_category_suspensions(as_of_date: str = None) -> pd.DataFrame:
         dates = row["Distinct_Violation_Dates"]
         if dates >= 12:
             return (
-                "CRITICAL_SUSPENSION",
+                STATUS_CRITICAL,
                 "30-Day Complete Wholesale Freeze & Catalog De-listing",
                 30
             )
         elif dates >= 7:
             return (
-                "FORMAL_SUSPENSION",
+                STATUS_FORMAL,
                 "30-Day Category Suspension Pending Formal Cure",
                 30
             )
         else:
             return (
-                "CONDITIONAL_PROBATION",
+                STATUS_PROBATION,
                 "48-Hour Final Cure Notice Before Automatic Category Deactivation",
                 0
             )

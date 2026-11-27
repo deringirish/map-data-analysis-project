@@ -30,6 +30,11 @@ CURRENCY_SYMBOLS: Dict[str, str] = {
     "UAE": "AED "
 }
 
+# Canonical Enforcement Status Constants (shared across enforcement, briefing, and KPIs)
+STATUS_CRITICAL = "CRITICAL_SUSPENSION"
+STATUS_FORMAL = "FORMAL_SUSPENSION"
+STATUS_PROBATION = "CONDITIONAL_PROBATION"
+
 
 def load_margin_matrix(excel_path: Optional[Path] = None) -> pd.DataFrame:
     """

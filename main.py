@@ -20,6 +20,14 @@ from src.reporting.generate_executive_briefing import main as generate_executive
 from src.analytics.recidivism_predictor import run_recidivism_pipeline
 
 
+def run_ingest_pipeline():
+    from src.etl.pipeline import run_full_etl
+    print("\n" + "=" * 65)
+    print(" [STAGE 0] MULTI-FORMAT ETL INGESTION & MONITORING")
+    print("=" * 65)
+    run_full_etl()
+
+
 def run_suspension_pipeline(as_of_date: str = None):
     print("\n" + "=" * 65)
     print(" [STAGE 1] CATEGORY SUSPENSION & RECIDIVISM ENFORCEMENT")
@@ -113,6 +121,10 @@ def main():
         description="Minimum Advertised Price (MAP) Data Analysis & Compliance Engine"
     )
     parser.add_argument(
+        "--ingest", action="store_true",
+        help="Run raw-to-processed ETL ingestion and price monitoring pipeline"
+    )
+    parser.add_argument(
         "--all", action="store_true", default=False,
         help="Execute all compliance modules (suspensions, charts, and notices)"
     )
@@ -172,7 +184,7 @@ def main():
     args = parser.parse_args()
 
     # Default to running all reporting/enforcement stages if no specific flag passed
-    if not any([args.all, args.suspend, args.charts, args.notices, args.briefing, args.predict, args.populate_db, args.validate, args.guardrails, args.stats, args.tests, args.dashboard]):
+    if not any([args.ingest, args.all, args.suspend, args.charts, args.notices, args.briefing, args.predict, args.populate_db, args.validate, args.guardrails, args.stats, args.tests, args.dashboard]):
         args.all = True
 
     print("=" * 65)
@@ -181,6 +193,9 @@ def main():
 
     if args.tests:
         run_test_suite()
+
+    if args.ingest:
+        run_ingest_pipeline()
 
     if args.guardrails or args.all:
         run_guardrails_pipeline()

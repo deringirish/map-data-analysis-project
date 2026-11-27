@@ -11,7 +11,7 @@
 | **Global Market Compliance** | **89.2%** | 89.23% of market listings adhere to established statutory MAP floors. |
 | **Cumulative Margin Deficit** | **₹211.99M** | Total monetary undercutting inflicted on authorized distributor margins. |
 | **Total Infractions Flagged** | **15,936** | Filtered actionable breaches out of 147,900 daily feed observations. |
-| **Reseller Accounts Frozen** | **0** | High-recidivism accounts placed under mandatory 30-day wholesale freeze. |
+| **Reseller Accounts Frozen** | **253** | High-recidivism accounts placed under mandatory 30-day wholesale freeze. |
 | **Pareto Offender Core** | **62 Resellers** | **80% of price deficit** is driven by just 62 corporate entities. |
 
 ---
@@ -31,9 +31,9 @@
 
 * **279 Itemized Warning Notices:** Formatted `.docx` legal notices generated with executive callouts, sub-category audit tables, and 48-hour cure mandates.
 * **Charter Objective 4 Escalations:**
-  * **Critical Suspension (30-Day Freeze):** 0 accounts (≥ 12 violation days).
-  * **Formal Suspension (30-Day Category Freeze):** 0 accounts (7-11 violation days).
-  * **Conditional Probation (48-Hr Cure):** 0 accounts (< 7 violation days).
+  * **Critical Suspension (30-Day Freeze):** 253 accounts (≥ 12 violation days).
+  * **Formal Suspension (30-Day Category Freeze):** 21 accounts (7-11 violation days).
+  * **Conditional Probation (48-Hr Cure):** 5 accounts (< 7 violation days).
 
 ---
 

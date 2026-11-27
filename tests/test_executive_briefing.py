@@ -15,6 +15,10 @@ def test_compile_executive_metrics():
     assert metrics["compliance_rate"] > 80.0
     assert metrics["total_deficit"] > 0.0
     assert metrics["sellers_80_pct"] > 0
+    assert (
+        metrics["critical_suspensions"] + metrics["formal_suspensions"] + metrics["probation_count"]
+        == metrics["total_suspensions"]
+    )
 
 
 def test_generate_html_briefing():
